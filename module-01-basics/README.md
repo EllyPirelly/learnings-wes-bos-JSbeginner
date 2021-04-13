@@ -1,6 +1,6 @@
-# Module 1 Basics Content
+# Module 1 - Basics
 
-As most of the "Module 1 Basic" Content is information, this README here is used as a notepad.
+As most of the "Module 1 Basic" content is information and small coding bits, this README here is used as a notepad.
 
 Please also [see index.html](./index.html) and [index.js](./index.js) in this module's folder to follow up with the coding bits.
 

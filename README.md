@@ -1,4 +1,4 @@
-# Based on Wes Bos' Beginner JavaScript course
+# Based on Wes Bos Beginner JavaScript course
 
 ### What is this about?
 
@@ -11,13 +11,15 @@
 
 - clone this whole repo or copy and paste code of a single project
 - cd into the project you want to throw on localhost
-- open `index.html` in your browser of choice (in my case, built in/for Chrome)
+- open `index.html` (or other html files present) in your browser of choice (in my case, built in/for Chrome)
 
 ### Course Content
 
 [Module 1 - Basics](#module-1-basics)
 
 [Module 2 - Functions](#module-2-functions)
+
+[Module 3 - The Tricky Bits](#module-3-the-tricky-bits)
 
 ### Module 1 Basics
 Please see folder `module-01-basics` with extra README [here](./module-01-basics/README.md)
@@ -36,4 +38,13 @@ Please see folder `module-01-basics` with extra README [here](./module-01-basics
 - Type - Boolean and equality
 
 ### Module 2 Functions
-ToDo
+Please see folder `module-02-functions` with extra README [here](./module-02-functions/README.md)
+
+- Functions - Custom
+- Functions - Parameters and Arguments
+- Different ways to declare Functions
+- Debugging Tools
+
+### Module 3 The Tricky Bits
+
+- ToDo
