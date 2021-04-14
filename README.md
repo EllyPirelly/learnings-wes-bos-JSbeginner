@@ -10,7 +10,7 @@
 ### How to run this?
 
 - clone this whole repo or copy and paste code of a single project
-- cd into the project you want to throw on localhost
+- navigate to folder you want to throw on localhost
 - open `index.html` (or other html files present) in your browser of choice (in my case, built in/for Chrome)
 
 ### Course Content
@@ -21,8 +21,11 @@
 
 [Module 3 - The Tricky Bits](#module-3-the-tricky-bits)
 
+[Module 4 - The DOM](#module-4-the-dom)
+
 ### Module 1 Basics
-Please see folder `module-01-basics` with extra README [here](./module-01-basics/README.md)
+Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
+Content of this module is information and small coding bits, no project.
 
 - Welcome and Course Methodologies
 - Browser, Editor and Terminal Setup
@@ -38,7 +41,8 @@ Please see folder `module-01-basics` with extra README [here](./module-01-basics
 - Type - Boolean and equality
 
 ### Module 2 Functions
-Please see folder `module-02-functions` with extra README [here](./module-02-functions/README.md)
+Please see folder `module-02-functions` [with extra README here](./module-02-functions/README.md)<br>
+Content of this module is information and small coding bits, no project.
 
 - Functions - Custom
 - Functions - Parameters and Arguments
@@ -46,5 +50,12 @@ Please see folder `module-02-functions` with extra README [here](./module-02-fun
 - Debugging Tools
 
 ### Module 3 The Tricky Bits
+Please see folder `module-03-tricky-bits` [with extra README here](./module-03-tricky-bits/README.md)<br>
+Content of this module is information and small coding bits, no project.
 
-- ToDo
+- Scope
+- Hoisting
+- Closure
+
+### Module 4 The DOM
+ToDo

@@ -32,7 +32,11 @@ const hello3 = `Hello my name is ${prename} . Nice to meet you. I am ${1 + 100} 
 /* handling HTML with back ticks*/
 const html = `
     <div>
-        <p>Run the index.html in a browser and check the JavaScript console to see what's going on.</p>
+        <p>Run the index.html in a browser, check which scripts are commented in and check the JavaScript console to
+        see what's going on.</p>
+        <div>
+        <span>Read the <a href="./README.md">Readme.</a></span>
+    </div>
         <h1>${prename}</h1>
         <span>${hello3}</span>
     </div>
