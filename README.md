@@ -58,4 +58,15 @@ Content of this module is information and small coding bits, no project.
 - Closure
 
 ### Module 4 The DOM
-ToDo
+Please see folder `module-04-the-dom` [with extra README here](./module-04-the-dom/README.md)<br>
+<!-- Content of this module is information and small coding bits, no project. -->
+
+- Introduction to the document
+- Selecting Elements
+- Element Properties and Methods
+- Working with Classes
+- Build in and Custom Data Attributes
+- Creating HTML
+- HTML from Strings and XSS
+- Traversing and Removing Nodes
+- CARDIO
