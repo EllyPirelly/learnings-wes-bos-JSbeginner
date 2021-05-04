@@ -1,5 +1,18 @@
+/* extra style for element properties and methods */
 .hiddenSpan {
     display: none;
+}
+
+/* extra style for working with classes */
+img {
+    transition: all 0.2s;
+}
+
+.round {
+    border-radius: 50%;
+    /* transform: rotate(20deg); */
+    transform: rotate(1turn) scale(2);
+    box-shadow: 0 0 10px #000;
 }
 
 /* css taken from wesbos */
