@@ -23,6 +23,8 @@
 
 [Module 4 - The DOM](#module-4-the-dom)
 
+[Module 5 - Events](#module-5-events)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -74,3 +76,14 @@ Content of this module is information and small coding bits, no project.
 - HTML from Strings and XSS
 - Traversing and Removing Nodes
 - CARDIO
+
+### Module 5 Events
+
+Please see folder `module-05-events` [with extra README here](./module-05-events/README.md)<br>
+
+<!-- Content of this module is information and small coding bits, no project. -->
+
+- Event Listener
+- Targets, Bubbling, Propagation and Capture
+- Prevent Default and Form Events
+- Accessibility Gotchas and Keyboard Codes

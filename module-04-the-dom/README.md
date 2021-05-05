@@ -1,8 +1,6 @@
 # Module 4 - The DOM
 
-<!-- As most of the "Module 4 The DOM" content is information and small coding bits, this README here is used as a notepad. -->
-
-Please check html file [index.html](./index.html) in this module's folder to check which js files are referenced to follow up with the coding bits.
+As most of the "Module 4 The DOM" content is information and small coding bits, this README here is used as a notepad.
 
 [Introduction to the document](#introduction-to-the-document)
 
