@@ -15,8 +15,22 @@ img {
     box-shadow: 0 0 10px #000;
 }
 
-/* css taken from wesbos */
+/* extra style for DOM cardio */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    padding: 20px;
+}
+.playerCard {
+    background: white;
+    padding: 20px;
+}
+.playerCard h2 {
+    color: black;
+}
 
+/* css taken from wesbos */
 /* normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 button,
 hr,

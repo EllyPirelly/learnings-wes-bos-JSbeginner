@@ -627,3 +627,6 @@ console.log(p); // <p>I will be removed</p>
 - the fact that we've created that element so it exists in JavaScript memory means that we still have access to that paragraph element
 
 ## CARDIO
+
+- this chapter is exercises, derived from previous lessons
+- **check out `dom-cardio.html` and `dom-cardio.js`** to follow along

@@ -24,6 +24,7 @@
 [Module 4 - The DOM](#module-4-the-dom)
 
 ### Module 1 Basics
+
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
 Content of this module is information and small coding bits, no project.
 
@@ -41,6 +42,7 @@ Content of this module is information and small coding bits, no project.
 - Type - Boolean and equality
 
 ### Module 2 Functions
+
 Please see folder `module-02-functions` [with extra README here](./module-02-functions/README.md)<br>
 Content of this module is information and small coding bits, no project.
 
@@ -50,6 +52,7 @@ Content of this module is information and small coding bits, no project.
 - Debugging Tools
 
 ### Module 3 The Tricky Bits
+
 Please see folder `module-03-tricky-bits` [with extra README here](./module-03-tricky-bits/README.md)<br>
 Content of this module is information and small coding bits, no project.
 
@@ -58,8 +61,9 @@ Content of this module is information and small coding bits, no project.
 - Closure
 
 ### Module 4 The DOM
+
 Please see folder `module-04-the-dom` [with extra README here](./module-04-the-dom/README.md)<br>
-<!-- Content of this module is information and small coding bits, no project. -->
+Content of this module is information and small coding bits, no project.
 
 - Introduction to the document
 - Selecting Elements
