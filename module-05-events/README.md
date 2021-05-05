@@ -15,6 +15,7 @@ Please check html file [index.html](./index.html) in this module's folder to che
 ## Event Listener
 
 - DOM elements emit events - when they are clicked, hovered, dragged, they will fire off
+- **following examples are referring to `index.html` and `index.js`**
 
 **event listener**
 
@@ -101,7 +102,52 @@ buyButton.forEach((button) => {
 
 ## Targets, Bubbling, Propagation and Capture
 
-- event object
+- **following examples are referring to `event.html` and `event.js`**
+- how to get information about what has specifically been clicked?
+  - that information is in the **event object**, with all kinds of useful information and methods for working with events
+- to access the **event object**, the callback/handler function needs to have a parameter that is the event
+- it doesn't matter what that event is called as long as it's the first argument of the callback, as the first argument IS the **event object**
+- `event.target` once you have the target, you can access anything you want about it (and is accessible)
+- what's the difference between `event.target` and `event.currentTarget`?
+  - the difference comes in when there's elements that are nested **inside** of the element that's been listened to
+  - `event.target` is the thing that got clicked
+  - `event.currentTarget` is the the thing that fired the event listener
+  - most cases most likely need `.currentTarget`
+
+**Propagation and Bubbling**
+
+- it is possible to click on multiple things at the same time = propagation
+- example click on `<strong>` - also all other added events are fired
+
+![event01](./img/screen-mod05-events01.png)
+
+- what happens is that events bubble up
+- click on `<strong>`, also click on `<button>`, also click on `<body>`, also click on `<html>`, also click on `window`, also click on (in my case) Google Chrome browser
+- even though the tiny `<strong>` is clicked, both the browser and the operating system will register that click and it will keep bubbling up
+- how to prevent that? with `stopPropagation()`
+
+**Capture**
+
+- is sort of the opposite
+- a click on a deeper nested element will go through all of the "outer" elements, doesn't do anything
+- after going through to the lowest DOM node, what happens is it starts to bubble up, will trigger the event
+- example: listen to click on `window` first and stop it from going any further
+- that happens via the third argument you can add to `addEventListner()`
+- be careful to not unintentally stop events through `stopPropagation()`
+
+**most common use case for event listener**
+
+- listening for clicks on lower level element
+- stopping the propagation when clicking on that element
+- so that elements that are higher, that are also listening for clicks, do not also fire that specific element event listener
+
+**this**
+
+- reserved word
+- in a callback function where you want to reference the actual element that the event was called against - the `this` keyword is going to surface that for you
+- the `this` keyword is always going to be equal whatever is to the left of the dot
+- the `this` keyword has a bit of a downside, when you change a function to an arrow function, then the `this` keyword is no longer scoped to that element
+- recommendation to not use it in event listeners and callbacks, use `e.target` or `e.currentTarget`
 
 ## Prevent Default and Form Events
 
