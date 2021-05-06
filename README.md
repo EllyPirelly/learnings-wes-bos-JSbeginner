@@ -25,6 +25,8 @@
 
 [Module 5 - Events](#module-5-events)
 
+[Module 6 - Etch-a-Sketch](#module-6-etch-a-sketch)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -81,9 +83,15 @@ Content of this module is information and small coding bits, no project.
 
 Please see folder `module-05-events` [with extra README here](./module-05-events/README.md)<br>
 
-<!-- Content of this module is information and small coding bits, no project. -->
+Content of this module is information and small coding bits, no project.
 
 - Event Listener
 - Targets, Bubbling, Propagation and Capture
 - Prevent Default and Form Events
 - Accessibility Gotchas and Keyboard Codes
+
+### Module 6 Etch-a-Sketch
+
+Please see folder `module-06-01-etch-a-sketch` [with extra README here](./module-06-01-etch-a-sketch/README.md)<br>
+
+![etch-a-sketch](./module-06-01-etch-a-sketch/img/screen-mod0601-01.png)
