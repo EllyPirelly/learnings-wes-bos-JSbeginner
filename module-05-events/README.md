@@ -151,4 +151,72 @@ buyButton.forEach((button) => {
 
 ## Prevent Default and Form Events
 
+**Prevent Default**
+
+- there's a couple of HTML elements that have default functionality
+- however you can stop the default action of the browser and pick it up from JavaScript
+- `preventDefault()` method on events
+- click on `<a>` obviously gets you to the website as the default of a link is to change the page
+
+```
+<a class="wes" href="https://wesbos.com">Wes Bos</a>
+const wes = document.querySelector('.wes');
+
+wes.addEventListener('click', function (eve) {
+    console.log(eve);
+})
+```
+
+- however you can prevent the default from happening
+
+```
+const wes = document.querySelector('.wes');
+
+wes.addEventListener('click', function (eve) {
+    eve.preventDefault();
+})
+```
+
+- `preventDefault()` is extremely handy when you wish for the default thing to stop from happening
+
+**form element**
+
+```
+const signupForm = document.querySelector('[name="signup"]');
+
+signupForm.addEventListener('submit', function (eve) {
+    console.log(eve);
+    eve.preventDefault();
+})
+```
+
+- whatever you've submitted is put in the URL `http://127.0.0.1:5500/module-05-events/forms.html?name=something&email=wesbos%40gmail.com`
+- more often than not you don't want to submit the form to a server side, but want to stop it from submitting, grab those details with JavaScript, and continue on
+
+**other types of events with forms**
+
+- `keyup`, `keydown`, `focus`, `blur`...
+
+```
+const signupForm = document.querySelector('[name="signup"]');
+
+signupForm.addEventListener('submit', function (eve) {
+    const name = eve.currentTarget.name.value;
+    if (name.includes('Chad')) {
+        alert('Sorry bro');
+        eve.preventDefault();
+    }
+});
+
+function logEvent(eve) {
+    console.log(eve.type);
+    console.log(eve.currentTarget.value);
+}
+
+signupForm.name.addEventListener('keyup', logEvent);
+signupForm.name.addEventListener('keydown', logEvent);
+signupForm.name.addEventListener('focus', logEvent);
+signupForm.name.addEventListener('blur', logEvent);
+```
+
 ## Accessibility gotchas and keyboard codes
