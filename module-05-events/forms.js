@@ -74,4 +74,14 @@ signupForm.name.addEventListener('keydown', logEvent);
 signupForm.name.addEventListener('focus', logEvent);
 signupForm.name.addEventListener('blur', logEvent);
 
+/* accessibility pitfalls */
+const imgAcc = document.querySelector('.photo');
 
+function handlePhotoClick(eve) {
+    if (eve.type === 'click' || eve.key === 'Enter') {
+        console.log('you clicked on the photo');
+    }
+}
+
+imgAcc.addEventListener('click', handlePhotoClick);
+imgAcc.addEventListener('keyup', handlePhotoClick);

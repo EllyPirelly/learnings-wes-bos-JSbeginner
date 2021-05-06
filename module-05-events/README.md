@@ -1,8 +1,8 @@
 # Module 5 - Events - Event Listener
 
-<!-- As most of the "Module 5 - Events - Event Listener" content is information and small coding bits, this README here is used as a notepad.
+As most of the "Module 5 - Events - Event Listener" content is information and small coding bits, this README here is used as a notepad.
 
-Please check html file [index.html](./index.html) in this module's folder to check which js files are referenced to follow up with the coding bits. -->
+Please check which html files and js files are referenced to follow up with the coding bits.
 
 [Event Listener](#event-listener)
 
@@ -151,6 +151,8 @@ buyButton.forEach((button) => {
 
 ## Prevent Default and Form Events
 
+- **following examples are referring to `forms.html` and `forms.js`**
+
 **Prevent Default**
 
 - there's a couple of HTML elements that have default functionality
@@ -220,3 +222,44 @@ signupForm.name.addEventListener('blur', logEvent);
 ```
 
 ## Accessibility gotchas and keyboard codes
+
+- HTML by itself is very accessible
+
+**common pitfalls while coding**
+
+- using buttons and links against their pupose, don't mix those up
+  - buttons: actions inside of an application
+  - links: change the page
+- things that are not keyboard accessible should not have clicks registered on them unless they **have** to
+- example `<img>`
+  - there might be use cases where you need to click on the image
+  - maybe you want to present a larger version of it, maybe you want to zoom in or click and drag around...
+  - however, without a mouse, you cannot click on the `<img>` with only the keyboard
+  - what you can do is give the `<img>` a `role="button"`
+- if you mean for something to be a `<button>` that is not a button tag, what you can do is give it a role of button
+
+```
+<img class="photo" role="button" tabindex="0" src="https://source.unsplash.com/random/200x200" alt="nice">
+
+const imgAcc = document.querySelector('.photo');
+imgAcc.addEventListener('click', function (eve) {
+    console.log(eve);
+})
+```
+
+- you still won't be able to click via keyboard unless you explicitly listen to keyboard events
+
+```
+<img class="photo" role="button" src="https://source.unsplash.com/random/200x200" alt="nice">
+
+const imgAcc = document.querySelector('.photo');
+
+function handlePhotoClick(eve) {
+    if (eve.type === 'click' || eve.key === 'Enter') {
+        console.log('you clicked on the photo');
+    }
+}
+
+imgAcc.addEventListener('click', handlePhotoClick);
+imgAcc.addEventListener('keyup', handlePhotoClick);
+```
