@@ -27,6 +27,8 @@
 
 [Module 6 - Etch-a-Sketch](#module-6-etch-a-sketch)
 
+[Module 6 - Click Outside Modal](#module-6-click-outside-modal)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -95,3 +97,9 @@ Content of this module is information and small coding bits, no project.
 Please see folder `module-06-01-etch-a-sketch` [with extra README here](./module-06-01-etch-a-sketch/README.md)<br>
 
 ![etch-a-sketch](./module-06-01-etch-a-sketch/img/screen-mod0601-01.png)
+
+### Module 6 Click Outside Modal
+
+Please see folder `module-06-02-click-outside-modal` [with extra README here](./module-06-02-click-outside-modal/README.md)<br>
+
+![click outside modal](./module-06-02-click-outside-modal/img/screen-mod0602-02.gif)
