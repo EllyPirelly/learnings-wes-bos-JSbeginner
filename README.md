@@ -31,6 +31,8 @@
 
 [Module 6 - Scroll Intersection Observer](#module-6-scroll-intersection-observer)
 
+[Module 6 - Tabs](#module-6-tabs)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -86,7 +88,6 @@ Content of this module is information and small coding bits, no project.
 ### Module 5 Events
 
 Please see folder `module-05-events` [with extra README here](./module-05-events/README.md)<br>
-
 Content of this module is information and small coding bits, no project.
 
 - Event Listener
@@ -111,3 +112,9 @@ Please see folder `module-06-02-click-outside-modal` [with extra README here](./
 Please see folder `module-06-03-scroll-intersection-observer` [with extra README here](./module-06-03-scoll-intersection-observer/README.md)<br>
 
 ![intersection observer](./module-06-03-scoll-intersection-observer/img/screen-mod0603-000.gif)
+
+### Module 6 Tabs
+
+Please see folder `module-06-04-tabs` [with extra README here](./module-06-04-tabs/README.md)<br>
+
+![tabs](./module-06-04-tabs/img/screen-mod0604-00.gif)

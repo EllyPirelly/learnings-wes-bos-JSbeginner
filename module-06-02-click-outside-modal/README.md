@@ -4,13 +4,15 @@
 
 ![mod 0602](./img/screen-mod0602-02.gif)
 
-- a series of 4 cards "in the background" (responsive)
-- an outer modal to be place on top, centered
-- an inner modal that takes in to be displayed content (not 100% responsive, possible TODO)
-  - display the image
-  - display the descripton of the cards
-- no close button in this example
-- click outside the inner modal closes the whole modal
+- click outside of modal will close modal
+  - JavaScript, HTML, CSS
+  - a series of 4 cards "in the background" (responsive)
+  - an outer modal to be place on top, centered, transparent background
+  - an inner modal that takes in the to be displayed content (not 100% responsive, possible TODO)
+    - grab and display the image
+    - grab and display the descripton of the cards
+  - no close button in this example
+  - click outside the inner modal closes the whole modal
 
 ## hide modal by default
 
