@@ -29,6 +29,8 @@
 
 [Module 6 - Click Outside Modal](#module-6-click-outside-modal)
 
+[Module 6 - Scroll Intersection Observer](#module-6-scroll-intersection-observer)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -103,3 +105,9 @@ Please see folder `module-06-01-etch-a-sketch` [with extra README here](./module
 Please see folder `module-06-02-click-outside-modal` [with extra README here](./module-06-02-click-outside-modal/README.md)<br>
 
 ![click outside modal](./module-06-02-click-outside-modal/img/screen-mod0602-02.gif)
+
+### Module 6 Scroll Intersection Observer
+
+Please see folder `module-06-03-scroll-intersection-observer` [with extra README here](./module-06-03-scoll-intersection-observer/README.md)<br>
+
+![intersection observer](./module-06-03-scoll-intersection-observer/img/screen-mod0603-000.gif)
