@@ -33,6 +33,8 @@
 
 [Module 6 - Tabs](#module-6-tabs)
 
+[Module 7 - Logic and Flow Control](#module-7-logic-and-flow-control)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -118,3 +120,11 @@ Please see folder `module-06-03-scroll-intersection-observer` [with extra README
 Please see folder `module-06-04-tabs` [with extra README here](./module-06-04-tabs/README.md)<br>
 
 ![tabs](./module-06-04-tabs/img/screen-mod0604-00.gif)
+
+### Module 7 Logic and Flow Control
+
+Please see folder `module-07-logic-and-flow-control` [with extra README here](./module-07-logic-and-flow-control/README.md)<br>
+
+#### Animated Turtle as part of this course:
+
+![turtle](./module-07-logic-and-flow-control/img/screen-mod0704-01.gif)

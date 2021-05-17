@@ -1,6 +1,6 @@
 # Module 7 - Logic and Flow Control
 
-As most of the "Module 7 - Logic and Flow Control" content is information and small coding bits, this README here is used as a notepad.
+As most of the "Module 7 - Logic and Flow Control" content (except for the animated turtle, see down below) is information and small coding bits, this README here is used as a notepad.
 
 Please also [see index.html](./index.html) and [index.js](./index.js) in this module's folder to follow up with the coding bits.
 
@@ -455,5 +455,73 @@ if (isAdmin) showAdminBar();
 - question is if you _should_ do that
 
 ## Case Switch
+
+### Switch
+
+- pass it the thing that you are testing
+- has cases, those cases HAVE to be clearly defined
+- `break;` is needed after each single statement
+- `default;` is needed at the end, (if something's going wrong in the other statements, there's at least `default;` to handle that)
+
+```
+switch (eve.key) {
+    case 'ArrowUp':
+        ...
+        break;
+    case 'ArrowDown':
+        ...
+        break;
+    case 'ArrowLeft':
+        ...
+        break;
+    case 'ArrowRight':
+        ...
+        break;
+    default:
+        console.log('that is not a valid move');
+        break;
+}
+```
+
+### Switch Turtle
+
+![mod 0603](./img/screen-mod0704-01.gif)
+
+See [html](./switch.html), [js](./switch.js) and [css](./styles.css) here.
+
+- `turtle.png`
+- make that turtle walk through pressing arrow keys 'up', 'down', 'left', 'right'
+- add speed, flip over turtle (change direction), rotate
+- update CSS variables with JavaScript
+
+**How to add custom CSS properties to `style` in JavaScript**
+
+```
+turtle.style.background = 'red'; // works
+turtle.style['background'] = 'yellow'; // works
+turtle.style['border'] = `5px solid black`; // works
+turtle.style['madeup'] = `5px solid green`; // does not work
+```
+
+- only CSS attributes that are "real" are going to be added to the turtle
+- so how - when it's not a "real" CSS attribute - to apply custom CSS properties?
+- this way:
+
+```
+.turt {
+    --x: 0;
+    --y: 0;
+    transform: translate(var(--x)) translateY(var(--y));
+}
+```
+
+- with `setAttribute();`
+
+```
+turtle.setAttribute('style', `
+    --x: ${x}px;
+    --y: ${y}px;
+`);
+```
 
 ## Intervals and Timers
