@@ -29,7 +29,7 @@ Please also [see index.html](./index.html) and [index.js](./index.js) in this mo
 ### If Statements
 
 - are the foundation of all logic in JavaScript
-- expect Boolean (`true` or `false`) or some sort of condition that is evaluated to `true` or `false` (or truthy / falsy)
+- expect Boolean (`true` or `false`) or some sort of condition that is evaluated to `true` or `false` (or `truthy` / `falsy`)
 
 ```
 if (10 > 2) {
@@ -221,9 +221,9 @@ if (nameIsAwesome('wes')) {
 }
 ```
 
-### truthy and falsy
+### `truthy` and `falsy`
 
-- an if statement does not only require `true` or `false`, but also takes in truthy or falsy
+- an if statement does not only require `true` or `false`, but also takes in `truthy` or `falsy`
 
 ```
 const dog = 'snickers';
@@ -245,7 +245,7 @@ if (dog) {
 - so how come that this still works
 - if statements take in a number of different values and will try to **coerce them** and will try to turn them into a Boolean of `true` or `false`
 
-### check for truthy / falsy values
+### check for `truthy` / `falsy` values
 
 ```
 // GRAB ALL, LOOP OVER, TRUTHY OR FALSY
@@ -266,30 +266,30 @@ values.forEach(value => {
 
 **array**
 
-- an array that has nothing in it is truthy
+- an array that has nothing in it is `truthy`
 - if you have to check for anything IN an array, check for `.length()`
 - `[1, 2, 3].length // 3` will be true
 - `[].length // 0` will be false
 
 **object**
 
-- an object that has nothing in it is truthy
+- an object that has nothing in it is `truthy`
 - if you have to check if anything is IN there, check `Object.keys({})`, will return to you an empty array where you then can use `.length` on: `Object.keys({}).length` and that's 0 (elements in it)
 
 **-10**
 
-- truthy
+- `truthy`
 
 **1**
 
-- truthy
+- `truthy`
 - `1 == true // true`
 
 **full string**
 
-- `'some words'` a full string is truthy
-- any string with content will be truthy
-- so also `'0'` or `' '` will be truthy
+- `'some words'` a full string is `truthy`
+- any string with content will be `truthy`
+- so also `'0'` or `' '` will be `truthy`
 
 ### Falsy Values
 
@@ -297,22 +297,162 @@ values.forEach(value => {
 
 - `0`, a zero will equate to `false`
 - `0 == false // true`
-- only `0` will be falsy, all other numbers will be truthy
+- only `0` will be `falsy`, all other numbers will be `truthy`
 
 **undefined**
 
-- falsy
+- `falsy`
 
 **NaN**
 
-- falsy
+- `falsy`
 - `score // NaN`
 
 **`''`**
 
-- `''` an empty string (without whitespace!) is falsy
+- `''` an empty string (without whitespace!) is `falsy`
 
 ## Coercion Ternaries Conditional Abuse
+
+### Coercion
+
+```
+const isCool = true;
+
+if (!isCool) {
+    console.log('nope');
+}
+```
+
+- `!` means "is not"
+- `!` does coercion
+- something of a different type (string, number...) will be taken and coerced into a real Boolean (`true` or `false`)
+
+```
+const holla = "ella";
+!"ella" // false
+!!"ella" // true
+```
+
+- `!` will coerce to `false`, `!!` will coerce to `true`
+
+**`!` and `!!` take the fact that something has a `truthy` or `falsy` value and coerce that into a real Boolean.**
+
+### Ternaries
+
+- like a shorthand if statement
+- helpful to quickly run functionality based on something being `true` or `false`
+- it needs a condition, it needs what to do if `true`, it needs what to do if `false`
+
+**If it's a simple if statement like below, that's too verbose and can be done better**
+
+```
+const count = 2;
+let word;
+
+if (count === 1) {
+    word = 'item';
+} else {
+    word = 'items';
+}
+const sentence = `You have ${count} ${word} in your cart`;
+console.log(sentence); // You have 2 items in your cart
+```
+
+**Ternary**
+
+```
+const count = 1;
+const word = count === 1 ? 'item' : 'items';
+
+const sentence = `You have ${count} ${word} in your cart`;
+console.log(sentence); // You have 1 item in your cart
+```
+
+**Even shorter**
+
+```
+const count = 3;
+const sentence = `You have ${count} items${count === 1 ? '' : 's'} in your cart`;
+console.log(sentence); // You have 3 itemss in your cart
+```
+
+**Use with functions**
+
+- how to do "nothing" in this statement? just type `null` (or an empty string `''`)
+- using the `false` case is a must and cannot be left off
+
+```
+function showAdminBar() {
+    console.log('Showing admin bar');
+};
+const isAdmin = true;
+isAdmin ? showAdminBar() : null;
+```
+
+**`&&` trick**
+
+- chaining: will check along the way if statements are true
+- makes sure that all of these three are `true` before continuing
+
+```
+// && trick
+function check1() {
+    console.log('Running check1'); // Running check1
+    return true;
+}
+
+function check2() {
+    console.log('Running check2'); // Running check2
+    return false;
+}
+
+function check3() {
+    console.log('Running check3');
+    return true;
+}
+
+if (check1() && check2() && check3()) {
+    console.log('all checks passed');
+} else {
+    console.log('some checks failed'); // some checks failed
+}
+```
+
+- the third check never runs
+- if in a condition at any point of that condition one part is `false`, the condition is returned as `false`
+- short circuiting, meaning that the whole condition knowingly was never finished
+
+### Conditional Abuse
+
+```
+function showAdminBar() {
+    console.log('Showing admin bar');
+};
+const isAdmin = true;
+isAdmin && showAdminBar();
+```
+
+- previously `isAdmin ? showAdminBar() : null;` is changed to `isAdmin && showAdminBar();`
+- if `isAdmin` is ever `false`, `showAdminBar()` will never run
+- this a bit of abuse but totally works
+- used in React a lot as if statements are hard to do there
+
+**Statement block `{}`**
+
+- if something is on the same line, the statement block is not needed and `{}` can be deleted
+
+```
+// this:
+if (isAdmin) {
+    showAdminBar();
+}
+
+// can be turned into this:
+if (isAdmin) showAdminBar();
+```
+
+- question is if you _should_ do that
 
 ## Case Switch
 

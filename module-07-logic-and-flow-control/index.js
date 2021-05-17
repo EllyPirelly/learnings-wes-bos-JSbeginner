@@ -185,3 +185,84 @@ values.forEach(value => {
         console.log(value, 'is falsy')
     }
 });
+
+console.clear();
+
+// COERCION
+
+const isCool = true;
+if (!isCool) {
+    console.log('nope');
+}
+
+/* const holla = "ella";
+!"ella" // false
+!!"ella" // true */
+
+// TERNARIES
+
+// verbose if statement
+/* const count = 2;
+let word;
+if (count === 1) {
+    word = 'item';
+} else {
+    word = 'items';
+}
+const sentence = `You have ${count} ${word} in your cart`;
+console.log(sentence); // You have 2 items in your cart */
+
+// shorthand
+/* const count = 1;
+const word = count === 1 ? 'item' : 'items';
+
+const sentence = `You have ${count} ${word} in your cart`;
+console.log(sentence); // You have 1 item in your cart */
+
+// even shorter
+const count = 3;
+const sentence = `You have ${count} items${count === 1 ? '' : 's'} in your cart`;
+console.log(sentence); // You have 3 itemss in your cart
+
+// use with functions
+/* function showAdminBar() {
+    console.log('Showing admin bar');
+};
+const isAdmin = true;
+isAdmin ? showAdminBar() : null; */
+
+// && trick
+function check1() {
+    console.log('Running check1'); // Running check1
+    return true;
+}
+
+function check2() {
+    console.log('Running check2'); // Running check2
+    return false;
+}
+
+function check3() {
+    console.log('Running check3');
+    return true;
+}
+
+if (check1() && check2() && check3()) {
+    console.log('all checks passed');
+} else {
+    console.log('some checks failed'); // some checks failed
+}
+
+// CONDITIONAL ABUSE
+function showAdminBar() {
+    console.log('Showing admin bar');
+};
+const isAdmin = true;
+isAdmin && showAdminBar();
+
+// Statements block
+if (isAdmin) {
+    showAdminBar();
+}
+
+if (isAdmin) showAdminBar();
