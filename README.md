@@ -35,6 +35,8 @@
 
 [Module 7 - Logic and Flow Control](#module-7-logic-and-flow-control)
 
+[Module 8 - Data Types](#module-8-data-types)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -124,7 +126,27 @@ Please see folder `module-06-04-tabs` [with extra README here](./module-06-04-ta
 ### Module 7 Logic and Flow Control
 
 Please see folder `module-07-logic-and-flow-control` [with extra README here](./module-07-logic-and-flow-control/README.md)<br>
+Content of this module (except for the animated turtle, see down below) is information and small coding bits.
+
+- BEDMAS
+- Flow Control - If Statements, Function Returns, Truthy, Falsy
+- Coercion, Ternaries and Conditional Abuse
+- Case Switch and Animating a Turtle with CSS Variables
+- Intervals and Timers
 
 #### Animated Turtle as part of this course:
 
 ![turtle](./module-07-logic-and-flow-control/img/screen-mod0704-01.gif)
+
+### Module 8 Data Types
+
+Please see folder `module-08-data-types` [with extra README here](./module-08-data-types/README.md)<br>
+Content of this module is information and small coding bits, no project.
+
+- Objects
+- Object Reference vs Values
+- Maps
+- Arrays
+- Array Cardio - Static Methods
+- Array Cardio - Instance Methods
+- Array Cardio - Callback Methods and Function Generation
