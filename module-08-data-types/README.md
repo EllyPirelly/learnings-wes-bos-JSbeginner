@@ -1,8 +1,6 @@
 # Module 8 - Data Types
 
-As most of the "Module 8 - Data Types" content is information and small coding bits, this README here is used as a notepad.
-
-Please also [see index.html](./index.html) and [index.js](./index.js) in this module's folder to follow up with the coding bits.
+As most of the "Module 8 - Data Types" content is information and coding bits, this README here is used as an extensive notepad.
 
 [Objects](#Objects)
 
@@ -22,13 +20,13 @@ Please also [see index.html](./index.html) and [index.js](./index.js) in this mo
 
 See [object.html](./object.html) and [object.js](./object.js) in this module's folder to follow up with the coding bits.
 
-- Objects are fundamental building block of JavaScript, just like Strings, Numbers, Boolean
+- objects are one fundamental building block of JavaScript, just like strings, numbers, boolean
 - actually everything in JavaScript is an object
 - objects allow us to group together properties and values (keys and values)
-- used for example for storing related data, storing functionality, all the way to creating custom types
-- values of an object can be of any type
+- used for example for storing related data, storing functionality, creating custom types
+- values of an object can be of _any_ type
 
-**Important: objects are used for where the order of the properties does not matter**
+**Important: objects can be used for where the order of the properties does not matter**
 
 ### Object Literal Syntax
 
@@ -47,7 +45,7 @@ const person = new Object({
 });
 ```
 
-### Shorten
+### Shorten a property/value pair
 
 ```
 const age = 100;
@@ -73,7 +71,7 @@ const person = {
 ```
 
 - `'cool-dude'` will show up as a property with a dash in it
-- `'really cool'` - spaces are possible in a property
+- `'really cool'`, spaces are possible in a property
 
 **Reasoning to always put a comma at the end of the last property value pair**
 
@@ -84,7 +82,7 @@ const person = {
   - with Git Blame, that line will then fall on that person even though another person wrote the original code
 - all modern browsers support putting a comma at the end of the last line
 
-### Nested objects: access, adding and overwriting through dot notation
+### Nested objects: access, add and overwrite through dot notation
 
 ```
 const age = 100;
@@ -103,10 +101,10 @@ console.log(person.job); // Chef cook
 console.log(person.age); // 50
 ```
 
-**How is it possible to change a variable value that has been created with `const`?!**
+**Why is it possible to change a variable value that has been created with `const`?!**
 
-- `const` does not mean that the VALUE of an object cannot be changed
-- `const` means that the BINDING to `person` cannot be changed - properties CAN change but the actual object itself can never be overwritten entirely
+- `const` does NOT mean that the VALUE of an object cannot be changed
+- `const` means that the BINDING to `person` cannot be changed - properties CAN change but the actual object itself (`person`) can never be overwritten entirely
 
 ### Immutable object
 
@@ -133,8 +131,8 @@ maria.age = 75;
 console.log(maria.age); // age: 50
 ```
 
-- that's not going to freeze the original object though
-- it will return a new object `mariaFroze`, and that object can never be changed
+- that's not going to freeze the original object `maria` though
+- it will return a new object `mariaFroze`, which can never be changed
 
 ### Reason 1 for `[]`
 
@@ -166,10 +164,12 @@ console.log('propertyToCheck:', person.propertyToCheck);
 // propertyToCheck: If I'm logged - are you really looking for the property??
 ```
 
-**Why is there both - `.` and `[]`, as `[]` seem to be much uglier?**
+**Why is there both `.` and `[]` - as `[]` seem to be much uglier?**
 
 - `person[propertyToCheck])` is not going to look for a property called `propertyToCheck`
 - what `person[propertyToCheck])` will do is use the string in that variable as a property look-up
+- `console.log(person.propertyToCheck);` will literally look for the PROPERTY on that object
+- that's the reason why `[]` are used: `console.log('person[propertyToCheck]);` to reference the NAME of the property
 
 ![mod 0801](./img/screen-mod0801-01.png)
 ![mod 0801](./img/screen-mod0801-02.png)
@@ -177,9 +177,6 @@ console.log('propertyToCheck:', person.propertyToCheck);
 ![mod 0801](./img/screen-mod0801-04.png)
 ![mod 0801](./img/screen-mod0801-05.png)
 ![mod 0801](./img/screen-mod0801-06.png)
-
-- `console.log(person.propertyToCheck);` will literally look for the property on that object
-- that's the reason why `[]` are needed here `console.log('person[propertyToCheck]);` to reference the name of the property
 
 ### Reason 2 for `[]`
 
@@ -199,9 +196,14 @@ const person = {
     },
 };
 
-//console.log(person.cool - dude); // Uncaught ReferenceError: dude is not defined
-//console.log(person.really cool); // Uncaught SyntaxError: missing ) after argument list
-//console.log(person.777); // Uncaught SyntaxError: missing ) after argument list
+console.log(person.cool-dude);
+// Uncaught ReferenceError: dude is not defined
+
+console.log(person.really cool);
+// Uncaught SyntaxError: missing ) after argument list
+
+console.log(person.777);
+// Uncaught SyntaxError: missing ) after argument list
 ```
 
 - `person.cool-dude`, `person.really cool`, `person.777` are invalid property look-ups
@@ -215,7 +217,7 @@ console.log(person[777]); // true
 
 **Why is that necessary in the first place?**
 
-Data from another language, or data from a server side, so you don't have a choice or a lot of options - then you need bracket notation in order to reference that data.
+If you receive data from another language or data from a server side you don't have a choice or a lot of options - you need bracket notation in order to reference that data.
 
 ### Referencing multiple levels deep
 
@@ -251,6 +253,7 @@ const nameInput = document.querySelector('[name="first"]');
 const naming = nameInput.value;
 console.log(nameInput);
 // <input type="text" name="first" value="valuehere">
+
 console.log(naming); // valuehere
 ```
 
@@ -312,7 +315,7 @@ person.age = undefined;
 
 **What's the difference between a method and a function?**
 
-A method is a function that lives inside of an object:
+A method is a function that lives inside of an object.
 
 ```
 const age = 100;
@@ -339,9 +342,16 @@ console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Maria!
 ### Method shorthand
 
 ```
-sayHello(greeting = 'Hola') {
-    return `${greeting} ${this.name}!`;
-},
+const age = 100;
+const person = {
+    name: 'Maria',
+    age,
+    sayHello(greeting = 'Hola') {
+        return `${greeting} ${this.name}!`;
+    },
+};
+console.log(person.sayHello()); // Hola Maria!
+console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Maria!
 ```
 
 - this is not an arrow function!
@@ -388,6 +398,8 @@ person.sneeze1();
 
 ## Object Reference vs Values
 
+See [ref-vs-value.html](./ref-vs-value.html) and [ref-vs-value.js](./ref-vs-value.js) in this module's folder to follow up with the coding bits.
+
 ### Strings
 
 ```
@@ -409,7 +421,9 @@ console.log(name1 === name2); // false
 console.log(name2); // bettina
 ```
 
-- `===` checks the type: is string, the value: is exactly the same
+- `===` checks
+  - the type: is string
+  - the value: is exactly the same?
 - when taking `name1` and setting it to `name2` like this `name1 = name2;`, the value of `name2` is taken, copied and pasted into `name1`
 - when one of the variables is updated, the other one that has been pointing to does not update itself
 
@@ -431,7 +445,8 @@ const person2 = {
 console.log(person1 === person2); // false
 ```
 
-- when you are comparing objects, it is done by reference to the object itself, NOT the values inside of it. So even if the content is exactly the same, it is NOT the same object.
+- when you are comparing objects, it is done by reference to the object itself, NOT the values inside of it
+- even if the content is exactly the same, it is NOT the same object
 
 **What's going on here?**
 
@@ -494,7 +509,7 @@ console.log(person1); // {first: "teddy", last: "cool"}
 ### How to take a copy then?
 
 - spread `...` operator or `Object.assign()` operator
-- copying will only work one level deep
+- copying will only work one level deep!
 - "shallow copy"
 
 **Copy via spread operator**
@@ -526,14 +541,15 @@ console.log(person3); // {first: "Larry", last: "smith"}
 **Copy via Oject.assign()**
 
 - not that popular anymore since spread has been introduced
-- first argument is an empty object, second argument is the object that is supposed to be fold into the first argument empty object
+- first argument is an empty object
+- second argument is the object that is supposed to be fold into the first argument's empty object
 
 ```
 const person4 = Object.assign({}, person1);
 console.log(person3); // {first: "Larry", last: "smith"}
 ```
 
-**Copying this way only goes one level deep**
+**Copying this way only goes one level deep!**
 
 ```
 const person1 = {
@@ -567,7 +583,7 @@ console.log(person1);
 ### Deep Copy / Deep Clone
 
 - via utility library, for example lodash https://lodash.com/
-- lots of methods to work with objects and arrays
+- has lots of methods to work with objects and arrays
 - can be included in your script
 - all of lodash method live in the `_`
 - `_.cloneDeep(value)` https://lodash.com/docs/4.17.15#cloneDeep
@@ -576,7 +592,7 @@ console.log(person1);
 
 - use https://unpkg.com/#/
 - change URL to https://unpkg.com/lodash@4.17.21/lodash.js will return the most recent lodash version
-- then take that URL and have it as a script tag right before your own scripts start
+- then take that URL and have it as a script tag in your HTML, right before your own scripts start
 
 ```
 <body>
@@ -637,7 +653,7 @@ console.log(inventory);
 
 - you can spead in as many objects as you want
 - you can add your own property value pair
-- **in case of duplicates the last one in the code wins and overwrites the one before**
+- **in case of duplicates, the last one in the code wins and overwrites the one before**
 
 ### Reference vs copy in functions
 
@@ -688,6 +704,202 @@ console.log(inventory);
 - when you pass in an object into a function, and you modify that object, the external object will also be updated
 
 ## Maps
+
+See [maps.html](./maps.html) and [maps.js](./maps.js) in this module's folder to follow up with the coding bits.
+
+- a `map` is very similar to an object
+- a `map` is simply for storing data
+- in order to add/delete items we have
+  - the `.set()` API
+  - the `.get()` API
+  - the `.has()` API
+  - the `.delete()` API
+- PROS of `map`
+  - the above mentioned methods
+  - the keys and the values can be of ANY type
+    - previously in the course, there only was the ability to put different types in the VALUE portion of an object
+    - a `map` allows to put ANY type into the key AND value
+  - order IS guaranteed (with an object, order is NOT guaranteed)
+- CONS of `map`
+  - there is no object literal syntax (as is with objects), we have to create a `new Map()` and then set the items (you _can_ pass items into a `map` though, with array of arrays)
+  - you cannot put functions inside of `map` (as you can with objects), that's not what `map` is for
+  - JSON
+    - currently JSON does not handle `map`
+    - if you use `map` and want to send your code for example via email, you have to convert it to an object first to then make it a JSON
+    - `Object.fromEntries()` tries its best to convert to an object
+
+**In a lot of the exercises that will follow - whenever there's the need to create an object - first is should be evaluated if `map` can be used.**
+
+Why would you want to use a `map` over an object?<br>
+Use `map` if you do need to maintain the order of your items.
+
+```
+const myMap = new Map();
+
+myMap.set('name', 'wes');
+myMap.age = 100;
+
+console.log(myMap);
+```
+
+![mod 0803](./img/screen-mod0803-01.png)
+
+- `.set(key, value)` takes two arguments, first one is the key, second one is the value you want to set
+- "Entries" are the actual values in the `map`
+- `age` is not in the same spot, it's a property ON `map` but NOT an actual entry IN `map`
+
+**Example dictionary**
+
+Dictionaries are a way to store additional metadata about something.
+
+```
+const person1 = {
+    name: 'wes',
+    age: 200,
+};
+
+const myMap = new Map();
+
+myMap.set('name', 'wes');
+myMap.set(100, 'this is a number');
+myMap.set(person1, 'really cool');
+
+console.log(myMap);
+console.log(myMap.get(person1));
+```
+
+![mod 0803](./img/screen-mod0803-02.png)
+
+- to store additional information inside of `map` use the reference to `person1` object as a key in `map`: `myMap.set(person1, 'really cool');`
+- the key is actually an object and the value is `'really cool'`
+
+```
+const person1 = {
+    name: 'wes',
+    age: 200,
+}
+
+myMap.set('name', 'wes');
+myMap.set(100, 'this is a number');
+myMap.set(person1, 'really cool');
+
+console.log(myMap);
+console.log(myMap.get(person1));
+```
+
+![mod 0803](./img/screen-mod0803-03.png)
+
+- use the nice `get()` method, instead of using a unique string or an ID to look the value up later
+- use the reference of the object as the key in the map `console.log(myMap.get(person1));`
+
+**Example score**
+
+Somebody has some scores that they want to store some additional information about.
+
+```
+const score = 100;
+const prizes = new Map();
+prizes.set(100, 'bear');
+prizes.set(200, 'duck');
+prizes.set(300, 'cat');
+
+console.log(`you win a ${prizes.get(score)}`);
+// you win a bear
+```
+
+- previously, if this was an object, we would have to use a string of the number to look it up
+- in this case we can simply use a number `const score = 200` to look up what the corresponding prize is
+
+**Example looping - return of value**
+
+```
+const score = 100;
+const prizes = new Map();
+prizes.set(100, 'bear');
+prizes.set(200, 'duck');
+prizes.set(300, 'cat');
+
+const ul = document.querySelector('.prizes');
+// returns the value
+prizes.forEach(entry => {
+    console.log(entry);
+});
+```
+
+![mod 0803](./img/screen-mod0803-04.png)
+
+**Example looping - returns array with key AND value**
+
+```
+const score = 100;
+const prizes = new Map();
+prizes.set(100, 'bear');
+prizes.set(200, 'duck');
+prizes.set(300, 'cat');
+
+// returns array with key and value
+for (const prize of prizes) {
+    console.log(prize);
+    console.log(prize[0]);
+    console.log(prize[1]);
+    console.log(prize[2]);
+}
+```
+
+![mod 0803](./img/screen-mod0803-05.png)
+
+**Destructuring and creating `<ul>`, `<li>` in the HTML**
+
+```
+const score = 100;
+const prizes = new Map();
+prizes.set(100, 'bear');
+prizes.set(200, 'duck');
+prizes.set(300, 'cat');
+
+const ul = document.querySelector('.prizes');
+for (const [points, prize] of prizes) {
+    console.log(points, prize);
+
+    const li = `<li>${points} - ${prize}</li>`;
+    ul.insertAdjacentHTML('beforeend', li);
+};
+```
+
+![mod 0803](./img/screen-mod0803-06.png)
+![mod 0803](./img/screen-mod0803-07.png)
+
+**Example Array of Arrays**
+
+```
+const arrayOfArrays = new Map([
+    ['name', 'bella'],
+    ['age', '75']
+]);
+console.log(arrayOfArrays);
+```
+
+![mod 0803](./img/screen-mod0803-08.png)
+
+- object literal syntax is a bit nicer than that though
+
+**`.delete()` API**
+
+```
+const person1 = {
+    name: 'wes',
+    age: 200,
+};
+const myMap = new Map();
+myMap.set('name', 'wes');
+myMap.set(100, 'this is a number');
+myMap.set(person1, 'really cool');
+myMap.delete('name');
+
+console.log(myMap);
+```
+
+![mod 0803](./img/screen-mod0803-09.png)
 
 ## Arrays
 

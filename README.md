@@ -6,6 +6,10 @@
 - you can buy this as a starter course or as a master package, my codealong is based on the master package
 - see more of [his courses on wesbos.com](https://wesbos.com/courses)
 - see [Wes Bos Beginner JavaScript on GitHub](https://github.com/wesbos/beginner-javascript) here
+- simple HTML5, CSS and JavaScript files - no build processes
+- most of the CSS has been provided by Wes Bos
+  - my focus is not, to - for every example - have a clever CSS
+  - my focus is to learn JavaScript as fast as possible
 
 ### How to run this?
 
@@ -141,7 +145,7 @@ Content of this module (except for the animated turtle, see down below) is infor
 ### Module 8 Data Types
 
 Please see folder `module-08-data-types` [with extra README here](./module-08-data-types/README.md)<br>
-Content of this module is information and small coding bits, no project.
+Content of this module is information and coding bits, no project.
 
 - Objects
 - Object Reference vs Values
