@@ -4,6 +4,7 @@
 
 - codealong to [Wes Bos Beginner JavaScript](https://beginnerjavascript.com/) course
 - you can buy this as a starter course or as a master package, my codealong is based on the master package
+- the course is 85 videos long, so it's quite long and time intense
 - see more of [his courses on wesbos.com](https://wesbos.com/courses)
 - see [Wes Bos Beginner JavaScript on GitHub](https://github.com/wesbos/beginner-javascript) here
 - simple HTML5, CSS and JavaScript files - no build processes

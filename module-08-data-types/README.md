@@ -1246,6 +1246,235 @@ console.log(comments);
 
 ## Array Cardio Static Methods
 
+There are static methods and there are instance or prototype methods.<br>
+
+**What does Static Method mean?**
+
+- static methods live on the `Array`
+- `Array.of()`
+- `Array.from()`
+- `Array.isArray()`
+- they are often called "utility methods", handy methods for creating/working with arrays
+- they are not a method like `push()`
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#static_methods
+
+### `Array.of()`
+
+```
+const names = Array.of('wes', 'kait', 'snickers');
+
+console.log(names);
+// (3) ["wes", "kait", "snickers"]
+
+console.log(Array.of(...'wes'));
+// (3) ["w", "e", "s"]
+```
+
+- is used for creating an array from its arguments
+- spread `...` into a function is possible with it
+
+```
+// most of the time you'll create an array this way though
+const names2 = ['wes2', 'kait2', 'snickers2'];
+
+console.log(names2);
+// (3) ["wes2", "kait2", "snickers2"]
+```
+
+### `Array.from()`
+
+```
+const from = Array.from({ length: 10 });
+console.log(from);
+```
+
+![mod 0804](./img/screen-mod0804-04.png)
+
+- will take an iterable (something with a length) and return an array from that iterable
+- example will return an array with 10 empty spots
+
+### `Array.from()` with function that creates a range from x to y
+
+```
+const range = Array.from({ length: 10 }, function () {
+    return 'wes';
+});
+
+console.log(range);
+// (10) ["wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes"]
+```
+
+```
+const range = Array.from({ length: 10 }, function (item, index) {
+    return index;
+});
+
+console.log(range);
+// (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+```
+function createRange(start, end) {
+
+    const range = Array.from({ length: end - start + 1 }, function (item, index) {
+        return index + start;
+    });
+    return range;
+
+}
+
+console.log(createRange(3, 7));
+// (5) [3, 4, 5, 6, 7]
+```
+
+- `Array.from()` creates an array
+- `Array.from()` takes two arguments
+  - the first one is an iterable (most likely will be an object with a length on it)
+  - the second argument is referred to as a map argument (callback function)
+- the callback function can take two arguments `function(item, index)`
+- in our example `item` is undefined, so we can refer to it with `function(_, index)` or `function(_item, index)` or `function(item, index)` - just to denote that item doesn't do anything
+
+### `Array.isArray()`, check if array really is an array, aka `true`
+
+```
+function createRange(start, end) {
+
+    const range = Array.from({ length: end - start + 1 }, function (item, index) {
+        return index + start;
+    });
+    return range;
+
+}
+const myRange = createRange(3, 7);
+
+console.log(Array.isArray(myRange)); // true
+```
+
+### Object.entries(), Object.keys(), Object.values() - make three arrays with each method
+
+**Those are static methods that are on the OBJECT instead of on the array, however, they RETURN ARRAYS.**
+
+```
+const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+};
+
+console.log(Object.entries(meats));
+console.log(Object.keys(meats));
+console.log(Object.values(meats));
+```
+
+![mod 0804](./img/screen-mod0805-01.png)
+
+- `Object.entries()`
+  - returns an array of the keys, or values, or both of them
+  - gives us arrays that are nested
+- `Object.keys()`
+  - returns an array of all the object keys
+- `Object.values()`
+  - returns an array of all the object values
+
+**`forEach()` looping**
+
+```
+const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+};
+
+Object.values(meats).forEach(qty => {
+    console.log(qty);
+    // 10
+    // 5
+    // 7
+});
+
+Object.keys(meats).forEach(qty => {
+    console.log(qty);
+    // beyond
+    // beef
+    // pork
+});
+
+Object.entries(meats).forEach(entry => {
+    console.log(entry);
+    // (2) ["beyond", 10]
+    // (2) ["beef", 5]
+    // (2) ["pork", 7]
+});
+```
+
+**`forEach()`, split up into their own variables**
+
+```
+const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+};
+
+Object.entries(meats).forEach(entry => {
+    const key = entry[0];
+    const value = entry[1];
+
+    console.log(key, value);
+    // beyond 10
+    // beef 5
+    // pork 7
+});
+```
+
+**`forEach()`, split up into their own variables, destructuring**
+
+```
+const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+};
+Object.entries(meats).forEach(entry => {
+    const [key, value] = entry;
+
+    console.log(key, value);
+    // beyond 10
+    // beef 5
+    // pork 7
+});
+```
+
+- or
+
+```
+const meats = {
+    beyond: 10,
+    beef: 5,
+    pork: 7
+};
+Object.entries(meats).forEach(([key, value]) => {
+
+    console.log(key, value);
+    // beyond 10
+    // beef 5
+    // pork 7
+});
+```
+
 ## Array Cardio Instance Methods
+
+**What does Instance Method (or Prototype Method) mean?**
+
+```
+const numbers = [1, 2, 3, 4, 5];
+console.log(numbers); // (5) [1, 2, 3, 4, 5]
+```
+
+![mod 0804](./img/screen-mod0804-03.png)
+
+- instance or prototype methods are the methods with `Array.prototype.something()`:
+- when you create an array you get what is referred to as the array prototype
+- these are the methods that are on every single array
 
 ## Array Cardio Callback Methods and Function Generation
