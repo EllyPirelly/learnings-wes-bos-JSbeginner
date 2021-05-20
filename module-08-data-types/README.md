@@ -748,7 +748,7 @@ console.log(myMap);
 - "Entries" are the actual values in the `map`
 - `age` is not in the same spot, it's a property ON `map` but NOT an actual entry IN `map`
 
-**Example dictionary**
+### Example dictionary
 
 Dictionaries are a way to store additional metadata about something.
 
@@ -792,7 +792,7 @@ console.log(myMap.get(person1));
 - use the nice `get()` method, instead of using a unique string or an ID to look the value up later
 - use the reference of the object as the key in the map `console.log(myMap.get(person1));`
 
-**Example score**
+### Example score
 
 Somebody has some scores that they want to store some additional information about.
 
@@ -810,7 +810,7 @@ console.log(`you win a ${prizes.get(score)}`);
 - previously, if this was an object, we would have to use a string of the number to look it up
 - in this case we can simply use a number `const score = 200` to look up what the corresponding prize is
 
-**Example looping - return of value**
+### Example looping - return of value
 
 ```
 const score = 100;
@@ -828,7 +828,7 @@ prizes.forEach(entry => {
 
 ![mod 0803](./img/screen-mod0803-04.png)
 
-**Example looping - returns array with key AND value**
+### Example looping - returns array with key AND value
 
 ```
 const score = 100;
@@ -848,7 +848,7 @@ for (const prize of prizes) {
 
 ![mod 0803](./img/screen-mod0803-05.png)
 
-**Destructuring and creating `<ul>`, `<li>` in the HTML**
+### Destructuring and creating `<ul>`, `<li>` in the HTML
 
 ```
 const score = 100;
@@ -869,7 +869,7 @@ for (const [points, prize] of prizes) {
 ![mod 0803](./img/screen-mod0803-06.png)
 ![mod 0803](./img/screen-mod0803-07.png)
 
-**Example Array of Arrays**
+### Example Array of Arrays
 
 ```
 const arrayOfArrays = new Map([
@@ -883,7 +883,7 @@ console.log(arrayOfArrays);
 
 - object literal syntax is a bit nicer than that though
 
-**`.delete()` API**
+### `.delete()` a property
 
 ```
 const person1 = {
@@ -902,6 +902,347 @@ console.log(myMap);
 ![mod 0803](./img/screen-mod0803-09.png)
 
 ## Arrays
+
+See [arrays.html](./arrays.html) and [arrays.js](./arrays.js) in this module's folder to follow up with the coding bits.
+
+### What's an array?
+
+- an array is used to hold a list of items where the order matters
+- each thing in an array is called an item
+- each item in an array can be of any type
+- each item's position is called an index
+- the number of items inside of an array is called a length
+- an array has no keys, the keys are always going to be indexes
+- whereas the `{}` are for an object, `[]` are for an array
+- an array is of type object (!), it is NOT its own type
+- an array can hold data that has a bunch of methods on them that live inside of the array
+- arrays are zero-based, the counting starts at `0`
+
+### Array Literal Syntax
+
+```
+const names = [];
+
+// similar as with objects, you can also do this
+const names1 = new Array();
+```
+
+```
+const names = ['wes', 'kait', 'snickers'];
+console.log(names);
+console.log(typeof names); // object
+```
+
+![mod 0804](./img/screen-mod0804-01.png)
+
+```
+// check typeof
+console.log(typeof names); // object
+
+// check if type is array
+console.log(Array.isArray(names)); // true
+
+// access items via index
+console.log(names[1]); // kait
+
+// check for length
+console.log(names.length); // 3
+
+// check for the last item
+console.log(names[names.length - 1]); // will return the last one: snickers
+```
+
+### Methods
+
+Most of the methods are immutable, but there are some to be careful with (will be addressed later in the course)
+
+#### Mutable
+
+- mutable methods perform mutations, they DO change the original data
+
+```
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const numbersBackwards = numbers.reverse();
+
+console.log(numbersBackwards);
+// (9) [9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+console.log(numbers);
+// (9) [9, 8, 7, 6, 5, 4, 3, 2, 1]
+```
+
+- the original array has been reversed as well
+- the second const `const numbersBackwards = numbers.reverse();` is not needed/too verboxe, do `numbers.reverse();` instead
+
+#### Immutable
+
+- immutable methods DO NOT change the original data
+- immutable methods return a new array
+- please see `slice()` method further down below
+
+#### `push()` - add item to the end - mutable
+
+```
+const names = ['wes', 'kait', 'snickers'];
+names.push('lux');
+
+console.log(names);
+// (4) ["wes", "kait", "snickers", "lux"]
+```
+
+- `push()` adds an item to the end of an array
+- mutates the original array
+
+#### `unshift()` - add item to the front - mutable
+
+```
+const names = ['wes', 'kait', 'snickers'];
+names.unshift('poppy');
+
+console.log(names);
+// (4) ["poppy", "wes", "kait", "snickers"]
+```
+
+- `unshift()` adds an item to the front of an array
+- mutates the original array
+
+#### spread `...` - reverse items - immutable
+
+```
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const numbersReversed = [...numbers];
+numbersReversed.reverse();
+
+console.log(numbersReversed);
+// (9) [9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+console.log(numbers);
+// (9) [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+- to have a nice one-liner, instead of having two lines like in the example, immediately call the method with<br>
+  `const numbersReversed = [...numbers].reverse();`
+
+#### spread `...` - add item to the end - immutable
+
+```
+const names = ['wes', 'kait', 'snickers'];
+const names2 = [...names, 'lux'];
+
+console.log(names2);
+// (4) ["wes", "kait", "snickers", "lux"]
+
+console.log(names);
+// (4) ["wes", "kait", "snickers"]
+```
+
+- keeps the original array intact with creating a new array
+- copies the original array via spread `...`
+- no `push()` needed
+- common thing in React, as you don't want to push items into state - you want to take a copy and update state
+
+#### spread `...` - add item to the front - immutable
+
+```
+const names = ['wes', 'kait', 'snickers'];
+const names2 = ['lux', ...names];
+
+console.log(names2);
+// ["lux", "wes", "kait", "snickers"]
+
+console.log(names);
+// (4) ["wes", "kait", "snickers"]
+```
+
+#### spread `...` - add item to the middle - immutable
+
+```
+const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+const newBikes = [
+    ...bikes.slice(0, 2),
+    'benotto',
+    ...bikes.slice(2)
+];
+console.log(newBikes);
+// (5) ["bianchi", "miele", "benotto", "panasonic", "miyata"]
+
+console.log(bikes);
+// (4) ["bianchi", "miele", "panasonic", "miyata"]
+```
+
+- task: insert `'benotto'` between `'miele'` and `'panasonic'`
+- there is no method to insert an item at a specific index and have the rest pushed over
+- for the `...` after inserting `'benotto'`, there is no need to put an "end of index" number, it's enough to have the "with this index number the end begins"
+
+#### spread `...` - remove item from the middle - immutablec
+
+```
+const bikes = ['bianchi', 'miele', 'panasonic', 'miyata'];
+const newBikes = [
+    ...bikes.slice(0, 2),
+    ...bikes.slice(3)
+];
+console.log(newBikes);
+// ["bianchi", "miele", "miyata"]
+
+console.log(bikes);
+// (4) ["bianchi", "miele", "panasonic", "miyata"]
+```
+
+- task: remove `'panasonic'`
+- takes up everything up until `'panasonic'` (`0, 2`)
+- skips one (`2`) and starts with a one plus from there (`3`), with that, wents to the end
+
+#### `slice()` and `splice()`
+
+- they are both used to grab a subset of the original array
+- you probably want to use `slice()` as this method does not mutate the original array
+
+**`slice()` - immutable**
+
+- is immutable
+- returns a shallow copy
+- the original array will not be modified
+- takes 2 arguments - start and end
+- start and end represent the index of items in that array
+- will take a portion of the original array and returns a new array from start to end (end not included)
+
+```
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const pizzaSlice = numbers.slice(2, 4);
+
+console.log(pizzaSlice);
+// (2) [3, 4]
+
+console.log(numbers);
+// (9) [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+- from index 2 (which is 3) and stop before index 4 which in turn means log index 3 (which is 4)
+
+**`splice()` - mutable**
+
+- is mutable
+- changes the content of the original array by removing or replacing existing elements
+- takes 2 arguments - start and "how many you should go for"
+
+```
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+numbers.splice(3, 2);
+console.log(numbers); // (7) [1, 2, 3, 6, 7, 8, 9]
+```
+
+- go to index 3 (which is `4`), from there splices off 2 items (which is `4, 5`)
+
+**`findIndex()`, if/else, log selected index**
+
+```
+const names = ['poppy', 'wes', 'kait', 'snickers', 'lux'];
+
+console.log(names);
+// (5) ["poppy", "wes", "kait", "snickers", "lux"]
+
+const kaitIndex = names.findIndex(name => {
+    if (name === 'kait') {
+        return true;
+    } else {
+        return false;
+    }
+});
+console.log(kaitIndex); // 2
+console.log(names[kaitIndex]); // kait
+```
+
+**`findIndex()`, explicit return, log selected index**
+
+```
+const names = ['poppy', 'wes', 'kait', 'snickers', 'lux'];
+const kaitIndex = names.findIndex(name => {
+    return (name === 'kait')
+});
+
+console.log(kaitIndex); // 2
+console.log(names[kaitIndex]); // kait
+console.log(names);
+// (5) ["poppy", "wes", "kait", "snickers", "lux"]
+```
+
+**`findIndex()`, implicit return, spread `...`, log resulting array**
+
+```
+const names = ['poppy', 'wes', 'kait', 'snickers', 'lux'];
+const kaitIndex = names.findIndex(name => name === 'kait');
+
+console.log(kaitIndex); // 2
+console.log(names[kaitIndex]); // kait
+
+const newNamesWithoutKait = [
+    // get everything up to kaitIndex
+    ...names.slice(0, kaitIndex),
+    // everything after kaitIndex
+    ...names.slice(kaitIndex + 1)
+];
+
+console.log(newNamesWithoutKait);
+// (4) ["poppy", "wes", "snickers", "lux"]
+
+console.log(names);
+// (5) ["poppy", "wes", "kait", "snickers", "lux"]
+```
+
+- use `...` if you don't want arrays within arrays
+
+**`findIndex()`, implicit return, `flat()`, log resulting array**
+
+```
+const names = ['poppy', 'wes', 'kait', 'snickers', 'lux'];
+const kaitIndex = names.findIndex(name => name === 'kait');
+const newNamesWithoutKait = [
+    // get everything up to kaitIndex
+    names.slice(0, kaitIndex),
+    // everything after kaitIndex
+    names.slice(kaitIndex + 1)
+].flat();
+
+console.log(newNamesWithoutKait);
+// (4) ["poppy", "wes", "snickers", "lux"]
+
+console.log(names);
+// (5) ["poppy", "wes", "kait", "snickers", "lux"]
+```
+
+**`findIndex()`, spread `...` and `slice()`**
+
+```
+const comments = [
+    { text: 'Cool Beans', id: 123 },
+    { text: 'Love This', id: 133 },
+    { text: 'Neato', id: 233 },
+    { text: 'Good Bikes', id: 333 },
+    { text: 'So Good', id: 433 },
+];
+
+function deleteComment(id, comments) {
+    // find the index of an item in the array
+    const commentIndex = comments.findIndex(comment => comment.id === id);
+    // make a new array without an item in it
+    // return new array
+    return [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1)
+    ];
+};
+console.log(comments);
+// (5) [{…}, {…}, {…}, {…}, {…}]
+
+console.log(deleteComment(233, comments));
+// (4) [{…}, {…}, {…}, {…}]
+
+console.log(comments);
+// (5) [{…}, {…}, {…}, {…}, {…}]
+```
+
+![mod 0804](./img/screen-mod0804-02.png)
 
 ## Array Cardio Static Methods
 
