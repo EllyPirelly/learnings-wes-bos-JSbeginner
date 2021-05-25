@@ -1466,15 +1466,255 @@ Object.entries(meats).forEach(([key, value]) => {
 
 **What does Instance Method (or Prototype Method) mean?**
 
-```
-const numbers = [1, 2, 3, 4, 5];
-console.log(numbers); // (5) [1, 2, 3, 4, 5]
-```
-
 ![mod 0804](./img/screen-mod0804-03.png)
 
 - instance or prototype methods are the methods with `Array.prototype.something()`:
 - when you create an array you get what is referred to as the array prototype
 - these are the methods that are on every single array
+
+**`join()`**
+
+```
+const buns = ['egg', 'wonder', 'brioche'];
+
+console.log(buns); // ["egg", "wonder", "brioche"]
+console.log(buns.join()); // egg,wonder,brioche
+console.log(buns.join(' or ')); // egg or wonder or brioche
+```
+
+- `join()` turns an array into a string
+
+**`split()`**
+
+```
+const foodString = 'hot dogs,hamburgers,sausages,corn';
+
+console.log(foodString.split());
+// ["hot dogs,hamburgers,sausages,corn"]
+
+console.log(foodString.split(','));
+// ["hot dogs", "hamburgers", "sausages", "corn"]
+```
+
+- `split()` turns a string into an (one) array
+- is a method on a string
+
+**`split()` on `''` is pretty much similar to spread `...`**
+
+```
+const foodString = 'hot dogs,hamburgers,sausages,corn';
+
+console.log(foodString.split(''));
+// ["h", "o", "t", " ", "d", "o", "g", "s", ",", "h", "a", "m", "b", "u", "r", "g", "e", "r", "s", ",", "s", "a", "u", "s", "a", "g", "e", "s", ",", "c", "o", "r", "n"]
+```
+
+- `split()` on `''` returns a string, split into single characters including spaces and commas
+
+**`pop()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const lastItem = toppings.pop();
+
+console.log(lastItem); // Cheese
+console.log(toppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
+```
+
+- `pop()` returns the last item of an array
+- it's a **mutable method** because it **mutates the original array** / it takes the last item off of the original array
+
+**`push()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const lastItem = toppings.pop();
+console.log(lastItem); // Cheese
+console.log(toppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
+
+const t2 = toppings.push(lastItem);
+
+console.log(t2); // 4
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+```
+
+- `push()` will return the new length of the array
+
+**`shift()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const firstItem = toppings.shift();
+
+console.log(firstItem); // Mushrooms
+console.log(toppings); // (3) ["Tomatoes", "Onions", "Cheese"]
+
+```
+
+- `shift()` takes off the first item of an array, mutates the original array
+
+**`unshift()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const firstItem = toppings.shift();
+console.log(firstItem); // Mushrooms
+console.log(toppings); // (3) ["Tomatoes", "Onions", "Cheese"]
+
+toppings.unshift(firstItem);
+
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"] */
+```
+
+- `unshift()` puts the item taken off via `shift()` back
+
+**IMMUTABLE - use `slice()` and spread `...` to take off / bring back items**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+
+let newToppings = toppings.slice(0, toppings.length - 1);
+console.log(newToppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
+
+// add it back
+newToppings = [...newToppings, toppings[toppings.length - 1]];
+console.log(newToppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+```
+
+**`slice()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const toppingsCopy = toppings.slice(0);
+toppings[0] = 'Mushy Boi';
+
+console.log('original toppings', toppings);
+// original toppings (4) ["Mushy Boi", "Tomatoes", "Onions", "Cheese"]
+
+console.log('toppings copy', toppingsCopy);
+// toppings copy (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+```
+
+- use `slice()` to make a copy of an array
+
+**spread `...`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const toppingsCopy = [...toppings];
+
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+console.log(toppingsCopy); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+
+toppingsCopy[0] = 'PARMESAN';
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+console.log(toppingsCopy); // (4) ["PARMESAN", "Tomatoes", "Onions", "Cheese"]
+```
+
+- use spread `...` to make a copy of an array
+
+**`splice()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
+
+console.log(toppings);
+// (11) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Chiles", "Bacon", "Pickles", "Onions", "Cheese"]
+
+const toppingsCopy = [...toppings];
+toppingsCopy.splice(3, 5);
+
+console.log(toppingsCopy);
+// (6) ["Mushrooms ", "Tomatoes", "Eggs", "Pickles", "Onions", "Cheese"]
+```
+
+- use `splice()` to take out items off an array
+
+**`indexOf()` / `lastIndexOf()` to find the index of `'Avocado'`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Cheese'];
+
+console.log(toppings);
+// (7) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Cheese"]
+
+const avoIndex = toppings.indexOf('Avocado');
+console.log(avoIndex); // 5
+
+const avoZwo = toppings.lastIndexOf('Avocado');
+console.log(avoZwo); // 5
+```
+
+- previously, `.find()` was used but if you're sure what exactly you are looking for (simply strings or numbers or reference to an object), `indexOf()` will do what you want to do
+- `indexOf()` will return the first instance
+- `indexOf()` works with any types
+- `indexOf()` is giving reference to objects
+- `-1` is returned when `indexOf()` doesn't find anything
+
+**Gotcha `indexOf()`**
+
+```
+const wesObject = { name: 'wes' };
+const people = [{ name: 'scott' }, wesObject];
+
+console.log(people.indexOf(wesObject)); // 1
+console.log(people.indexOf({ name: 'scott' })); // -1
+```
+
+**Why does it work when you pass it an object `people.indexOf(wesObject)` but doesn't work when you pass it an object that is kinda of the same "structure" and content `people.indexOf({ name: 'scott' })`?**
+
+- even though the objects `{ name: 'scott' }` may look exactly the same, they are NOT the exact same thing
+- **objects don't do a deep check for all the properties**
+- in case of `wesObject`, it checks if that object is the exact same object as the object in here `[{ name: 'scott' }, wesObject]`, in this case it's `true`
+- whereas when you just checked it for an object that looks exactly the same `{ name: 'scott' }` it returns `false`
+- **reference vs value** again
+- if you're looking for someone with the name of `'scott'` then you need to use `find()` with a callback
+
+**`includes()`**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+const isInToppings = toppings.includes('Hot Sauce');
+
+console.log(isInToppings); // false
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+
+// add if it's not
+if (!isInToppings) {
+    toppings.push('Hot Sauce');
+}
+
+console.log(toppings); // (5) ["Mushrooms ", "Tomatoes", "Onions", "Cheese", "Hot Sauce"]
+```
+
+- `includes()` is NOT case sensitive
+- if you'd want to check for all different versions (`hot sauce`, `Hot sauce`, `hot Sauce`, etc), you'd first lowercase the entire array (more on that later in the course, `map()`)
+- `includes()` checks if the array includes a number, a string, or reference to an object
+
+**`reverse()` - mutable method**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+
+toppings.reverse();
+console.log(toppings); // (4) ["Cheese", "Onions", "Tomatoes", "Mushrooms "]
+```
+
+- mutatable method, meaning it will reverse the original `toppings` array
+
+**`reverse()` - how to use this in an immutable way**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+
+const toppingsReversed = [...toppings].reverse();
+console.log(toppingsReversed); // (4) ["Cheese", "Onions", "Tomatoes", "Mushrooms "]
+```
+
+- make a new array
+- spread `...` the previous array into it
+- `reverse()` the new array
 
 ## Array Cardio Callback Methods and Function Generation
