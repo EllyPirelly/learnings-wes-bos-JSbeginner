@@ -42,6 +42,8 @@
 
 [Module 8 - Data Types](#module-8-data-types)
 
+[Module 9 - Looping and Iterating](#module-9-looping-and-iterating)
+
 ### Module 1 Basics
 
 Please see folder `module-01-basics` [with extra README here](./module-01-basics/README.md).<br>
@@ -155,3 +157,15 @@ Content of this module is information and coding bits, no project.
 - Array Cardio - Static Methods
 - Array Cardio - Instance Methods
 - Array Cardio - Callback Methods and Function Generation
+
+### Module 9 Looping and Iterating
+
+Please see folder `module-09-loops` [with extra README here](./module-09-loops/README.md)<br>
+Content of this module is information and coding bits, no project.
+
+- Array `.forEach()`
+- Mapping `map()`
+- `filter()`, `find()` and Higher Order Functions
+- `reduce()`
+- `reduce()` Exercise
+- for, for in, for of and while loops
