@@ -329,7 +329,7 @@ console.log(allOrders); */
 
 
 // reduce() - example 2
-const inventory = [
+/* const inventory = [
     { type: 'shirt', price: 4000 },
     { type: 'pants', price: 4532 },
     { type: 'socks', price: 234 },
@@ -366,4 +366,96 @@ console.log(inventoryCounts); // {shirt: 2, pants: 3, socks: 2}
 
 // what is the total value
 const totalInventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
-console.log(totalInventoryPrice); // 14117
+console.log(totalInventoryPrice); // 14117 */
+
+
+
+// for
+/* for (let i = 0; i <= 10; i++) {
+    console.log(i);
+}
+
+for (let i = 100; i <= 120; i += 2) {
+    console.log(i);
+} */
+
+/* const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+for (let i = 0; i < numbers.length; i++) {
+    console.log(i);
+    console.log('numbers length', numbers.length);
+    console.log('retrieve numbers inside of array', numbers[i]);
+} */
+
+
+// for of
+/* const naming = '🦁 Wes 🦁 Bos 🦁';
+for (const letter of naming) {
+    console.log(letter);
+}
+
+const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+for (const number of numbers) {
+    console.log('number of', number);
+} */
+
+
+// for in
+/* const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+for (const number in numbers) {
+    console.log('number in', number);
+} */
+
+/* const wes = {
+    name: 'wes',
+    age: 100,
+    cool: true,
+}
+for (const prop in wes) {
+    console.log(prop);
+}
+
+const baseHumanStats = {
+    feet: 2,
+    arms: 2,
+    head: 1,
+};
+
+function Human(naming) {
+    this.naming = naming;
+}
+
+const wes2 = new Human('wes');
+console.log('wes2', wes2); // wes2 Human {naming: "wes"}
+console.log('wes2 arms', wes2.arms) // wes2 arms undefined
+console.log('object keys', Object.keys(wes2)); // object keys ["naming"]
+console.log('object entries', Object.entries(wes2)); // object entries [Array(2)]
+
+Human.prototype = baseHumanStats;
+const wes3 = new Human('wes');
+console.log('wes3', wes3); // wes3 Human {naming: "wes"}
+console.log('wes3 arms', wes3.arms); // wes3 arms 2
+console.log('object keys', Object.keys(wes3)); // object keys ["naming"]
+
+for (const prop in wes3) {
+    console.log('wes3 prop', prop); // wes3 prop naming // wes3 prop feet // wes3 prop arms // wes3 prop head
+} */
+
+
+// while loop
+let cool = true;
+let i = 0;
+
+while (cool === true) {
+    console.log('you are cool'); // 101loops.js:449 you are cool
+    i++;
+    if (i > 100) {
+        cool = false;
+    }
+}
+
+// do while loop
+let a = 1;
+let b = 2;
+do {
+    console.log('b actually is bigger than a'); // b actually is bigger than a
+} while (b <= a);

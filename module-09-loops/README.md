@@ -23,10 +23,10 @@ Please also [see loops.html](./loops.html) and [loops.js](./loops.js) in this mo
   - it's been passed a callback function
   - the callback function will run once for every item in the array, giving access to each idividual item
 
-## Array `.forEach()`
+## Array for Each
 
 - the very basic looping on some data
-- for example add event listeners to multiple elements, logging of data, displaying data on a page
+- for example, add event listeners to multiple elements, logging of data, displaying data on a page
 - `forEach()` is a bit different from the other methods, it doesn't return any value, it just goes off and does some work on each piece of data in an array
 
 ```
@@ -44,7 +44,8 @@ toppings.forEach(topping => {
 });
 ```
 
-- so where is `topping` coming from?
+**So where is `topping` coming from?**
+
 - the phrase is not important, important is, that it is a PLACEHOLDER, not an argument that has a value
 - the first parameter in `forEach()` stands for the (current) element being processed in the array
 
@@ -96,16 +97,15 @@ toppings.forEach(logTopping);
 
 ### Side Effects
 
-- when you are inside of a function and you reach outside of that function to do something else, for example attaching event listeners, console.logging
+- being inside of a function reaching outside of that function to do something else, for example attaching event listeners, console.logging
 - whereas side effects are totally fine, there's quite some methods that are simply taking in data, doing something with that data, and then returning that data that has been modified, massaged or transformed in some way
 - that is where we get into `map()`, `filter()` and `reduce()`
-- pure functions: they take in data, they return data, they always work exactly the same way given the data input, they always return the exact same thing, they don't reach outside themselves
+- pure functions: they take in data, they return data, they always work exactly the same way given the data input, they always return the exact same thing, they don't reach outside of themselves
 
 ## Mapping
 
-- `map()` is like a machine in a factory
-- it takes in data, performs an operation and spits it out on the other side
-- it will always produce the same length of the array as it starts with (returns an array of the exact same length put in)
+- `map()` will always produce the same length of the array as it starts with (returns an array of the exact same length put in)
+- `map()` is like a machine in a factory, it takes in data, performs an operation and spits it out on the other side
 - `map()` can be used for any kind of data (strings, numbers, objects)
 - **don't update the DOM inside of a `map()` function**
 
@@ -161,8 +161,9 @@ console.log(orderTotalsWithTax); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
 console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 ```
 
-- every items is turned into `1` - why?
-  - whatever you return from your `map()` function will replace whatever initially was in your `map()` function
+**Every item is turned into `1` - why?**
+
+- whatever you return from your `map()` function will replace whatever initially was in your `map()` function
 - it's NOT mutable, `orderTotals` are still there
 - the NEW array `orderTotalsWithTax` will have the updated values
 
@@ -174,7 +175,7 @@ console.log(orderTotalsWithTax);
 console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 ```
 
-**fun with `repeat()`, `fill()`, `map()`, `forEach()`**
+**`repeat()`, `fill()`, `map()`, `forEach()`**
 
 ```
 const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
@@ -198,8 +199,10 @@ faces.map(face => attachBody(face, '🍟')).forEach(body => console.log(body));
 
 **`map()` with objects**
 
-- use case: data that's not in the format that you need
-  - take in that data, optimize it and return the new formatted data
+Use case:
+
+- data that's not in the format that you need
+- take in that data, optimize it and return the new formatted data
 - timestamp checker https://epoch.vercel.app/
 - https://date-fns.org/
 
@@ -255,7 +258,9 @@ console.table(cleanPeople);
 
 **`filter()`**
 
-- use case: find ONE person in a set of data or filter that list of data down to be a subset of it
+Use case:
+
+- find ONE person in a set of data or filter that list of data down to be a subset of it
 - `filter()` loops over every single item in the array, and you either say 'yes' or 'no' (aka, `true` or `false`)
 - `filter()` will return all of the items that match what you want
 - `filter()` will always return an array
@@ -327,7 +332,7 @@ console.log(student2); // {id: "565a", first_name: "Bendicty", last_name: "Wooda
 console.log(student3); // {id: "3a16", first_name: "Micki", last_name: "Mattes"}
 ```
 
-- more flexible, because what happpens if a student you want to `find()` on has 15 properties on them?
+- more flexible, because what happpens if a `student` you want to run `find()` on has 15 properties on them?
 - `function findByProp()`
   - takes in a property (or key) we are looking for and an actual key we are looking for
   - looks into an object for whatever property you specified is equal to whatever value you have specified
@@ -345,9 +350,9 @@ console.log(student3); // {id: "3a16", first_name: "Micki", last_name: "Mattes"}
 
 ![mod 0904](./img/map-filter-reduce.png)
 
-- `map()` take in raw materials and map it through a 'cook function', return the cooked, transformed materials
-- `filter()` take in cooked materials and return the veggie options, a subset of the original array
-- `reduce()` take in the cooked materials and return a compiled smaller version of it
+- `map()` takes in raw materials and map it through a 'cook function', returns the cooked, transformed materials
+- `filter()` takes in cooked materials and returns the veggie options, a subset of the original array
+- `reduce()` takes in the cooked materials and returns a compiled smaller version of it
 
 - `reduce()`
   - accumulator: the thing that has been handed to you from the last instance of the loop
@@ -451,4 +456,167 @@ Please see [reduce-ex.html](./reduce-ex.html) and [reduce-ex.js](./reduce-ex.js)
 
 ## For, for in, for of, while loops
 
-- ToDo
+These methods are not as nearly as popular as the array methods.
+
+**`for()`**
+
+- `for()` loop requires 3 things: initial expression, condition, increment expression
+- a plain `for()` loop is great for running a block of code a number of times
+
+```
+for (let i = 0; i <= 10; i++) {
+    console.log(i);
+}
+```
+
+- initial expression: `let i = 0;`
+  - sort of set up of the code, the loop starts here
+- condition: `i <= 0;`
+  - will run each time before each loop runs
+  - if this is `true` the loop will run one more time
+  - if this is `false` it will no longer run and it will move on to the next line of code
+- increment expression: `i++`
+
+  - this is the increment, in this case we increment `0` by `1`
+  - this allows us to access the variable `i`
+
+- traditionally this is used to loop over something, like an array of numbers
+- `let` is scoped to the block, so you can use the var name (most of the time `i`) more than once
+
+```
+const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+
+for (let i = 0; i < numbers.length; i++) {
+    console.log(i);
+    console.log('numbers length', numbers.length);
+    console.log('retrieve numbers inside of array', numbers[i]);
+}
+```
+
+- it's now easier to do this with `forEach()`, `map()` or `reduce()`
+- if you see a `for()` loop maybe ask yourself if you can refactor it
+
+See etch-a-sketch example in module 6.
+
+- for HTML canvas there's a `getImageData()` method on it
+- `cancasContext.getImageData(0, 0, 100, 100)`
+- will return an array of data with a lot of items inside of it (40.000)
+- special kind of array called clamped array, used for very, very, very large arrays
+- if you want to loop over that data, you have to loop over every single pixel, meaning that you have to take 4 key/value pairs at a time
+
+**`for(... of ...)`**
+
+- used for looping over iterables (an iterable is something that has a length, like a number or a string)
+- in most cases you will use this for an array or a string
+- returns every single letter as a string
+
+```
+const naming = '🦁 Wes 🦁 Bos 🦁';
+
+for (const letter of naming) {
+    console.log(letter);
+}
+```
+
+Why would `for(... of ...)` be better than splitting it and looping over it with a `forEach()`?
+
+- `for(... of ...)` can handle emojis, `split()` won't work
+- the other use case would be working with promises: if you ever need to sequence a bunch of data, the `for(... of ...)` loop will allow to use `await` in it (more later in course)
+
+```
+const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+
+for (const number of numbers) {
+    console.log('number of', number);
+}
+```
+
+- returns each of the **raw values** from the array
+- `for(... of ...)` won't give us the index (whereas `.forEach()` would do that)
+- `for(... of ...)` also doesn't allow to filter or anything like that
+
+**`for(... in ...)`**
+
+- used for looping over keys of an object
+- returns the **keys** of an object
+
+```
+const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+
+for (const number in numbers) {
+    console.log('number in', number);
+}
+```
+
+```
+const wes = {
+    name: 'wes',
+    age: 100,
+    cool: true,
+}
+
+for (const prop in wes) {
+    console.log(prop);
+}
+```
+
+- how is that better than `Object.entries()` or `Object.keys()` or `Object.values()`? It's not :p
+- one sort of gotcha with `for(...in...)` vs `Object.entries()`:
+
+```
+const wes = {
+    name: 'wes',
+    age: 100,
+    cool: true,
+}
+
+const baseHumanStats = {
+    feet: 2,
+    arms: 2,
+    head: 1,
+};
+
+function Human(naming) {
+    this.naming = naming;
+}
+
+const wes2 = new Human('wes');
+console.log(wes2); // Human {naming: "wes"}
+```
+
+- `wes2` is an object with the type of `Human`
+- what happens with a prototype is that
+  - when you try to access a property, it first checks on the object itself for a property on that
+  - when it's not there, it will look up the prototype chain
+
+**If you need to grab the prototype methods and properties, then you can use a `for(...in...)` loop to grab those. If you don't need those, then you are fine with `Object.entries()`**
+
+**`while()` and `do... while()`**
+
+- not all that popular
+- be aware of infinite loops!!!
+- `while()` will take in an condition and will run infinitely until the condition is `false`
+- `while()` will check the condition before the first run and then go ahead and do it
+
+```
+let cool = true;
+let i = 0;
+
+while (cool === true) {
+    console.log('you are cool'); // 101loops.js:449 you are cool
+    i++;
+    if (i > 100) {
+        cool = false;
+    }
+}
+```
+
+```
+let a = 1;
+let b = 2;
+do {
+    console.log('b actually is bigger than a'); // b actually is bigger than a
+} while (b <= a);
+```
+
+- `do... while()` will run first and then check the condition after the first run
