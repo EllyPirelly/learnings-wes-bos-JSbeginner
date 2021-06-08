@@ -5,6 +5,7 @@
 - codealong to [Wes Bos Beginner JavaScript](https://beginnerjavascript.com/) course
 - you can buy this as a starter course or as a master package, my codealong is based on the master package
 - the course is 85 videos long, so it's quite long and time intense
+- newly added [notes and references](https://wesbos.com/javascript)
 - see more of [his courses on wesbos.com](https://wesbos.com/courses)
 - see [Wes Bos Beginner JavaScript on GitHub](https://github.com/wesbos/beginner-javascript) here
 - simple HTML5, CSS and JavaScript files - no build processes
@@ -43,6 +44,8 @@
 [Module 8 - Data Types](#module-8-data-types)
 
 [Module 9 - Looping and Iterating](#module-9-looping-and-iterating)
+
+[Module 10 - Face Detection](#module-10-face-detection)
 
 ### Module 1 Basics
 
@@ -169,3 +172,9 @@ Content of this module is information and coding bits, no project.
 - `reduce()`
 - `reduce()` Exercise
 - for, for in, for of and while loops
+
+### Module 10 Face Detection
+
+Please see folder `module-10-01-face-detection` [with extra README here](./module-10-01-face-detection/README.md)<br>
+
+![facedetection](./module-10-01-face-detection/img/screen-mod1001-10.gif)
