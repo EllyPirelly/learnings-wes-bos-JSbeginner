@@ -1,23 +1,40 @@
 # Based on Wes Bos Beginner JavaScript course
 
-### What is this about?
+### What is this repository about?
 
-- codealong to [Wes Bos Beginner JavaScript](https://beginnerjavascript.com/) course
-- you can buy this as a starter course or as a master package, my codealong is based on the master package
+- it's my codealong to [Wes Bos Beginner JavaScript](https://beginnerjavascript.com/) course
+- additionally, videos are grouped into module sections
+  - Module 1 - Basics
+  - Module 2 - Functions
+  - Module 3 - The Tricky Bits
+  - Module 4 - The DOM - Working with HTML and CSS
+  - Module 5 - Events
+  - Module 6 - Serious Practice Exercises
+  - Module 7 - Logic and Flow Control
+  - Module 8 - Data Types
+  - Module 9 - Getting Loopy
+  - Module 10 - Harder Practice Exercises
+  - Module 11 - Prototypes, `this`, `new` and Inheritance
+  - Module 12 - Advanced Flow Control
+  - Module 13 - Ajax and Fetching Data
+  - Module 14 - ES Modules and Structuring Larger Apps
+  - Module 15 - Final Round of Exercises
 - the course is 85 videos long, so it's quite long and time intense
-- newly added [notes and references](https://wesbos.com/javascript)
-- see more of [his courses on wesbos.com](https://wesbos.com/courses)
-- see [Wes Bos Beginner JavaScript on GitHub](https://github.com/wesbos/beginner-javascript) here
+- [Wes Bos Beginner JavaScript on GitHub](https://github.com/wesbos/beginner-javascript)
+- [Wes Bos JavaScript Notes & Reference](https://wesbos.com/javascript)
+- [Wes Bos courses on wesbos.com](https://wesbos.com/courses)
+
+My codealong is
 - simple HTML5, CSS and JavaScript files - no build processes
-- most of the CSS has been provided by Wes Bos
-  - my focus is not, to - for every example - have a clever CSS
-  - my focus is to learn JavaScript as fast as possible
+- no fancy extra CSS (my focus is on learning JavaScript), most of the CSS has been provided by Wes Bos out of the box
 
 ### How to run this?
 
-- clone this whole repo or copy and paste code of a single project
-- navigate to folder you want to throw on localhost
-- open `index.html` (or other html files present) in your browser of choice (in my case, built in/for Chrome)
+Mind you, there's no build process in here.
+So there's two ways: clone the whole repo or copy and paste code of a single module
+- navigate to module you want to look into
+- to throw it on localhost, open respective `.html` file in your browser of choice (in my case, built in/for Chrome)
+- tip: if you work with Visual Studio Code consider installing the Live Server extension
 
 ### Course Content
 
