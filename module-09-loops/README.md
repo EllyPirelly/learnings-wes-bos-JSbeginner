@@ -1,18 +1,22 @@
 # Module 9 - Looping and Iterating
 
-As most of the "Module 9 - Loops" content is information and small coding bits, this README here is used as a notepad.
-
-Please also [see loops.html](./loops.html) and [loops.js](./loops.js) in this module's folder to follow up with the coding bits.
+As most of the "Module 9 - Loops" content is information and small coding bits, this README here is used as a notepad. <br>
+Content of this module is information and coding bits, no project.
 
 [Array for Each](#Array-for-Each)
+ `.forEach()`
 
 [Mapping](#Mapping)
+`map()`
 
 [Filter, Find and Higher Order Functions](#Filter-Find-And-Higher-Order-Functions)
+`filter()`, `find()`
 
 [Reduce](#Reduce)
+`reduce()`
 
 [Reduce Exercise](#Reduce-Exercise)
+`reduce()`
 
 [for, for in, for of, while loops](#for-for-in-for-of-while-loops)
 

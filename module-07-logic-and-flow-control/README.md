@@ -1,8 +1,6 @@
 # Module 7 - Logic and Flow Control
 
-As most of the "Module 7 - Logic and Flow Control" content (except for the animated turtle, see down below) is information and small coding bits, this README here is used as a notepad.
-
-Please also [see index.html](./index.html) and [index.js](./index.js) in this module's folder to follow up with the coding bits.
+As most of the content (except for the animated turtle, see down below) is information and small coding bits, this README here is used as a notepad.
 
 [BEDMAS](#BEDMAS)
 
@@ -11,6 +9,7 @@ Please also [see index.html](./index.html) and [index.js](./index.js) in this mo
 [Coercion, Ternaries and Conditional Abuse](#Coercion-Ternaries-Conditional-Abuse)
 
 [Case Switch and Animating a Turtle with CSS Variables](#Case-Switch)
+![mod 0603](./img/screen-mod0704-01.gif)
 
 [Intervals and Timers](#Intervals-and-Timers)
 

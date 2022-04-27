@@ -1,6 +1,7 @@
 # Module 4 - The DOM
 
-As most of the "Module 4 The DOM" content is information and small coding bits, this README here is used as a notepad.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+Content of this module is information and small coding bits, no project.
 
 [Introduction to the document](#introduction-to-the-document)
 

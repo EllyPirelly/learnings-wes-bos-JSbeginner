@@ -1,8 +1,7 @@
 # Module 1 - Basics
 
-As most of the "Module 1 Basic" content is information and small coding bits, this README here is used as a notepad.
-
-Please also [see index.html](./index.html) and [index.js](./index.js) in this module's folder to follow up with the coding bits.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+Content of this module is information and small coding bits, no project. <br>
 
 [Browser, Editor and Terminal Setup](#Browser-Editor-and-Terminal-Setup)
 

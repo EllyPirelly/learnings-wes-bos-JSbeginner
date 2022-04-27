@@ -1,6 +1,7 @@
 # Module 8 - Data Types
 
-As most of the "Module 8 - Data Types" content is information and coding bits, this README here is used as an extensive notepad.
+As most of the content is information and coding bits, this README here is used as an extensive notepad. <br>
+Content of this module is information and coding bits, no project.
 
 [Objects](#Objects)
 

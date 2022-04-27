@@ -1,8 +1,7 @@
 # Module 5 - Events - Event Listener
 
-As most of the "Module 5 - Events - Event Listener" content is information and small coding bits, this README here is used as a notepad.
-
-Please check which html files and js files are referenced to follow up with the coding bits.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+Content of this module is information and small coding bits, no project.
 
 [Event Listener](#event-listener)
 

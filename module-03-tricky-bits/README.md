@@ -1,8 +1,7 @@
 # Module 3 - The Tricky Bits
 
-As most of the "Module 3 tricky bits" content is information and small coding bits, this README here is used as a notepad.
-
-Please check html file [index.html](./index.html) in this module's folder to check which js files are referenced to follow up with the coding bits.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+Content of this module is information and small coding bits, no project. <br>
 
 [Scope](#Scope)
 
