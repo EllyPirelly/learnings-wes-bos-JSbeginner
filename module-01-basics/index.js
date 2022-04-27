@@ -12,13 +12,13 @@ const sentence2 = "she's so \"cool\"";
 const sentence3 = `she's so "cool"`;
 
 const song = `
-    Oh
+  Oh
 
-    yeah
+  yeah
 
-    I like
+  I like
 
-    pizza
+  pizza
 `;
 console.log(song);
 
@@ -26,20 +26,20 @@ console.log(song);
 const hello = 'Hello my name is ' + prename + '. Nice to meet you';
 
 /* concatenation and interpolation with back ticks */
-const hello2 = `Hello my name is ${prename} . Nice to meet you`;
-const hello3 = `Hello my name is ${prename} . Nice to meet you. I am ${1 + 100} years old.`;
+const hello2 = `Hello my name is ${prename}. Nice to meet you`;
+const hello3 = `Hello my name is ${prename}. Nice to meet you. I am ${1 + 100} years old.`;
 
 /* handling HTML with back ticks*/
 const html = `
-    <div>
-        <p>Run the index.html in a browser, check which scripts are commented in and check the JavaScript console to
-        see what's going on.</p>
-        <div>
-        <span>Read the <a href="./README.md">Readme.</a></span>
-    </div>
-        <h1>${prename}</h1>
-        <span>${hello3}</span>
-    </div>
+  <div>
+    <p>This text here comes in via index.js.</p>
+    <p>Also check Dev Tools in a browser to see what's going on.</p>
+    <br>
+    <span>Also check the <a href="./README.md">Readme.</a></span>
+    <br>
+    <h1>${prename}</h1>
+    <span>${hello3}</span>
+  </div>
 `;
 document.body.innerHTML = html;
 console.log(hello3);
@@ -75,6 +75,8 @@ const floatP = 0.1 + 0.2;
 console.log('floating-point here: ', floatP); // 0.30000000000000004
 
 /* Infinity / -Infinity */
+10 ** 2 // 100
+1000 ** 20 // 1e+60
 1000 ** 200; // Infinity
 typeof Infinity // "number"
 typeof -Infinity // "number"
@@ -85,9 +87,9 @@ typeof NaN; // "number"
 
 /* OBJECT */
 const person = {
-    first: 'wes',
-    last: 'bos',
-    age: 300
+  first: 'wes',
+  last: 'bos',
+  age: 300
 };
 console.table(person);
 console.log(typeof(person)); // object
