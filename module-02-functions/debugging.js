@@ -1,102 +1,84 @@
-// Logs
-console.log('%c All kinds of console logs', 'background: yellow');
+// LOGS -----------------------
+console.log('%c All kinds of console logs that are now yellow', 'background: yellow');
 
 const people = [
-    { name: 'Wes', cool: true, country: 'Canada' },
-    { name: 'Scott', cool: true, country: 'Merica' },
-    { name: 'Snickers', cool: false, country: 'Dog Country' },
+  { name: 'Wes', cool: true, country: 'Canada' },
+  { name: 'Scott', cool: true, country: 'Merica' },
+  { name: 'Snickers', cool: false, country: 'Dog Country' },
 ];
 
-console.log('Hey I log');
-console.warn('Watch out!');
-console.error('Error Message Here');
+console.log('Hey I log a console.log');
+console.warn('Watch out! This is a console.warn');
+console.error('Error Message here. This is a console.error');
 console.table(people);
 
 people.forEach((person, index) => {
 
-    if (person.name === 'Wes') {
-        console.warn('canadian coder warn wizzard');
-        console.error('canadian coder error wizzard');
-      }
+  if (person.name === 'Wes') {
+    console.warn('warn wizzard console.warn');
+    console.error('error wizzard console.error');
+    }
 
 });
 
 people.forEach((person, index) => {
-    console.groupCollapsed(`${person.name}`);
-	console.log(`${person.cool}`);
-	console.log(`${person.country}`);
-    console.log('DONE');
-	console.groupEnd(`${person.name}`);
+  console.groupCollapsed(`${person.name}`);
+  console.log(`${person.cool}`);
+  console.log(`${person.country}`);
+  console.log('DONE');
+  console.groupEnd(`${person.name}`);
 })
 
 
-// Grabbing Elements
+// GRABBING ELEMENTS -----------------------
 console.log('%c Grabbing Elements', 'background: yellow');
 console.log('See Readme/js');
 // in JavaScript console
 // inspect an element and type
-// $0
-// $1
-// $('div')
-// $$('div')
+// $0 // will return to you whatever element you've currently selected, the last one you've selected
+// $1 // will return to you the second to last you've selected
+// $('div') // will return the first div that matches
+// $$('div') // will return all of the divs that matches
 
 
-// Debugger
+// DEBUGGER -----------------------
 console.log('%c Debugger', 'background: yellow');
 console.log('See Readme/js');
 
 people.forEach((person, index) => {
-    // debugger;
-    console.log(person.name);
+  // debugger; // comment this out to see in action in the console
+  console.log(person.name);
 });
 
 
-// Scope
+// SCOPE -----------------------
 console.log('%c Scope, will be looked into later in the course', 'background: yellow');
 // will be looked into more later in the course
 
 
-// Network Requests
+// NETWORK REQUESTS -----------------------
 console.log('%c Network Requests', 'background: yellow');
 console.log('See Readme/js');
 
 async function fetchDadJoke() {
-    const res = await fetch('https://icanhazdadjoke.com/', {
-        headers: {
-            Accept: 'text/plain',
-        },
-    });
-    const joke = await res.text();
-    console.log(joke); // What did the late tomato say to the early tomato? I’ll ketch up
-    return joke;
+  const res = await fetch('https://icanhazdadjoke.com/', {
+    headers: {
+      Accept: 'text/plain',
+    },
+  });
+  const joke = await res.text();
+  console.log(joke); // What did the late tomato say to the early tomato? I’ll ketch up
+  return joke;
 }
-// `fetchDadJoke()` in the JavaScript Console
+// `fetchDadJoke()` comment this out to get dadjokes
 
 
-// Break On Attribute
+// BREAK ON ATTRIBUTE -----------------------
 console.log('%c Break on Attribute', 'background: yellow');
 console.log('See Readme');
 
 const button = document.querySelector('.bigger');
-    button.addEventListener('click', function(e) {
-    const newFontSize =
-        parseFloat(getComputedStyle(e.currentTarget).fontSize) + 1;
-    e.currentTarget.style.fontSize = `${newFontSize}px`;
+  button.addEventListener('click', function(e) {
+  const newFontSize = parseFloat(getComputedStyle(e.currentTarget).fontSize) + 1;
+  e.currentTarget.style.fontSize = `${newFontSize}px`;
 });
-
-
-// Some Setup Code
-
-function doctorize(name) {
-    return `Dr. ${name}`;
-}
-
-function greet(name) {
-    doesntExist(); // ReferenceError: doesntExist is not defined
-    return `Hello ${name}`;
-}
-
-function go() {
-    const name = doctorize(greet('Wes'));
-    console.log(name);
-}

@@ -1,7 +1,7 @@
 # Module 2 - Functions
 
 As most of the content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and small coding bits, no project. <br>
+This module contains no project. <br>
 
 [Functions - Built in](#Functions-built-in)
 
@@ -21,10 +21,10 @@ Content of this module is information and small coding bits, no project. <br>
 
 - functions are like types: a fundamental building block of JavaScript
 - functions allow to group a set of statements together
-- they take in values / arguments and return a new value or set of values
-    - pass it in directly
-    - as a variable that holds a value
-    - as expressions
+- they take in values / arguments / parameters / data and return a new value or set of values
+  - pass it in directly
+  - as a variable that holds a value
+  - as expressions
 
 ```
 const mathMax = Math.max(10, 12);
@@ -34,24 +34,31 @@ const mathFloor = Math.floor(2.4444);
 console.log(mathFloor); // 2
 ```
 - there's a whole lot of built-in functions in JavaScript
+- for example `.log()`
 
 ```
-console.log('hey'); // hey
+console.log('hey'); // hey // undefined
 ```
+- why undefined?
+- that's ok, because functions can be used to do some operations without returning a value
 
 ```
-// string passed returns a floating point NUMBER
+// pass a string
+// returns a floating point NUMBER
 
 const parseFl = parseFloat('20.343434');
 console.log(parseFloat('20.343434')); // 20.343434
 
-// string passed returns a WHOLE NUMBER
+// pass a string
+// returns a WHOLE NUMBER
 
 const parseI = parseInt('20.343434');
 console.log(parseInt('20.343434')); // 20
 ```
 ```
-// when you don't pass arguments returns the number of milliseconds passed since 01.01.1970, 00:00:00 UTC - Universal Time, also known as International Standard Time
+// pass no argument
+// returns the number of milliseconds passed since 01.01.1970, 00:00:00 UTC Universal Time
+// also known as International Standard Time
 
 const dateN = Date.now();
 console.log(dateN); // 1618297431375
@@ -59,7 +66,6 @@ console.log(dateN); // 1618297431375
 - [Timebie Universal Time (UTC)](http://www.timebie.com/timelocal/universal.php)
 - [Timebie Berlin UTC](http://www.timebie.com/timezone/universalberlin.php)
 - [Epoch Converter](https://epoch.now.sh/)
-
 - [MDN web docs page - API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)
 
 **Functions that work with the DOM**
@@ -68,11 +74,16 @@ console.log(dateN); // 1618297431375
 // .querySelector
 const div = document.querySelector('div');
 
-// type this directly into the JavaScript console:
+// type this directly into the JavaScript console
+// to see what happens when you have a bunch of text on a page:
 scrollTo(0, 200);
 
 // or try this with an object being passed
-// scrollTo({ top: 500, left: 0, behavior: 'smooth' })
+/* scrollTo({
+  top: 500,
+  left: 0,
+  behavior: 'smooth'
+}); */
 ```
 
 ## Custom Functions
@@ -83,8 +94,8 @@ scrollTo(0, 200);
 
 ```
 function calculateBillReturn() {
-    const total = 100 * 1.13;
-    return total;
+  const total = 100 * 1.13;
+  return total;
 }
 const myTotal = calculateBillReturn();
 console.log(myTotal); // 112.99999999999999
@@ -97,7 +108,7 @@ console.log(`Your total is $${myTotal}, tax included.`); // Your total is $112.9
 console.log(`Your total is $${calculateBillReturn()}, inclucing tax.`); // Your total is $112.99999999999999, inclucing tax.
 ```
 
-- `total` here is a temporary variables, created inside a function's body
+- `total` here is a temporary variable, created inside a function's body
 - when the function is done running, `total` gets cleaned up ("garbage collected")
 - if you have to capture a value, you need to stick it into a new variable
 
@@ -105,15 +116,15 @@ console.log(`Your total is $${calculateBillReturn()}, inclucing tax.`); // Your 
 
 **Variables defined in global/outer scope**
 
-- sub optimal as to calculate, reaches outside into a higher/global scope
+- sub-optimal to calculate, reaches outside into a higher / global scope
 - further down below in your code you might accidentally re-assign a previously set variable
 
 ```
 let bill = 100;
 let taxRate = 0.13;
 function calculateBillNew() {
-    const total = bill * 1 + taxRate;
-    return total;
+  const total = bill * 1 + taxRate;
+  return total;
 }
 const myTotal2 = calculateBillNew();
 console.log(myTotal2); // 100.13
@@ -124,25 +135,23 @@ console.log('myTotal3); // 200.13
 
 **Make variable values to parameters for the function**
 
-- values available to the function are scoped to that function!
-
 ```
 function calculateBillParam(billAmount, canadianTax) {
-    const total = billAmount * (1 + canadianTax);
-    return total;
+  const total = billAmount * (1 + canadianTax);
+  return total;
 }
 const myTotalParam1 = calculateBillParam(100, 0.13);
 console.log(myTotalParam1); //  112.99999999999999
 ```
-
+- values available to the function are scoped to that function!
 - parameters can be seen as placeholders
 - arguments can be seen as actual values
 - values/arguments passed into a function can be variables aswell
 
 ```
 function calculateBillParams2(billAmount2, canadianTax2) {
-    const total = billAmount2 * (1 + canadianTax2);
-    return total;
+  const total = billAmount2 * (1 + canadianTax2);
+  return total;
 }
 const wesTotal = 500;
 const wesTaxRate = 0.3;
@@ -152,15 +161,15 @@ console.log('WES tax thingy here: ', myTotalParam2); // WES tax thingy here:  65
 
 - confusion here is what's being worked with? `billAmount2`? `canadianTax2`? `wesTotal`? `wesTaxRate`?
 - functions are like factories
-    - when you run a function, it takes in whatever you pass it
-    - weather you pass it a number/string or weather you pass it a reference to a variable
-    - at the end of the day, VALUES are being passed - either "directly" as strings/numbers/etc. or referenced to a variable that HOLDS the value
+  - when you run a function, it takes in whatever you pass it
+  - weather you pass it a number/string or weather you pass it a reference to a variable
+  - at the end of the day, VALUES are being passed - either "directly" as strings/numbers/etc. or referenced to a variable that HOLDS the value
 
 **This function returns undefined**
 
 ```
 function sayHiTo() {
-    return `Hello ${firstName}`;
+  return `Hello ${firstName}`;
 }
 const greeting = sayHiTo();
 console.log(greeting); // firstName is not defined
@@ -169,7 +178,7 @@ console.log(greeting); // firstName is not defined
 **Passing a parameter with an undefined value**
 ```
 function sayHiTo(firstName) {
-    return `Hello ${firstName}`;
+  return `Hello ${firstName}`;
 }
 const greeting1 = sayHiTo();
 console.log(greeting1); // Hello undefined
@@ -181,7 +190,7 @@ console.log(greeting1); // Hello undefined
 **This function will work, as long as a value is passed**
 ```
 function sayHiTo(firstName) {
-    return `Hello ${firstName}`;
+  return `Hello ${firstName}`;
 }
 const greeting1 = sayHiTo('wes');
 console.log(greeting1); // Hello wes
@@ -191,8 +200,8 @@ console.log(greeting1); // Hello wes
 
 ```
 function calculateNewBill(billAmount2, canadianTax2) {
-    const total = billAmount2 * (1 + canadianTax2);
-    return total;
+  const total = billAmount2 * (1 + canadianTax2);
+  return total;
 }
 
 let myTotalNewBill = calculateNewBill(100, 0.15);
@@ -208,10 +217,10 @@ console.log(myTotalNewBill2); // 103.49999999999999 -> made up
 
 ```
 function doctorize(name) {
-    return `Dr. ${name}`;
+  return `Dr. ${name}`;
 }
 function yell(name) {
-    return `HEY ${name.toUpperCase()} !`;
+  return `HEY ${name.toUpperCase()} !`;
 }
 doctorize('umpa'); // "Dr. umpa"
 yell('lumpa'); // "HEY LUMPA !"
@@ -223,11 +232,11 @@ yell(doctorize('Lumpa')); // "HEY DR. LUMPA !"
 - the usage of `name` passed in as arguemnt will never collide or overwrite because they are scoped to the function
 - at the end of the day, the output of another function is the value passed in
 
-**Set a default to avoid breaking a function in case of missing to pass (a) value**
+**Set a default to avoid breaking a function in case of missing to pass a value**
 
 ```
 function yello(namoh = 'Silly Goose') {
-    return `Hey ${namoh.toUpperCase()}`;
+  return `Hey ${namoh.toUpperCase()}`;
 }
 yello(); // "Hey SILLY GOOSE"
 ```
@@ -255,26 +264,26 @@ const testBill = calculateBill(100, ,0.5); // Unexpected token
 - JavaScript functions are values in themselves
 - they can be stored in variables
 - they can be passed in to other functions
-- they can be passed around just like any other data within JavaScript
+- they can be moved around just like any other data within JavaScript
 
 ### Anonymous Function
 
 - function without a name
-- defining them on their own as a pure statement is not valid JavaScript, will throw an error (but are used for example in callbacks or IIFEs)
+- defining them on their own like here as a pure statement is not valid JavaScript, will throw an error (but are used for example in callbacks or IIFEs)
 
 ```
 function (firstName) {
-    return `Dr. ${firstName}`;
+  return `Dr. ${firstName}`;
 }
 ```
 
 ### Function Expression
 
-- store a function as a value in a value
+- store a function as a value in a variable
 
 ```
 const doctorize = function (firstName) {
-    return `Dr. ${firstName}`;
+  return `Dr. ${firstName}`;
 }
 doctorize('dude'); // "Dr. dude"
 ```
@@ -287,21 +296,20 @@ doctorize('dude'); // "Dr. dude"
 - regular functions that are declared with a function keyword are hoisted
 - JavaScript takes all of those functions and hoist them up
 - those functions are put at the top of the file, before they are called/initialized
-- JavaScript does not hoist functions assigned to variables
+- JavaScript does not hoist functions assigned to variables / function expressions
 
 ```
-// won't work
 // console.log(doctorize('wes')); // Cannot access 'doctorize' before initialization
+// console.log(doctorize2('woah')); // Dr. woah
 
-// works
-console.log(doctorize2('woah')); // Dr. woah
-
+// Function Expression
 const doctorize = function (firstName) {
-    return `Dr. ${firstName}`;
+  return `Dr. ${firstName}`;
 }
 
+// Regular Function - hoisted
 function doctorize2(firstName) {
-    return `Dr. ${firstName}`;
+  return `Dr. ${firstName}`;
 }
 ```
 
@@ -316,8 +324,8 @@ function doctorize2(firstName) {
 - start with a regular function
 ```
 function inchToCM(inches) {
-    const cm = inches * 2.54;
-    return cm;
+  const cm = inches * 2.54;
+  return cm;
 }
 console.log(inchToCM(3)); // 7.62
 ```
@@ -325,7 +333,7 @@ console.log(inchToCM(3)); // 7.62
 - shrink it down
 ```
 function inchToCM(inches) {
-    return inches * 2.54;
+  return inches * 2.54;
 }
 console.log(inchToCM(3)); // 7.62
 ```
@@ -333,14 +341,14 @@ console.log(inchToCM(3)); // 7.62
 - assign to a variable, function is now anonymous
 ```
 const inchToCM1 = function(inches) {
-    return inches * 2.54;
+  return inches * 2.54;
 }
 console.log(inchToCM1(3)); // 7.62
 ```
 
 - arrow function (explicit return)
-    - delete `function` keyword
-    - add fat arrow
+  - delete `function` keyword
+  - add fat arrow
 ```
 const inchToCM2 = (inches) => {
     return inches * 2.54;
@@ -349,7 +357,7 @@ console.log(inchToCM2(3)); // 7.62
 ```
 
 - arrow function (implicit return)
-    - delete `return` and `{}`
+  - delete `return` and `{}`
 ```
 const inchToCM3 = (inches) => inches * 2.54;
 ```
@@ -377,9 +385,9 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 - anonymous arrow function
 ```
 const makeADonut = (first, last) => {
-    const donut = {
-        name: `${first} ${last}`,
-		age: 0
+  const donut = {
+    name: `${first} ${last}`,
+	  age: 0
 	}
 	return donut;
 }
@@ -389,8 +397,8 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 - even less
 ```
 const makeADonut = (first, last) => {
-    return {
-        name: `${first} ${last}`,
+  return {
+    name: `${first} ${last}`,
 		age: 0
 	}
 }
@@ -398,18 +406,18 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 ```
 
 - implicit return - won't work
-- `{}` will be taken as the `{}` of the _function body_ not the `{}` of the donut object
 ```
 const makeADonut = (first, last) => { name: `${first} ${last}`, age: 0 };
 console.log(makeADonut('chocolate', 'vanilla')); // Unexpected token
 ```
+- `{}` will be taken as the `{}` of the _function body_ not the `{}` of the donut object
 
 - implicit return - works
-- if you want to implicitly return an object, just have a set of `()` around it
 ```
 const makeADonut = (first, last) => ({ name: `${first} ${last}`, age: 0 });
 console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", age: 0}
 ```
+- if you want to implicitly return an object, just have a set of `()` around it
 
 ### IIFE
 
@@ -417,8 +425,8 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 
 ```
 (function() {
-    console.log('run the IIFE'); // run the IIFE
-	return 'Something witty here'; // "Something witty here"
+  console.log('run the IIFE'); // run the IIFE
+  return 'Something witty here'; // "Something witty here"
 })();
 ```
 
@@ -428,14 +436,14 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 - this was really popular before Modules and Block Scope
 - IIFE is declared in it’s own scope
 - functions inside of it run in the overarching, contained scope
-- variables cannot leak inside
+- variables cannot leak
 
 **Within an IIFE, passing a parameter**
 
 ```
 (function(age) {
-    console.log('run the IIFE'); // run the IIFE
-	return `Something witty here and age ${age}`; // "Something witty here and age 5"
+  console.log('run the IIFE'); // run the IIFE
+  return `Something witty here and age ${age}`; // "Something witty here and age 5"
 })(5);
 ```
 
@@ -443,19 +451,19 @@ console.log(makeADonut('chocolate', 'vanilla')); // {name: "chocolate vanilla", 
 
 - a method is a function that lives inside of an object
 - `console.log();`
-    - `.log()` is the function that lives inside of `console`
-    - `console` is actually an object
+  - `.log()` is the function that lives inside of `console`
+  - `console` is actually an object
 - create a property on your object and assign a function to it
 - these functions can also have names, it's technically allowed
 - you don't have to set a name, when a function name is missing, the browser will derive the name from the property name
 
 ```
 const wes = {
-    name: 'Wes Bos',
-    sayHi: function() {
-        console.log('Hey Wes');
-        return 'Hey Wesser';
-    }
+  name: 'Wes Bos',
+  sayHi: function() {
+    console.log('Hey Wes');
+    return 'Hey Wesser';
+  }
 }
 console.log(wes); // Hey Wes
 console.log(wes.sayHi()); // Hey Wesser
@@ -465,31 +473,29 @@ console.log(wes.sayHi()); // Hey Wesser
 
 ```
 const functionmethod = {
-	name: 'Whatever Ever',
+  name: 'Whatever Ever',
 
-	// METHOD
-	sayHi: function() {
-		console.log("Hey there");
-		return "Hey there";
-	},
+  // METHOD
+  // create a property on your object and assign it a function
+  sayHi: function() {
+    console.log("Hey there");
+    return "Hey there";
+  },
 
-	// SHORTHAND
-	yellHi() {
-		console.log("YELLLL-OOOO");
-	},
+  // SHORTHAND METHOD
+  yellHi() {
+    console.log("YELLLL without function keyword");
+  },
+  // same as above but with function keyword
+  /* yellHi: function() {
+    console.log("YELLLL with function keyword");
+  }, */
 
-	// writing the above is the same thing as writing
-	yellHiho: function() {
-		console.log("YELLLL-UUU");
-	},
-
-    // arrow function
-    wisperHi: () => {
-        console.log('hii');
-    }
+  // ARROW FUNCTION
+  wisperHi: () => {
+    console.log('hii');
+  }
 }
-console.log(functionmethod.yellHi()); // YELLLL-OOOO
-console.log(functionmethod.yellHiho()); // YELLLL-UUU
 ```
 
 ### Callback Functions
@@ -504,8 +510,7 @@ console.log(functionmethod.yellHiho()); // YELLLL-UUU
 const button = document.querySelector('.click-me');
 button.addEventListener('click', functionmethod.yellHi);
 ```
-
-- when the `click` happens, pass it a reference to any function that should run
+- when the `click` happens, pass it a reference to any function that should run (in this case `functionmethod()`)
 - the callback is sort of a function to which the event listener is given access to
 - we're not running it here, we're just saying "here's the function, browser, please call that function, when somebody clicks the button"
 
@@ -514,7 +519,7 @@ button.addEventListener('click', functionmethod.yellHi);
 ```
 const button = document.querySelector('.click-me');
 function handleClick() {
-    console.log('you clicked!');
+  console.log('you clicked!');
 }
 button.addEventListener('click', handleClick);
 ```
@@ -524,37 +529,34 @@ button.addEventListener('click', handleClick);
 ```
 const button = document.querySelector('.click-me');
 button.addEventListener('click', function() {
-    console.log('inside anonymous');
+  console.log('inside anonymous');
 });
-
 ```
 - anonymous function directly being passed
 - the browser would know to call the function itself
+- is not a callback function right here
 
 ### Timer Callback
-- probably the simplest way to do this is `setTimeout()`
+- probably the simplest one is `setTimeout()`
 - first, it takes a function to call, that you want to run after a certain amount of time
 - second, it asks for a duration in time (milliseconds), "after how long should I run this"
 
 ```
 // timer callback
-setTimeout(functionmethod.yellHiho, 1000);
+setTimeout(functionmethod.yellHi, 1000);
 
 // anonymous function
 setTimeout(function() {
-	console.log('Done');
+  console.log('Done');
 }, 1000);
 
-// arrow functions aswell
+// arrow function
 setTimeout(() => {
-	console.log('arrow done');
+  console.log('arrow done');
 }, 1000);
 ```
 
 ## Debugging Tools
-
-- it's about the tools, not the mindset how to be a good debugger
-
 ### Console
 
 - `console.log()` - the most common log
@@ -574,8 +576,8 @@ setTimeout(() => {
 
 ### Grabbing Elements
 
-- go to a website like [MDN for example](https://developer.mozilla.org/en-US/)
-- inspect the input field
+- go to any website, for example [MDN for example](https://developer.mozilla.org/en-US/)
+- inspect the input field (so it turns "blue")
 ![input-01](./img/screen-mod02-input01.png)
 - flip over to the JavaScript console and type `$0`
 - it will return to you whatever you've currently selected
@@ -583,34 +585,35 @@ setTimeout(() => {
 ![input-03](./img/screen-mod02-input03.png)
 - helpful as you can call for example `.value` against it (type something into the input field)
 ![input-04](./img/screen-mod02-input04.png)
+<br>
+<br>
 - `$0`
-    - gives you something like a shortcut access to the element
-    - basically means "show me the last in the elements tab clicked element"
+  - will return to you whatever element you've currently selected, the last one you've selected
+  - gives you something like a shortcut access to the element
 - `$1`
-    - means the second last element you clicked in the elements tab (and so on with `$2`, etc)
-- `$('div')` - example, works like a querySelector, gives you the first `<div>` on a page (if present)
-- `$$('div')` - example, works like a querySelector, gives you all `<div>`s on a page (if present)
+  - will return to you the second to last you've selected (and so on with `$2`, etc)
+- `$('div')` - like querySelector, gives you the first `<div>` on a page (if present)
+- `$$('div')` - like querySelectorAll, gives you all `<div>`s on a page (if present)
 
 ### Debugger - Setting Breakpoints
 
-**Set `debugger;` in js file**
+**Set `debugger;` in functions**
 ```
 people.forEach((person, index) => {
-    debugger;
-    console.log(person.name);
+  debugger;
+  console.log(person.name);
 });
 ```
-
 - open JavaScript console
 - the debugger will pause JavaScript from running but only when your Dev Tools are open
-- when you now run it, JavaScript will run until the line you've set the debugger on and stop there - you've set a breakpoint
-- you can gain a lot of info at this stopped point
-- `play` will keep on running JavaScript line by line until exiting that function (and until the next debugger is hit)
+- when you now run it, JavaScript will run until the line you've set the `debugger` on and stop there - you've set a breakpoint
+- you can gain a lot of info at this stopped point, in the Sources Tab
+- `play` will keep on running JavaScript until the next debugger is hit
 - `Setp over` will step into the next function call, will allow you to run the code line by line, again and again (in a loop)
 
 ![debug-01](./img/screen-mod02-debug01.png)
 
-**Set `debugger;` within the sources tab**
+**Set `debugger;` within the Sources Tab**
 
 - go to the sources tab and select the `.js` you want to set a debugger in
 - now just pick the function/the line you want to debug and click on the number of that line
@@ -628,34 +631,32 @@ people.forEach((person, index) => {
 
 ```
 async function fetchDadJoke() {
-    const res = await fetch('https://icanhazdadjoke.com/', {
-        headers: {
-        Accept: 'text/plain',
-        },
-    });
-    const joke = await res.text();
-    console.log(joke); // What did the late tomato say to the early tomato? I’ll ketch up
-    return joke;
+  const res = await fetch('https://icanhazdadjoke.com/', {
+    headers: {
+      Accept: 'text/plain',
+    },
+  });
+  const joke = await res.text();
+  console.log(joke); // What did the late tomato say to the early tomato? I’ll ketch up
+  return joke;
 }
 
-// in the JavaScript console, run
-fetchDadJoke()
+// in the JavaScript console, run fetchDadJoke()
 ```
-
-- open network tab in Dev Tools and refresh
-- you now see all of the files that are needed in order for that website to work
+- while doing so, open Network Tab in Dev Tools and refresh
+- you now see all of the files that are needed in order for that website to work, that joke to work
 
 ![network-01](./img/screen-mod02-network01.png)
 
 - if you have a request to an API, you can investigate for example why that request takes so long
-- the XHR tab for example is sending data about you back
+- the XHR Tab for example is sending out data about YOU
 
 ### Break on attribute
 
 **attribute modifications**
 - example: "where is the JavaScript that is making a button bigger?"
-- right click on DOM element, "Break on", "attribute modifications"
-- when somebody changes one of the attribute in that button, break
+- right click on Elements Tab, "Break on", "attribute modifications"
+- when somebody changes one of the attributes in that button, break
 ![break-01](./img/screen-mod02-break01.png)
 ![break-02](./img/screen-mod02-break02.png)
 - click the button, will jump into debugging
@@ -665,4 +666,4 @@ fetchDadJoke()
 - example: when somebody adds a `<div>`
 
 **node removal**
-- example: when somebody removes an element or some tags
+- example: when somebody removes an element or some tags from the DOM

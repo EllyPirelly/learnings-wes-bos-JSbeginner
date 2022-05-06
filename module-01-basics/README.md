@@ -1,7 +1,7 @@
 # Module 1 - Basics
 
 As most of the content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and small coding bits, no project. <br>
+This module contains no project. <br>
 
 [Browser, Editor and Terminal Setup](#Browser-Editor-and-Terminal-Setup)
 
