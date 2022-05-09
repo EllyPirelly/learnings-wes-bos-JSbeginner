@@ -1,7 +1,7 @@
 # Module 4 - The DOM
 
 As most of the content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and small coding bits, no project.
+This module contains no project. <br>
 
 [Introduction to the document](#introduction-to-the-document)
 
@@ -29,7 +29,8 @@ Content of this module is information and small coding bits, no project.
   - add/remove classes
   - fetch new data
   - play music and videos, etc, etc
-  - ... we need the **DOM**<br>
+  - ... we need the **DOM**
+<br>
 
 **The browser grabs HTML and turns it into something that is called the "Document Object Model", the DOM**
 
@@ -50,10 +51,10 @@ Content of this module is information and small coding bits, no project.
 
 ### Document
 
-**`document` is everything from the opening HTML tag `<!DOCTYPE html>` to the closing HTML tag `</html>`**
+**`document` is everything from the opening HTML tag `<!DOCTYPE html>` to the closing HTML tag `</!DOCTYPE>`**
 
 - the `document` is only concerned about the DOM
-- the entire Document **Object** Model is accessible via the `document.` keyword
+- the entire Document Object Model is accessible via the `document` keyword
 
 ![the dom 01](./img/screen-mod04-the-dom01.png)
 
@@ -67,23 +68,13 @@ Content of this module is information and small coding bits, no project.
 
 ## Selecting Elements
 
-**A word on loading JS**
+**A word on loading JavaScript**
 
 - do not have JavaScript loaded and running before elements are rendered (e.g. do not put a `<script>` tag in the `<head>` if possible)
-- as mentioned before, put the `<script>` tag right before the closing `<body>` tag, this will ensure that your HTML is parsed/rendered on the page before the JavaScript is run
+- as mentioned before, put the `<script>` tag right before the closing `</body>` tag, this will ensure that your HTML is parsed/rendered on the page before the JavaScript is run
 - if you have to have a `<script>` tag in the `<head>` tag, make sure that the DOM content is loaded (`DOMContentLoaded`) before running the JavaScript
 
 **Following examples are referring to `index.html` and `the-dom.js`**
-
-```
-// returns the first matching <p> AND makes sure that DOM content is loaded
-function init() {
-    // grab the first matching p
-    const p = document.querySelector('p');
-    console.log(p);
-}
-document.addEventListener('DOMContentLoaded', init);
-```
 
 - before working with elements on a webbrowser page is possible, they need to be selected
 - once elements are selected they can be manipulated
@@ -91,7 +82,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 **querySelector**
 
-- returns the first matching element
+- returns only the first matching element
 - will seach the entire webpage / the entire document
 - as a method of a selected element, will only search inside of that selected element
 
@@ -99,8 +90,8 @@ document.addEventListener('DOMContentLoaded', init);
 
 - returns a NodeList
 - a NodeList is NOT an array!
-  - it's a "list of things" (more explanation later in the courses)
-  - it does not have all the methods you'd have for an array (e.g. `map()`, `filter()`, `reduce()` and so on)
+- it's a "list of things" (more explanation later in the courses)
+- it does not have all the methods you'd have for an array (e.g. `map()`, `filter()`, `reduce()` and so on)
 
 ```
 // grab the first matching p element
@@ -163,7 +154,6 @@ const heading = document.querySelector('h2');
 console.log(heading); // <h2>Badly styled heading...</h2>
 console.dir(heading); // h2
 ```
-
 - this looks like it returns an actual _element_ but in reality it's an **object** that has a lot of properties and methods on it
 - `.dir` will show the object properties, instead of the element itself
 - if you open it up:
@@ -176,15 +166,13 @@ console.dir(heading); // h2
   - `parentElement: div.item.item2`
   - `parentNode: div.item.item2`
   - ... etc, etc
-- these are just properties, meaning they can be used as "getters" (pull the data out of them) or as "setters" (set new data)
+- these are just properties, meaning they can be used as "getters" (pull the data out) or as "setters" (set new data)
 
 - `textContent`
-
   - gets ALL of the elements, including `<script>` and `<style>` elements
   - returns EVERY element of the node<br>
 
 - `innerText`
-
   - gets only human-readable elements
   - won't address text of hidden elements<br>
 
@@ -204,34 +192,32 @@ console.log(heading.outerHTML); // <h2>Set new headline with textContent</h2>
 ```
 const pizzaList = document.querySelector('.pizza');
 console.log(pizzaList.textContent); // This is what I ate 🧇
+```
 
+#### One possibility to update
+- can be slow in applications, will cause the browser to rerender the entire list
+```
 pizzaList.textContent = `${pizzaList.textContent} plus pizza 🍕`;
 console.log(pizzaList.textContent); // This is what I ate 🧇 plus pizza 🍕
 ```
 
-- one possibility to update
-- can be slow in applications, will cause the browser to rerender the entire list
+#### Better method to update is `insertAdjacentText`
+- this is not a property on an object, it's a method
+- when trying out various combinations of `.insertAdjacentText('option', element)`, have a close look in the Dev Tools Elements Tab _where_ an element is added
 
 ```
 pizzaList.insertAdjacentText('afterbegin', '🍿');
 console.log(pizzaList.textContent); // 🍿This is what I ate 🧇
 ```
-
-- better method to update, `.insertAdjacentText('afterbegin', element)` adds to the front of the element
-- this is not a property on an object, it's a method
-- the browser knows that you added it after first render, so it puts it on an extra line
+- adds to the front, on an extra line, but prints no space
 
 ![the dom 06](./img/screen-mod04-the-dom06.png)
-
-**That's the difference between elements and nodes - nodes can be anything, an element is something that's wrapped in a tag, so it's a specific kind of node**
 
 ```
 pizzaList.insertAdjacentText('beforeend', '🍕');
 console.log(pizzaList.textContent); // 🍿This is what I ate 🧇🍕
 ```
-
 - adds this to the end of the element `.insertAdjacentText('beforeend', element)`
-- adds this as its OWN NODE on an extra line BEFORE the element `.insertAdjacentText('beforebegin', element)`
 
 ```
 pizzaList.insertAdjacentText('beforebegin', '🍔');
@@ -240,6 +226,7 @@ console.log(pizzaList.textContent); // 🍿This is what I ate 🧇🍕
 const article = document.querySelector('article');
 console.log(article.textContent); // I'm an article headline 🍔🍿This is what I ate 🧇🍕
 ```
+- adds this as its OWN NODE on an extra line BEFORE the element `.insertAdjacentText('beforebegin', element)`
 
 ![the dom 07](./img/screen-mod04-the-dom07.png)
 
@@ -250,6 +237,9 @@ console.log(article.textContent); // I'm an article headline 🍔🍿This is wha
   [MDN Web Docs - Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)<br>
   [MDN Web Docs - Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
 - be aware that some properties doesn't only exist on elements but also on nodes - so if you don't find it in elements, check the nodes page
+
+
+**That's the difference between elements and nodes - nodes can be anything, an element is something that's wrapped in a tag, so it's a specific kind of node**
 
 ## Working with Classes
 

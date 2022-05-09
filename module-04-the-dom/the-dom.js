@@ -1,10 +1,3 @@
-/* function init() {
-    // grab the first matching p
-    const p = document.querySelector('p');
-    console.log(p);
-}
-document.addEventListener('DOMContentLoaded', init); */
-
 /* START BATCH 01 OF EXAMPLES - Selecting Elements */
 
 /* // grab the first matching p element
@@ -45,13 +38,13 @@ console.log(idElement); // <h2 id="wes">Sub Div headline</h2> */
 /* START BATCH 2 OF EXAMPLES - Element Properties and Methods*/
 
 /* const heading = document.querySelector('h2');
-console.log(heading); // <h2>Badly styled heading...</h2>
+console.log(heading); // <h2>Badly styled heading in HTML</h2>
 console.dir(heading); // h2
 
 console.log(heading.textContent); // Badly styled heading in HTML I am a hidden span within the h2
 console.log(heading.innerText); // Badly styled heading in HTML
 
-// heading.textContent = 'Set new headline with textContent';
+heading.textContent = 'Set new headline with textContent';
 
 console.log(heading.textContent); // Set new headline with textContent
 console.log(heading.innerText); // Set new headline with textContent
