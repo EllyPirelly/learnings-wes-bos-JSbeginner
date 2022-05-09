@@ -1,7 +1,7 @@
 # Module 3 - The Tricky Bits
 
 As most of the content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and small coding bits, no project. <br>
+This module contains no project. <br>
 
 [Scope](#Scope)
 
@@ -12,10 +12,10 @@ Content of this module is information and small coding bits, no project. <br>
 ## Scope
 
 - scope answers the questions, "where are my variables and functions available to me"
-- different types of scope
+- there are different types of scope
 
-#### Global Variables - Global Scope
-- `<script>`, js file, console - any time you declare a variable it will be available anywhere in the application
+#### Global Variables in Global Scope
+- any time you declare a variable (no matter where: `<script>`, js file, console) it will be available anywhere in the application
 - in a browser the global scope is the window
 - methods that are globally available to us like for example `setTimeout()` are actually on the window object
 
@@ -30,19 +30,17 @@ console.log((window.one)); // undefined
 console.log((window.two)); // undefined
 console.log((window.age)); // 100
 ```
-
 - why `undefined`?
 - `var` variables are attached to the window object - they are globally scoped
-- `const` and `let` variables are still globally scoped BUT they are not attached to the window object
+- `const` and `let` variables are still globally scoped BUT they are not attached to the window object = `undefined`
 
 ```
 function sayHi() {
-    console.log('hey from sayHi here');
+  console.log('hey from sayHi here');
 }
 // you can call this from the js file, from the script tag or from the console - all three methods work
 sayHi();
 ```
-
 - anything that is in the global scope is attached to the window object (with the exeption of `const` and `let`)
 - functions - when declared globally - are available inside of the window object
 
@@ -51,38 +49,34 @@ sayHi();
 
 #### Function Scope
 
-- when variables are created inside of a function, those variables are only available to that function
-
 ```
 const age = 100;
 function go() {
-    const hair = 'blonde';
+  const hair = 'blonde';
 }
 console.log(age); // 100
 console.log(hair); // Uncaught ReferenceError: hair is not defined
 ```
-
-- unless you explicitly return and put that return it it's own variable
+- when variables are created inside of a function, those variables are only available to that function
+- unless you explicitly return and put that return in it's own variable:
 
 ```
 const alter = 50;
 function go() {
-    const color = 'blue';
-    return color;
+  const color = 'blue';
+  return color;
 }
 const newHair = go();
 console.log(alter); // 100
 console.log(newHair); // blue
 ```
-
-- when variables are not bound inside of a function they go up and look one level higher
-
+- when variables are not bound inside of a function they go up and look one level higher:
 ```
 const global = 200;
 function bam() {
-    const meme = 'lama';
-    console.log(global); // 200
-    console.log(meme); // lama
+  const meme = 'lama';
+  console.log(global); // 200
+  console.log(meme); // lama
 }
 bam();
 ```
@@ -93,18 +87,18 @@ bam();
 ```
 const naming = 'naming outer';
 function namefunction() {
-    const naming = 'naming inner';
-    console.log(naming);
+  const naming = 'naming inner';
+  console.log(naming);
 }
 namefunction(); // naming inner
 ```
 
 ```
 function yellHi(namehere) {
-    function yellAnother() {
-        console.log(namehere.toUpperCase());
-    }
-    yellAnother();
+  function yellAnother() {
+    console.log(namehere.toUpperCase());
+  }
+  yellAnother();
 }
 yellAnother(); // Uncaught ReferenceError: yellAnother is not defined
 ```
@@ -119,17 +113,17 @@ yellAnother(); // Uncaught ReferenceError: yellAnother is not defined
 
 ```
 if (1 === 1) {
-    const cool = true;
+  const cool = true;
 }
 console.log('const:', cool); // Uncaught ReferenceError: cool is not defined
 
 if (1 === 1) {
-    var cool = true;
+  var cool = true;
 }
 console.log('var:', cool); // true
 
 if (1 === 1) {
-    let cool = true;
+  let cool = true;
 }
 console.log('let:', cool); // Uncaught ReferenceError: cool is not defined
 ```
@@ -140,7 +134,7 @@ console.log('let:', cool); // Uncaught ReferenceError: cool is not defined
 ```
 let right;
 if (1 === 1) {
-    right = true;
+  right = true;
 }
 console.log(right); // true
 ```
@@ -149,29 +143,30 @@ console.log(right); // true
 
 ```
 function isCool(namesome) {
-    let cool;
-    if (namesome === 'some name') {
-        cool = true;
-    }
-    console.log(cool);
-    return cool;
+  let cool;
+  if (namesome === 'some name') {
+    cool = true;
+  }
+  console.log(cool);
+  return cool;
 }
 ```
 
-- this `i` leaks outside of this for loop
+#### Loops
 
+- with `var`, not good, causes issues
+- this `i` leaks outside of this for loop
+- if you now need another `for` loop and use that `i` again that could cause bugs
 ```
 for(var i = 0; i < 10; i++) {
-    console.log(i);
+  console.log(i);
 }
 ```
-
-- so if you now need another for loop and use that `i` again that could cause bugs
-- make the `var` a `let` and you're good, as that scopes the `i` to the block
+- with `let`, better, the `i` is block scoped
 
 ```
 for(let i = 0; i < 10; i++) {
-    console.log(i);
+  console.log(i);
 }
 ```
 
@@ -182,18 +177,13 @@ for(let i = 0; i < 10; i++) {
 
 ```
 const dog = 'snickers';
-
-// here it's defined
-// here, it will look up one level as inside of the function there's not dog defined
 function logDog() {
-    console.log(dog); // snickers
+  console.log(dog); // snickers
 }
-
 function anotherdog() {
-    const dog = 'sunny';
-    logDog(); // here it's run - JavaScript doesn't care
+  const dog = 'sunny'; // won't log
+  logDog(); // here it's run - JavaScript doesn't care
 }
-
 anotherdog();
 ```
 
@@ -203,18 +193,17 @@ function logCat(cat) {
     console.log(cat); // Schnitzel
 }
 function anotherCat() {
-    const cat = 'smitty';
+    const cat = 'smitty'; // won't log
     logCat('Schnitzel');
 }
 anotherCat();
 ```
 
-- why?  when a function takes in an argument `(cat)` it will make local variables inside of that function and name them whatever you passed in as the first argument to the function
+- why?  when a function takes in an argument `cat` it will make local variables inside of that function and name them whatever you passed in as the first argument to the function
 
 #### Best Practices
 
 - try not to create global variables
-
 
 ## Hoisting
 
