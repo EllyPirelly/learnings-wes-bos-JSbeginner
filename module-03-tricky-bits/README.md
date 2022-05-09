@@ -207,28 +207,29 @@ anotherCat();
 
 ## Hoisting
 
-- hoisting allows you do access/run functions and variables before they have been created
-- there's two things that are hoisted in JavaScript
-    - function declarations
-    - variable declarations
+- hoisting allows you to access functions and variables before they have been created
+- there are two things that's hoisted
+  - function declarations
+  - variable declarations
 
 **Hoisting - function declaration**
 
+- this works
 ```
 sayHi();
-
 function sayHi() {
-    console.log('hey'); // hey
-    console.log(add(10, 2)); // 12
-}
-
-function add(a, b) {
-    return a + b;
+  console.log('hey'); // hey
 }
 ```
-- works because of hoisting
-- only works with regular functions, does not work with functions assigned to variables
+- because internally JavaScript hoists the function to the top
 - JavaScript will re-arrange this so the functions are at the top of the file
+```
+function sayHi() {
+  console.log('hey'); // hey
+}
+sayHi();
+```
+- only works with regular functions, does not work with functions assigned to variables
 - best practice: first create your functions and then call them (or work modular, export/import them)
 
 **Hoisting - variable declaration**
@@ -239,16 +240,15 @@ function add(a, b) {
 console.log(age);
 var age = 10; // undefined
 ```
-
-- before everything runs, JS will hoist all variables to the top
-- then it's going ahead and update them
-
+- internally, JavaScript does this
 ```
 var age;
 console.log(age);
-age = 10; // undefined
-console.log(age); // 10
+age = 10; // undefined // comes "too late to be logged"
 ```
+
+- before everything runs, JS will hoist all variables to the top
+- then it's going ahead and update them
 
 ## Closures
 
@@ -258,16 +258,16 @@ console.log(age); // 10
 
 ```
 function outer() {
-    const outerVar = 'outer hey';
-    function inner() {
-        const innerVar = 'inner hey';
-        console.log(innerVar);
-        console.log(outerVar);
-    }
-    inner();
-    // run outer() in the console (!), works:
-    // inner hey
-    // outer hey
+  const outerVar = 'outer hey';
+  function inner() {
+    const innerVar = 'inner hey';
+    console.log(innerVar);
+    console.log(outerVar);
+  }
+  inner();
+  // run outer() in the console (!), works:
+  // inner hey
+  // outer hey
 }
 // inner(); // Uncaught ReferenceError: inner is not defined - error, because it's not returned!
 // then, run on page load, works:
@@ -278,13 +278,13 @@ outer(); // inner hey // outer hey
 
 ```
 function outer() {
-    const outerVar = 'outer hey 2';
-    function inner() {
-        const innerVar = 'inner hey 2';
-        console.log(innerVar);
-        console.log(outerVar);
-    }
-    return inner;
+  const outerVar = 'outer hey 2';
+  function inner() {
+    const innerVar = 'inner hey 2';
+    console.log(innerVar);
+    console.log(outerVar);
+  }
+  return inner;
 }
 const innerFn = outer();
 // run innerFn in the console - returns the inner() FUNCTION
@@ -304,10 +304,10 @@ innerFn(); // inner hey // outer hey
 
 ```
 function createGreeting(greeting = '') {
-    const myGreet = greeting.toUpperCase();
-    return function(name) {
-        return `${myGreet} ${name}`;
-    }
+  const myGreet = greeting.toUpperCase();
+  return function(name) {
+    return `${myGreet} ${name}`;
+  }
 }
 
 const sayHello = createGreeting('hello');
@@ -326,11 +326,11 @@ console.log(sayHey('petey'));
 
 ```
 function createGame(gameName) {
-    let score = 0;
-    return function win() {
-        score++;
-        return `your name ${gameName} score is ${score}`;
-    }
+  let score = 0;
+  return function win() {
+    score++;
+    return `your name ${gameName} score is ${score}`;
+  }
 }
 const hockeyGame = createGame('Hockey');
 const soccerGame = createGame('Soccer');

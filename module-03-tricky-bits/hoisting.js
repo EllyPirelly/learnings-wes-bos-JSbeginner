@@ -1,23 +1,36 @@
-// hoisting - function declaration
+// HOISTING - FUNCTION DECLARATION
 
-sayHi();
-
+// this works
+sayHi(); // hey
 function sayHi() {
-    console.log('hey'); // hey
-    console.log(add(10, 2)); // 12
+  console.log('hey'); // hey
+}
+
+// because internally JavaScript hoists the function to the top
+function sayHi() {
+  console.log('hey'); // hey
+}
+sayHi(); // hey
+
+
+// another example
+anotherTest(); // 12
+function anotherTest() {
+  console.log(add(10, 2));
 }
 
 function add(a, b) {
-    return a + b;
+  return a + b;
 }
 
 
-// hoisting - variable declaration
+// HOISTING - VARIABLE DECLARATION
 
-/* console.log(age);
-var age = 10; // undefined */
+// JS will hoist declarations but NOT the actual value
+console.log(age);
+var age = 10; // undefined
 
+// internally, JavaScript does this
 var age;
 console.log(age);
-age = 10; // undefined
-console.log(age); // 10
+age = 10; // undefined // comes "too late to be logged"
