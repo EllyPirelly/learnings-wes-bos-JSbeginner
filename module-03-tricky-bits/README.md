@@ -252,9 +252,12 @@ age = 10; // undefined // comes "too late to be logged"
 
 ## Closures
 
-- hard concept to get, this course bit here is about the basics, more will be explained during upcoming examples in the course
+**A closure is the ability for a child/inner function to access variables from a higher level/parent scope function - even after the higher level/parent scope function has been called/terminated/closed over.**
 
-**A closure is the ability for a child/inner function to access variables from a higher level/parent scope function - even after the higher level/parent scope function has been called/closed over.**
+Hard concept to get, this course bit here is about the basics, more will be explained during upcoming examples in the course
+
+
+#### Scope look-up into outer parent
 
 ```
 function outer() {
@@ -265,39 +268,33 @@ function outer() {
     console.log(outerVar);
   }
   inner();
-  // run outer() in the console (!), works:
-  // inner hey
-  // outer hey
 }
-// inner(); // Uncaught ReferenceError: inner is not defined - error, because it's not returned!
-// then, run on page load, works:
 outer(); // inner hey // outer hey
 ```
-
 - the inner `function inner()` is able to make a scope look-up into the outer/parent `function outer()` function (that's not really closure just yet but scoping)
+
+#### Example of closure - Assign a function to a variable, so at a later point you have access to that inner function
 
 ```
 function outer() {
-  const outerVar = 'outer hey 2';
+  const outerVar = 'outer hey';
   function inner() {
-    const innerVar = 'inner hey 2';
+    const innerVar = 'inner hey';
     console.log(innerVar);
     console.log(outerVar);
   }
   return inner;
 }
 const innerFn = outer();
-// run innerFn in the console - returns the inner() FUNCTION
-
-// then, run on page load, works:
-innerFn(); // inner hey // outer hey
+console.log(innerFn); // is a function
+innerFn(); // innerhey // outer hey
 ```
-
-- assign a function to a variable (`const innerFn = outer();`) so at a later point you have access to that function
 - even though the `function outer()` is done running (and should have been cleaned up/garbage collected), JavaScript will still maintain the `const outerVar` in memory, so that it's accessible at a later time
-- JavaScript - from within the inner `function inner()` - reaches out to the parent scope
-- so when you run the `function innerFn()` outside of the parent `function outer()`, JavaScript is still able to access `function inner()`<br><br>
-**Don't forget to `return`!**<br>
+- from within the inner `function inner()` - JavaScript reaches out to the parent scope
+- so when you run the `function innerFn()` outside of the parent `function outer()`, JavaScript is still able to access `function inner()`
+<br>
+**Don't forget to `return`!**
+<br>
 **Either the inner function itself `return inner(){...}` or (as done in the example) after the `function inner(){...}` with `return inner;`**
 
 #### Example of closure - functions inside of functions
@@ -309,18 +306,16 @@ function createGreeting(greeting = '') {
     return `${myGreet} ${name}`;
   }
 }
-
 const sayHello = createGreeting('hello');
 const sayHey = createGreeting('hey');
-
-console.log(sayHello('budda'));
-console.log(sayHello('weasel'));
-console.log(sayHey('petey'));
+console.log(sayHello('budda')); // HELLO budda
+console.log(sayHello('weasel')); // HELLO weasel
+console.log(sayHey('petey')); // HEY petey
 ```
 
 - variable `const myGreet` is created inside of the parent function `function createGreeting()`
-- `myGreet` is then referenced and returned within inner function `return function(name)`, via `return ${myGreet}`
-- because of that references to variable `const myGreet` which (seen from the inner function) was created in outer scope/the parent function `function createGreeting()`, JavaScript still can access this (outer) variable - even after the parent function/the outer `function createGreeting()` is done running/has been closed over
+- `myGreet` is then referenced and returned within inner function, via `return ${myGreet}`
+- because of that references JavaScript still can access this (outer) variable - even after the parent function/the outer `function createGreeting()` is done running/has been closed over
 
 #### Example how to use closure to create "private variables"
 
@@ -329,21 +324,24 @@ function createGame(gameName) {
   let score = 0;
   return function win() {
     score++;
-    return `your name ${gameName} score is ${score}`;
+    return `your ${gameName} score is ${score}`;
   }
 }
+
 const hockeyGame = createGame('Hockey');
 const soccerGame = createGame('Soccer');
 // run hockeyGame() in the JavaScript console
 // increments every time it's run, independent from soccerGame():
-// "your name Hockey score is 1"
+// "your Hockey score is 1"
+
 // run soccerGame() in the JavaScript console
 // increments every time it's run, independent from hockeyGame():
-// "your name Soccer score is 1"
+// "your Soccer score is 1"
 ```
 
 - within the outer, the parent `function createGame()` the _empty_ score `let score = 0;` is created
--  within the inner `function win()`, `score` is referenced, incremented and returned
-- `score` itself will be undefined, type `score` in JavaScript console: `ReferenceError: score is not defined`
-- so there's no way to access `score` unless it's explicitly returned, in our case through `return your name ${gameName} score is ${score};`
+-  within the inner (returned!!!) `function win()`, `score` is referenced, incremented and returned
+- `score` itself will be undefined
+- type `score` in JavaScript console: `ReferenceError: score is not defined`
+- so there's no way to access `score` unless it's explicitly returned, in our case through `return your ${gameName} score is ${score};`
 - creating functions this way, enables you to maintain multiple games at once, which will run independent from one another!
