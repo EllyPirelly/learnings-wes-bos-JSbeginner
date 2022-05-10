@@ -431,33 +431,32 @@ document.body.insertAdjacentElement('afterbegin', myList);
 
 **Following examples are referring to `create-w-strings.html` and `create-w-strings.js`**
 
-- creating HTML with back tick strings
-- there's a potential security hole - there's some things to know about XSS - Cross-Site Scripting
-
+#### innerHTML (and back ticks)
 ```
 const item = document.querySelector('.item');
-// getter, showing everything as a string
-console.log(item.innerHTML); //  <img src="https://source.unsplash.com/random/150x150"> <p>Hi I'm the first ever item p</p>
 
-// setter
+// innerHTML, getter
+console.log(item.innerHTML); // <img src="https://source.unsplash.com/random/150x150"> <p>Hi I'm the first ever item p</p>
+
+// innerHTML setter
 item.innerHTML = `
   <div>
     <h1>Hey how are you</h1>
   </div>
 `;
-console.log(item.innerHTML);
+console.log(item.innerHTML); // will log that html inside of the first .item element found
 ```
 
-- way better, than example in Creating HTML chapter
 - `innerHTML` = great way to dump the string in and have the browser create all of the elements for you
 - with back ticks you can interpolate values easier
 
+#### back ticks, more elaborate
 ```
-const width = 300;
+const width = 75;
 const src = `https://source.unsplash.com/random/${width}x${width}`;
 const desc = `meaningful desc text`;
 const myHTML = `
-  <div className="wrapper">
+  <div class="wrapper">
     <h2>Random ${desc}</h2>
     <img src="${src}" alt="meaningful alt text"/>
   </div>
@@ -465,14 +464,16 @@ const myHTML = `
 item.innerHTML = myHTML;
 
 console.log(typeof myHTML); // string
-
-const itemImage = document.querySelector('.wrapper img');
-console.log(itemImage);
-itemImage.classList.add('round');
 ```
-
 - one downside: those are not elements, meaning that those are just strings
 - `myHTML` is NOT an element, it's only a string
+- you first have to dump it into the DOM to then selected again to be able to for example use `classList`
+```
+const itemImage = document.querySelector('.wrapper img');
+itemImage.classList.add('round');
+console.log(itemImage); // will log the added class
+console.log(typeof itemImage); // object
+```
 
 **createRange() and createContextualFragment()**
 
@@ -507,13 +508,13 @@ document.body.appendChild(myFragment);
 **If you want to create HTML from a string**
 
 - you can either dump it straight into an element with `.innerHTML`<br>OR
-- if you do need to do things like addEventListeners, change classes, change attributes, with `createRange()` and `createContextualFragment()` you can turn it into DOM nodes before it's dumped in
+- if you do need to do things like addEventListeners, change classes, change attributes: with `createRange()` and `createContextualFragment()` you can turn it into DOM nodes before it's dumped in
 
 **Security and Sanitization**
 
 - example: people can edit their profile, name, etc
 - if somebody puts HTML into _your_ HTML you've created via back ticks, what can happen is that the _foreign_ HTML will then be rendered onto the page
-- not per se bad, but with cross-site scripting it is
+- not per se bad, but with cross-site scripting (XSS) it is
 - when people take it further and introduce `<script>` tags into your HTML
 - the browser will run that tag, `onload` will execute immediately
 - any time you allow a third party to run a JavaScript on your page that is a potential security hole
