@@ -250,8 +250,8 @@ console.log(article.textContent); // I'm an article headline 🍔🍿This is wha
 
 ```
 <body>
-    <img class="nice cool" src="https://source.unsplash.com/random/250x250" />
-    ...
+  <img class="nice cool" src="https://source.unsplash.com/random/250x250" />
+  ...
 </body>
 ```
 
@@ -272,48 +272,25 @@ console.log(pic.classList); // DOMTokenList(2) ["nice", "open", value: "nice op
 
 - `toggle` will add the class if it's not there and remove it if it's there
 - click the first image on the page to see toggle in action
-
-```
-img {
-    transition: all 0.2s;
-}
-.round {
-    border-radius: 50%;
-    transform: rotate(1turn) scale(2);
-    box-shadow: 0 0 10px #000;
-}
-```
+- in example, see toggled `.round` style in `style.css`
 
 ```
 pic.classList.toggle('round');
-
-// try this out in repeatedly copy and pasting `pic.classList.toggle('round');` into the JavaScript console
-pic.classList.toggle('round'); // true
-// click
-pic.classList.toggle('round'); // false
 ```
 
-**add eventListener**
+**addEventListener**
 
 ```
-// add eventListener
+const pic = document.querySelector('.nice');
+pic.classList.add('round');
 function toggleRound() {
-    pic.classList.toggle('round');
+  pic.classList.toggle('round');
 }
-
 pic.addEventListener('click', toggleRound);
 ```
 
 - a lot of JavaScript will be adding and removing classes at some point in time
 - pretty common for modals or navs that need to open or close or slide in
-
-```
-// contains
-// click
-pic.classList.contains('round'); // true
-// click
-pic.classList.contains('round'); // false
-```
 
 ## Build in and Custom Data Attributes
 
@@ -337,7 +314,7 @@ console.log(pic.naturalWidth); // 0 - because the image isn't downloaded yet
 
 ```
 window.addEventListener('load', function () {
-    console.log(pic.naturalWidth); // 250
+  console.log(pic.naturalWidth); // 250
 });
 ```
 
@@ -345,7 +322,7 @@ window.addEventListener('load', function () {
 
 ```
 pic.addEventListener('load', function () {
-    console.log(pic.naturalWidth); // 250
+  console.log(pic.naturalWidth); // 250
 });
 ```
 
@@ -474,9 +451,9 @@ console.log(item.innerHTML); //  <img src="https://source.unsplash.com/random/15
 
 // setter
 item.innerHTML = `
-    <div>
-        <h1>Hey how are you</h1>
-    </div>
+  <div>
+    <h1>Hey how are you</h1>
+  </div>
 `;
 console.log(item.innerHTML);
 ```
@@ -490,10 +467,10 @@ const width = 300;
 const src = `https://source.unsplash.com/random/${width}x${width}`;
 const desc = `meaningful desc text`;
 const myHTML = `
-    <div className="wrapper">
-        <h2>Random ${desc}</h2>
-        <img src="${src}" alt="meaningful alt text"/>
-    </div>
+  <div className="wrapper">
+    <h2>Random ${desc}</h2>
+    <img src="${src}" alt="meaningful alt text"/>
+  </div>
 `;
 item.innerHTML = myHTML;
 
@@ -516,10 +493,10 @@ const width = 75;
 const src = `https://source.unsplash.com/random/${width}x${width}`;
 const desc = `meaningful desc text`;
 const myHTML = `
-    <div class="wrapper">
-        <h2>Random ${desc}</h2>
-        <img src="${src}" alt="meaningful alt text"/>
-    </div>
+  <div class="wrapper">
+    <h2>Random ${desc}</h2>
+    <img src="${src}" alt="meaningful alt text"/>
+  </div>
 `;
 
 const myFragment = document.createRange().createContextualFragment(myHTML);
