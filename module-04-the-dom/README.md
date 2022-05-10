@@ -533,8 +533,8 @@ const desc = `meaningful desc text <img onload="alert('example of being hacked -
 ```
 const wes = document.querySelector('.wes');
 console.log(wes); // <p class="wes">I am Wes, I <em>love </em> to bbq.</p>
-console.log(wes.children); // HTMLCollection [em]
-console.log(wes.childNodes); // NodeList(3) [text, em, text]
+console.log(wes.children); // HTMLCollection(2) [em, strong]
+console.log(wes.childNodes); // NodeList(4) [text, em, text, strong]
 ```
 
 - what's the actual difference between a node and an element?
@@ -576,11 +576,11 @@ const p = document.createElement('p');
 p.textContent = 'I will be removed';
 document.body.appendChild(p);
 p.remove();
-console.log(p); // <p>I will be removed</p>
+console.log(p); // <p>I will be removed</p> -> still there
 ```
 
-- what about if you create an element and then remove it - does it still exist in the DOM?
-- no, it's still there
+- BUT: what about if you create an element and then remove it - does it still exist in the DOM?
+- it's still there
 - the fact that we've created that element so it exists in JavaScript memory means that we still have access to that paragraph element
 
 ## CARDIO
