@@ -281,7 +281,6 @@ pic.classList.toggle('round');
 **addEventListener**
 
 ```
-const pic = document.querySelector('.nice');
 pic.classList.add('round');
 function toggleRound() {
   pic.classList.toggle('round');
@@ -300,25 +299,20 @@ pic.addEventListener('click', toggleRound);
 ```
 // setter
 pic.alt = 'random otherwise helpful alt text';
+
 // getter
 console.log(pic.alt); // random otherwise helpful alt text
-console.log(pic.naturalWidth); // 0 - because the image isn't downloaded yet
 ```
 
 **naturalWidth**
 
-- `naturalWidth` is only a getter
+```
+// only a getter
+console.log(pic.naturalWidth); // 0 - because the image isn't downloaded yet
+```
 - as the image HAS a width, how to solve the 0 pixel width above?
 - addEventListener
 - all the images, resources, css, JavaScript, etc have to be downloaded before this will fire:
-
-```
-window.addEventListener('load', function () {
-  console.log(pic.naturalWidth); // 250
-});
-```
-
-- listen to the specific image, which is the better use case
 
 ```
 pic.addEventListener('load', function () {
@@ -332,20 +326,22 @@ pic.addEventListener('load', function () {
 console.log(pic.getAttribute('alt')); // random otherwise helpful alt text
 pic.setAttribute('alt', 'changed via set Attribute');
 console.log(pic.getAttribute('alt')); // changed via set Attribute
+
+pic.setAttribute('newly-set-attr', 'new text too');
+console.log(pic.getAttribute('newly-set-attr')); // new text too
+```
+
+- will return:
+
+```
+<img class="nice open round" src="https://source.unsplash.com/random/250x250" alt="changed via set Attribute" newly-set-attr="new text too">
 ```
 
 - so where's the difference between using dot notation with a property on the picture object and those both methods?
 - `setAttribute()` will also work for things that are non-standard
-
-```
-pic.setAttribute('newly-set-attr', 'new text too');
-console.log(pic.getAttribute('newly-set-attr')); // new text too
-
-<img class="nice open round" src="https://source.unsplash.com/random/250x250" alt="changed via set Attribute" newly-set-attr="new text too">
-```
-
-- be careful to introduce weirdly named custom attributes - they might officially be introduced in the future, then there's legacy code that is clashing with the standard
-
+- you can set attributes that are non-standard with `setAttribute()`
+- be careful with custom named attributes
+- they might officially be introduced in the future, then there's legacy code that is clashing with the standard and will break your code
 - use data-attributes as custom attributes, use `data-`
 - access them via `.dataset`
 - dataset will give an object with all the properties that it has on it
@@ -358,13 +354,23 @@ console.log(pic.getAttribute('newly-set-attr')); // new text too
 
 **createElement**
 
-- the main way is with the `document.createElement`<br>
-  [MDN Web Docs - createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
+- the main way is with the `document.createElement`
+<br>
+[MDN Web Docs - createElement](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement)
 
 ```
 const myParagraph = document.createElement('p');
-```
+myParagraph.textContent = 'I am a p';
+myParagraph.classList.add('special');
 
+const myImage = document.createElement('img');
+myImage.src = 'https://source.unsplash.com/random/150x150';
+myImage.alt = 'meaningful alt text';
+
+const myDiv = document.createElement('div');
+myDiv.classList.add('wrapper');
+console.log(myDiv);
+```
 - simply doing this won't have anything showing up on the page
 - it's just been created in JavaScript memory
 - how to add created elements to a page then?
@@ -373,29 +379,14 @@ const myParagraph = document.createElement('p');
 - `appendChild()` can be called against any node
 
 ```
-document.body.appendChild(myDiv);
 myDiv.appendChild(myParagraph);
 myDiv.appendChild(myImage);
+document.body.appendChild(myDiv);
 ```
-
+- order matters here because
 - every time `appendChild()` is used, the DOM is modified which causes a reflow in the browser, everything will be repainted
-- to not have this happening, do the above calls in reverse order, to only have ONE touch of the DOM
-- this will only cause one reflow/repaint:
-
-```
-myDiv.appendChild(myParagraph);
-myDiv.appendChild(myImage);
-document.body.appendChild(myDiv);
-```
-
-- below is valid JavaScript but it's not needed as `body` is directly available on `document`
-
-```
-const body = document.querySelector('body');
-```
-
-- the document gives reference to the body element quickly via a property
-- not every element is accessible that way but the most popular ones
+- have `document.body.appendChild(myDiv);` as the last call to only have two reflows/repaints
+- one for dumping all elements into the div, one for dumping all of that into the document
 
 **Element.append()**
 
@@ -406,7 +397,8 @@ const body = document.querySelector('body');
 
 ![the dom 10](./img/screen-mod04-the-dom10.png)
 
-- worst way to create elements:
+- worst way to create elements
+- only to show that there's a couple of ways to create elements
 
 ```
 const myList = document.createElement('ul');
@@ -418,7 +410,7 @@ const li5 = document.createElement('li');
 li5.textContent = 'five';
 myList.append(li5);
 
-const li1 = li5.cloneNode();
+const li1 = li5.cloneNode(true);
 li1.textContent = 'one';
 myList.insertAdjacentElement('afterbegin', li1);
 
@@ -433,13 +425,11 @@ li.insertAdjacentElement('beforebegin', li2);
 document.body.insertAdjacentElement('afterbegin', myList);
 ```
 
-- only to show that there's a couple of ways to create elements
-
 ![the dom 11](./img/screen-mod04-the-dom11.png)
 
 ## HTML from Strings and XSS
 
-**Following examples are referring to `creating.html` and `creating.js`**
+**Following examples are referring to `create-w-strings.html` and `create-w-strings.js`**
 
 - creating HTML with back tick strings
 - there's a potential security hole - there's some things to know about XSS - Cross-Site Scripting

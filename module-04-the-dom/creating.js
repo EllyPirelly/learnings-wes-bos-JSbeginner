@@ -1,3 +1,5 @@
+/* createElement */
+
 const myParagraph = document.createElement('p');
 myParagraph.textContent = 'I am a p';
 myParagraph.classList.add('special');
@@ -12,14 +14,12 @@ const myDiv = document.createElement('div');
 myDiv.classList.add('wrapper');
 console.log(myDiv);
 
-// const body = document.querySelector('body');
-/* document.body.appendChild(myDiv);
-myDiv.appendChild(myParagraph);
-myDiv.appendChild(myImage); */
-
+// order here is important see README
 myDiv.appendChild(myParagraph);
 myDiv.appendChild(myImage);
 document.body.appendChild(myDiv);
+
+/* insertAdjacentElement */
 
 // add something to the top, like a heading
 const heading = document.createElement('h2');
@@ -37,7 +37,7 @@ const li5 = document.createElement('li');
 li5.textContent = 'five';
 myList.append(li5);
 
-const li1 = li5.cloneNode();
+const li1 = li5.cloneNode(true);
 li1.textContent = 'one';
 myList.insertAdjacentElement('afterbegin', li1);
 
