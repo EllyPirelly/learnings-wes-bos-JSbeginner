@@ -1,7 +1,7 @@
 # Module 5 - Events - Event Listener
 
 As most of the content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and small coding bits, no project.
+This module contains no project. <br>
 
 [Event Listener](#event-listener)
 
@@ -26,7 +26,6 @@ Content of this module is information and small coding bits, no project.
 **callback function**
 
 - is just a regular function that gets passed to a method that will then be called at a later point in time
-- anonymous, as it's not named, there's no reference to it (!)
 - with `addEventListener()` this function will be called/run by the browser when it needs to
 
 ```
@@ -35,76 +34,77 @@ const coolButton = document.querySelector('.cool');
 
 // anonymous callback function
 butts.addEventListener('click', function () {
-    console.log('anon callback function');
+  console.log('anon callback function');
 });
 
 // named function
 function handleClick() {
-    console.log('it got clicked');
+  console.log('it got clicked');
 }
 butts.addEventListener('click', handleClick);
-coolButton.addEventListener('click', handleClick);
-butts.removeEventListener('click', handleClick);
+/* butts.removeEventListener('click', handleClick); */
 
 // arrow function
 const hooray = () => console.log('hooray');
 coolButton.addEventListener('click', hooray);
+coolButton.addEventListener('click', hooray);
 ```
+- try to reference a named function in that callback as it's generally way easier to maintain
 
 **removeEventListener**
 
-- `removeEventListener()` **needs reference to a function**
+- `removeEventListener()` **needs reference to a named function**
 - `removeEventListener()` unbinds the function from the element
   - binding: taking a function, listening for a specific event against a specific element
-- a named function or an arrow function that is stored in a variable, **must** be used to be able to reference and unbind
-- the arrow function above technically is an anonymous function, as it's stored in a variable it is referencable
+- a named function (or an arrow function that is stored in a variable), **must** be used to be able to reference and unbind
+- the arrow function (stored in the const hooray) above technically is an anonymous function but as it's stored in a variable it is referencable
 
 **listening for events on multiple items**
 
-- example 10 `<button>`
-  - selecting all of them gives a node list, not HTML elements
-  - elements here don't have `addEventListener()` on them
-  - you need to loop over the elements with `forEach()`
+- example: take 10 `<button>`
+- selecting all of them gives a node list, not HTML elements
+- node list elements don't have `addEventListener()` on them
+- you need to loop over each individual node list elements with `forEach()`
 - for `removeEventListener()` it's the same, it needs to be looped over
 
 ```
 const buyButton = document.querySelectorAll('button.buy');
+console.log(buyButton); // NodeList, NOT HTML elements
 
 // with anonymous function
 function buyItem() {
-    console.log('buying item');
+  console.log('buying item anon function');
 }
 buyButton.forEach(function (calledAnythingWeWant) {
-    console.log(calledAnythingWeWant);
-    calledAnythingWeWant.addEventListener('click', buyItem);
+  console.log(calledAnythingWeWant);
+  calledAnythingWeWant.addEventListener('click', buyItem);
 });
 
 // with named function
 function buyItem() {
-    console.log('buying item');
+  console.log('buying item');
 }
 function loopOverButton(calledAnythingWeWant) {
-    console.log('looped over click');
-    calledAnythingWeWant.addEventListener('click', buyItem);
+  console.log('looped over click named function');
+  calledAnythingWeWant.addEventListener('click', buyItem);
 }
 buyButton.forEach(loopOverButton);
 
 // with arrow function
 buyButton.forEach((button) => {
-    button.addEventListener('click', () => {
-        console.log('arrow click');
-    })
+  button.addEventListener('click', () => {
+    console.log('arrow click');
+  })
 })
 ```
-
-- arrow function downside: unbinding of event listeners doesn't work as it's an anonymous function
 
 ## Targets, Bubbling, Propagation and Capture
 
 - **following examples are referring to `event.html` and `event.js`**
-- how to get information about what has specifically been clicked?
-  - that information is in the **event object**, with all kinds of useful information and methods for working with events
-- to access the **event object**, the callback/handler function needs to have a parameter that is the event
+- example: take 10 `<button>`
+- how to get information about what has specifically been clicked, as we use one handler function for all buttons?
+- that information is in the **event object**, with all kinds of useful information and methods for working with events
+- to access the **event object**, the callback/handler function needs to have a parameter that is the `event`
 - it doesn't matter what that event is called as long as it's the first argument of the callback, as the first argument IS the **event object**
 - `event.target` once you have the target, you can access anything you want about it (and is accessible)
 - what's the difference between `event.target` and `event.currentTarget`?
@@ -112,6 +112,7 @@ buyButton.forEach((button) => {
   - `event.target` is the thing that got clicked
   - `event.currentTarget` is the the thing that fired the event listener
   - most cases most likely need `.currentTarget`
+  - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
 
 **Propagation and Bubbling**
 
@@ -164,7 +165,7 @@ buyButton.forEach((button) => {
 const wes = document.querySelector('.wes');
 
 wes.addEventListener('click', function (eve) {
-    console.log(eve);
+  console.log(eve);
 })
 ```
 
@@ -174,7 +175,7 @@ wes.addEventListener('click', function (eve) {
 const wes = document.querySelector('.wes');
 
 wes.addEventListener('click', function (eve) {
-    eve.preventDefault();
+  eve.preventDefault();
 })
 ```
 
@@ -186,8 +187,8 @@ wes.addEventListener('click', function (eve) {
 const signupForm = document.querySelector('[name="signup"]');
 
 signupForm.addEventListener('submit', function (eve) {
-    console.log(eve);
-    eve.preventDefault();
+  console.log(eve);
+  eve.preventDefault();
 })
 ```
 
@@ -202,16 +203,16 @@ signupForm.addEventListener('submit', function (eve) {
 const signupForm = document.querySelector('[name="signup"]');
 
 signupForm.addEventListener('submit', function (eve) {
-    const name = eve.currentTarget.name.value;
-    if (name.includes('Chad')) {
-        alert('Sorry bro');
-        eve.preventDefault();
-    }
+  const name = eve.currentTarget.name.value;
+  if (name.includes('Chad')) {
+    alert('Sorry bro');
+    eve.preventDefault();
+  }
 });
 
 function logEvent(eve) {
-    console.log(eve.type);
-    console.log(eve.currentTarget.value);
+  console.log(eve.type);
+  console.log(eve.currentTarget.value);
 }
 
 signupForm.name.addEventListener('keyup', logEvent);
@@ -242,7 +243,7 @@ signupForm.name.addEventListener('blur', logEvent);
 
 const imgAcc = document.querySelector('.photo');
 imgAcc.addEventListener('click', function (eve) {
-    console.log(eve);
+  console.log(eve);
 })
 ```
 
@@ -254,9 +255,9 @@ imgAcc.addEventListener('click', function (eve) {
 const imgAcc = document.querySelector('.photo');
 
 function handlePhotoClick(eve) {
-    if (eve.type === 'click' || eve.key === 'Enter') {
-        console.log('you clicked on the photo');
-    }
+  if (eve.type === 'click' || eve.key === 'Enter') {
+    console.log('you clicked on the photo');
+  }
 }
 
 imgAcc.addEventListener('click', handlePhotoClick);
