@@ -31,9 +31,11 @@
     left: 0;
     justify-content: center;
     align-items: center;
-    /* hide outer modal, capture no events */
+    /* instead of visibility hidden, hide outer modal with opacity */
     opacity: 0;
+    /* add this to be able to click through it, to capture no events */
     pointer-events: none;
+    /* slightly fade in / out the modal outer */
     transition: opacity 0.2s;
 }
 
@@ -45,6 +47,7 @@
 /* display outer modal, capture all events */
 .modal-outer.open {
     opacity: 1;
+    /* bring back the pointer events you noned per default */
     pointer-events: all;
 }
 
