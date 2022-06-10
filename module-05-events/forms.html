@@ -10,19 +10,27 @@
 
 <body>
   <div class="wrapper">
-    <a class="wes" href="https://wesbos.com">Wes Bos</a>
+    <a class="wes" href="https://wesbos.com">Wes Bos - click me - prevent default</a>
 
     <form name="signup">
       <label for="name">Name</label>
-      <input type="text" id="name" name="name" value="Wes Bos">
+      <input type="text" id="name" name="name" value="Wes Bos" required>
+
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" value="wesbos@gmail.com">
-      <input type="checkbox" id="agree" name="agree">
+      <input type="email" id="email" name="email" value="wesbos@gmail.com" required>
+
+      <input type="checkbox" id="agree" name="agree" required>
       <label for="agree">I agree to the terms and conditions</label>
+
       <hr>
+
       <button type="submit">Submit</button>
     </form>
-    <img class="photo" tabindex="0" src="https://source.unsplash.com/random/200x200" alt="nice">
+    <img class="photo" src="https://source.unsplash.com/random/200x200" alt="nice">
+
+    <img class="photo-clickable" src="https://source.unsplash.com/random/200x200" alt="nice-clickable" tabindex="0">
+
+    <img class="photo-button" role="button" tabindex="0"  src="https://source.unsplash.com/random/200x200" alt="nice-button">
   </div>
 
   <script src="./forms.js"></script>
