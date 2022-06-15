@@ -1,73 +1,66 @@
-function calculateBill(billAmount, taxRate = 0.13, tipRate = 0.15) {
-    // console.log('Running calculate bill');
-    const total = billAmount + billAmount * taxRate + billAmount + taxRate;
-    return total;
-}
+// BEDMAS -------------------------------------
 
-// BEDMAS
 const age = 10 * 5 - 2; // 48
 const age2 = 10 * (5 - 2); // 30
-const total = calculateBill(100) + (calculateBill(20) - calculateBill(15)); // 128 + (25.6 - 19.2)
 
-// FLOW CONTROL
+// another example
+function calculateBill(billAmount, taxRate = 0.13, tipRate = 0.15) {
+  const total = billAmount + billAmount * taxRate + billAmount + taxRate;
+  return total;
+}
+
+const total = calculateBill(100) + (calculateBill(20) - calculateBill(15)); // equals to the operation 128 + (25.6 - 19.2)
+
+
+// FLOW CONTROL -------------------------------------
+
 // IF STATEMENTS
 if (10 > 2) {
-    //console.log('Yo');
+  console.log('Yo'); // Yo
 } else if (11 > 10) {
-    console.log('first else if yes');
+  console.log('first else if yes'); // ignored, because the first statement already returned true
 } else if (3 > 1) {
-    console.log('second else if yes');
+  console.log('second else if yes'); // ignored, because the first statement already returned true
 }
 
 const alter = 50;
+
 if (alter > 70) {
-    console.log('In your seventies');
+  console.log('In your seventies');
 } else if (alter > 60) {
-    console.log('In your sixties');
+  console.log('In your sixties');
 } else if (alter > 50) {
-    console.log('In your fifties');
+  console.log('In your fifties');
 } else {
-    //console.log('Nothing was true');
+  console.log('Nothing was true'); // Nothing was true
 }
 
-// IF STATEMENTS inside of functions
-function slugify1(sentence, lowercase) {
-    if (lowercase) {
-        return sentence.replace(/\s/g, '-').toLowerCase();
-    } else {
-        return sentence.replace(/\s/g, '-');
-    }
+// IF STATEMENTS inside of functions - one way
+/* function slugify(sentence, lowercase) {
+  if (lowercase) {
+    return sentence.replace(/\s/g, '-').toLowerCase();
+  }
+  return sentence.replace(/\s/g, '-');
 }
-//console.log(slugify1('This, too, shall pass.')); // This,-too,-shall-pass.
-//console.log(slugify1('This, too, shall pass.', true)); // this,-too,-shall-pass.
+console.log(slugify('This, too, shall pass.')); // This,-too,-shall-pass.
+ console.log(slugify('This, too, shall pass.', true)); // this,-too,-shall-pass. */
 
 
-function slugify2(sentence, lowercase) {
-    if (lowercase) {
-        return sentence.replace(/\s/g, '-').toLowerCase();
-    } else
-        return sentence.replace(/\s/g, '-');
+// IF STATEMENTS inside of functions - another way
+function slugify(sentence, lowercase) {
+
+  let slug = sentence.replace(/\s/g, '-');
+
+  if (lowercase) {
+    return slug = slug.toLowerCase();
+  }
+  return slug;
 }
-//console.log(slugify2('Same, Same, but different')); // Same,-Same,-but-different
-//console.log(slugify2('Same, Same, but different', true)); // same,-same,-but-different
+console.log(slugify('Another One here')); // Another-One-here
+console.log(slugify('Another One here', true)); // another-one-here
 
-
-function slugify3(sentence, lowercase) {
-
-    let slug = sentence.replace(/\s/g, '-');
-
-    if (lowercase) {
-        return slug = slug.toLowerCase();
-    } else {
-        return slug;
-    }
-}
-//console.log(slugify3('Another One here')); // Another-One-here
-//console.log(slugify3('Another One here', true)); // another-one-here
 
 // OPERATORS
-// age = 48; // Uncaught TypeError: Assignment to constant variable. at <anonymous>:1:5
-
 // checks for value
 age == 48; // true
 age == '48'; // true
@@ -78,121 +71,168 @@ age === '48'; // false
 console.log(typeof (48)); // number
 console.log(typeof ('48')); // string
 
+
+// >, >=, >==
+/* 10 > 10 // false
+10 >= 10 // true
+10 >== 10 // Uncaugth SyntaxError: Unexpected token '='
+'10' > 10 // false */
+
+
 // || and &&
-const naming = 'wes';
+/* const naming = 'wes';
 const lastNaming = 'bos';
 
 if (naming === 'wes' || naming === 'scott') {
-    console.log('cool name(s)'); // cool name(s)
-    console.log(naming); // wes
+  console.log('cool name(s)'); // cool name(s)
+  console.log(naming); // wes
 }
 
 if (naming === 'wes' && lastNaming === 'bos') {
-    console.log(naming, lastNaming); // wes bos
+  console.log(naming, lastNaming); // wes bos
 }
 
 if (naming === 'scott' || (naming === 'wes' && lastNaming === 'bos')) {
-    console.log(naming, lastNaming); // wes bos
-}
+  console.log(naming, lastNaming); // wes bos
+} */
 
-// true and false with functions
+
+// FUNCTION RETURNDS
+const naming = 'wes';
 const isAwesomeName = 'awesome'.includes(naming)
 if (isAwesomeName) {
-    console.log('super awesome'); // super awesome
+  console.log('super awesome'); // super awesome
 }
 
 // own function, that returns true or false
 function nameIsAwesome(naming) {
-    return 'awesome'.includes(naming);
+  return 'awesome'.includes(naming);
 }
 if (nameIsAwesome('wes')) {
-    console.log('own function wes');
+  console.log('own function wes');
 }
+
 
 // TRUTHY and FALSY
 const dog = 'snickers';
 if (dog) {
-    console.log('you have a dog'); // you have a dog
+  console.log('you have a dog'); // you have a dog
 } else {
-    console.log('you don\'t have a dog'); //
+  console.log('you don\'t have a dog'); // ignored because first statement ist true
 }
 
 const dog2 = '';
 if (dog2) {
-    console.log('you have a dog'); //
+  console.log('you have a dog'); // ignored because second statement is true
 } else {
-    console.log('you don\'t have a dog'); // you don't have a dog
+  console.log('you don\'t have a dog'); // you don't have a dog
 }
 
 // TRUTHY
-/* const score = 1;
+/* let score = 1;
 if (score) {
-    console.log('there is a score already'); // there is a score already
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // 1
 } else {
-    console.log('no score yet');
+  console.log('no score yet');
 } */
 
-/* const score = -10;
+/* let score = -10;
 if (score) {
-    console.log('there is a score already'); // there is a score already
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // -10
 } else {
-    console.log('no score yet');
+  console.log('no score yet');
 } */
 
-/* let score1 = [];
-if (score1) {
-    console.log('there is a score already');
+/* let score = "0";
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // 0
 } else {
-    console.log('no score yet');
+  console.log('no score yet');
 } */
 
-let score1 = {};
-if (score1) {
-    console.log('there is a score already');
+/* let score = [];
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // []
 } else {
-    console.log('no score yet');
-}
+  console.log('no score yet');
+} */
+
+/* let score = {};
+if (score) {
+  console.log('there is a score already');
+  console.log(score); // {}
+} else {
+  console.log('no score yet');
+} */
 
 // FALSY
-/* const score = 0;
+/* let score = 0;
 if (score) {
-    console.log('there is a score already');
+  console.log('there is a score of 0 already');
+  console.log(score);
 } else {
-    console.log('no score yet');
+  console.log('no score yet'); // no score yet
 } */
 
 /* let score;
 if (score) {
-    console.log('there is a score already');
+  console.log('there is a score already');
 } else {
-    console.log('no score yet'); // no score yet, `score` is undefined
+  console.log(score); // undefined
+  console.log('no score yet'); // no score yet
 } */
 
-/* let score1 = 'wes' * 100;
-if (score1) {
-    console.log('there is a score already');
+/* let score = 'wes' * 100;
+if (score) {
+  console.log('there is a score already');
 } else {
-    console.log('no score yet'); // no score yet, `score1` is NaN
+  console.log(score); // NaN
+  console.log('no score yet'); // no score yet
 } */
 
-// GRAB ALL OF THEM, LOOP OVER, TRUTHY OR FALSY
+/* let score = '';
+if (score) {
+  console.log('there is a score already');
+} else {
+  console.log(score); //
+  console.log('no score yet'); // no score yet
+} */
+
+// GRAB ALL OF THE POSSIBLE VALUES, LOOP OVER, return TRUTHY OR FALSY
 const values = [[], {}, -10, 1, 0, '', 'full string', ' ', undefined, NaN, null];
 
 values.forEach(value => {
-    if (value) {
-        console.log(value, 'is truthy')
-    } else {
-        console.log(value, 'is falsy')
-    }
+  if (value) {
+    console.log(value, 'is truthy')
+  } else {
+    console.log(value, 'is falsy')
+  }
 });
+
+// [] 'is truthy'
+// {} 'is truthy'
+// -10 'is truthy'
+// 1 'is truthy'
+// 0 'is falsy'
+// '' is falsy
+// full string is truthy
+// ' ' is truthy
+// undefined 'is falsy'
+// NaN 'is falsy'
+// null 'is falsy'
 
 console.clear();
 
-// COERCION
+
+// COERCION -------------------------------------
 
 const isCool = true;
 if (!isCool) {
-    console.log('nope');
+  console.log('nope');
 }
 
 /* const holla = "ella";
@@ -205,9 +245,9 @@ if (!isCool) {
 /* const count = 2;
 let word;
 if (count === 1) {
-    word = 'item';
+  word = 'item';
 } else {
-    word = 'items';
+  word = 'items';
 }
 const sentence = `You have ${count} ${word} in your cart`;
 console.log(sentence); // You have 2 items in your cart */
@@ -226,43 +266,43 @@ console.log(sentence); // You have 3 itemss in your cart
 
 // use with functions
 /* function showAdminBar() {
-    console.log('Showing admin bar');
+  console.log('Showing admin bar');
 };
 const isAdmin = true;
 isAdmin ? showAdminBar() : null; */
 
 // && trick
 function check1() {
-    console.log('Running check1'); // Running check1
-    return true;
+  console.log('Running check1'); // Running check1
+  return true;
 }
 
 function check2() {
-    console.log('Running check2'); // Running check2
-    return false;
+  console.log('Running check2'); // Running check2
+  return false;
 }
 
 function check3() {
-    console.log('Running check3');
-    return true;
+  console.log('Running check3');
+  return true;
 }
 
 if (check1() && check2() && check3()) {
-    console.log('all checks passed');
+  console.log('all checks passed');
 } else {
-    console.log('some checks failed'); // some checks failed
+  console.log('some checks failed'); // some checks failed
 }
 
 // CONDITIONAL ABUSE
 function showAdminBar() {
-    console.log('Showing admin bar');
+  console.log('Showing admin bar');
 };
 const isAdmin = true;
 isAdmin && showAdminBar();
 
 // Statements block
 if (isAdmin) {
-    showAdminBar();
+  showAdminBar();
 }
 
 if (isAdmin) showAdminBar();

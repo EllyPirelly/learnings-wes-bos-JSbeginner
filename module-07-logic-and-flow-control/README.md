@@ -15,6 +15,8 @@ As most of the content (except for the animated turtle, see down below) is infor
 
 ## BEDMAS
 
+- **following examples are referring to `index.html` and `index.js`**
+
 - **order of operations** in which JavaScript runs (exactly how math works)
   - Brackets (Parenthesis)
   - Exponents (to the power of)
@@ -23,43 +25,52 @@ As most of the content (except for the animated turtle, see down below) is infor
   - Addition
   - Substraction
 
+```
+// BEDMAS example
+const age = 10 * 5 - 2; // 48
+const age2 = 10 * (5 - 2); // 30
+```
+
+```
+// BEDMAS example
+function calculateBill(billAmount, taxRate = 0.13, tipRate = 0.15) {
+  const total = billAmount + billAmount * taxRate + billAmount + taxRate;
+  return total;
+}
+
+const total = calculateBill(100) + (calculateBill(20) - calculateBill(15)); // equals to the operation 128 + (25.6 - 19.2)
+```
 ## Flow Control
 
 ### If Statements
 
 - are the foundation of all logic in JavaScript
-- expect Boolean (`true` or `false`) or some sort of condition that is evaluated to `true` or `false` (or `truthy` / `falsy`)
+- they expect a Boolean that either is `true` or `false` or some sort of condition that is evaluated to `true` or `false` (or `truthy` / `falsy`)
 
 ```
 if (10 > 2) {
-    console.log('Yo');
-}
-```
-
-```
-if (10 > 2) {
-    console.log('Yo'); // Yo
+  console.log('Yo'); // Yo
 } else if (11 > 10) {
-    console.log('first else if yes'); // ignored
+  console.log('first else if yes'); // ignored, because the first statement already returned true
 } else if (3 > 1) {
-    console.log('second else if yes'); // ignored
+  console.log('second else if yes'); // ignored, because the first statement already returned true
 }
 ```
 
 - watch out: if the first statement returns `true`, the ones that follow will be ignored; as soon as an if statement finds itself to be `true`, it will skip the rest of the if statement
-- check for multiple things to be `true` in using seperate statements
+- check for multiple things to be `true` in using seperate if statements
 
 ```
 const alter = 50;
 
 if (alter > 70) {
-    console.log('In your seventies');
+  console.log('In your seventies');
 } else if (alter > 60) {
-    console.log('In your sixties');
+  console.log('In your sixties');
 } else if (alter > 50) {
-    console.log('In your fifties');
+  console.log('In your fifties');
 } else {
-    console.log('Nothing was true');
+  console.log('Nothing was true'); // Nothing was true
 }
 ```
 
@@ -68,54 +79,42 @@ if (alter > 70) {
 
 ### If Statements inside of functions
 
-- it's likely that to use an if statement inside of a function to return different values
-
-```
-function slugify(sentence, lowercase) {
-    if (lowercase) {
-        return sentence.replace(/\s/g, '-').toLowerCase();
-    } else {
-        return sentence.replace(/\s/g, '-');
-    }
-}
-console.log(slugify('This, too, shall pass.')); // This,-too,-shall-pass.
-console.log(slugify('This, too, shall pass.', true)); // this,-too,-shall-pass.
-```
-
-- regex
+- regex (regular expression)
   - https://regex101.com/
   - `/\s/g, '-'`
   - always wrapped in an opening and closing `/`
-  - inside, this `\s` means space
-  - `g` means global
-  - `'-'` means replace space with a dash
+  - inside, this `\s` means "space"
+  - `g` means "global"
+  - `'-'` means "replace space with a dash"
 
 ```
 function slugify(sentence, lowercase) {
-    if (lowercase) {
-        return sentence.replace(/\s/g, '-').toLowerCase();
-    }
-    return sentence.replace(/\s/g, '-');
+  if (lowercase) {
+    return sentence.replace(/\s/g, '-').toLowerCase();
+  }
+  return sentence.replace(/\s/g, '-');
 }
+console.log(slugify('This, too, shall pass.')); // This,-too,-shall-pass.
+ console.log(slugify('This, too, shall pass.', true)); // this,-too,-shall-pass.
 ```
 
-- it's the same as above
 - `return` means return a value from a function and **stop that function from running**
 
 ```
-function slugify3(sentence, lowercase) {
+function slugify(sentence, lowercase) {
 
-    let slug = sentence.replace(/\s/g, '-');
+  let slug = sentence.replace(/\s/g, '-');
 
-    if (lowercase) {
-        return slug = slug.toLowerCase();
-    } else {
-        return slug;
-    }
+  if (lowercase) {
+    return slug = slug.toLowerCase();
+  }
+  return slug;
 }
-console.log(slugify3('Another One here')); // Another-One-here
-console.log(slugify3('Another One here', true)); // another-one-here
+console.log(slugify('Another One here')); // Another-One-here
+console.log(slugify('Another One here', true)); // another-one-here
 ```
+
+- same as above just with assigning the regex to a variable
 
 ### Operators
 
@@ -129,15 +128,6 @@ console.log(slugify3('Another One here', true)); // another-one-here
 null === undefined // false
 null == undefined // true
 ```
-
-**Assignment to a `const` with `=`, won't work**
-
-```
-const age = 10 * 5 - 2; // 48
-age = 48; // Uncaught TypeError: Assignment to constant variable. at <anonymous>:1:5
-```
-
-- the single `=` will set the value into a variable
 
 **Checks for value with `==`**
 
@@ -165,10 +155,11 @@ console.log(typeof ('48')); // string
 ```
 10 > 10 // false
 10 >= 10 // true
-10 >==10 // Uncaught SyntaxError: Unexpected token '='
+10 >== 10 // Uncaugth SyntaxError: Unexpected token '='
+'10' > 10 // false
 ```
 
-- why error with `10>==`? because `>=` or `<=` and `=` operators only ever deal with numbers
+- why error with `>==`? because `>=` or `<=` and `=` operators only ever deal with numbers
 - if you use `'10' > 10`, `'10'` will be turned into a number
 
 ```
@@ -176,16 +167,16 @@ const naming = 'wes';
 const lastNaming = 'bos';
 
 if (naming === 'wes' || naming === 'scott') {
-    console.log('cool name(s)'); // cool name(s)
-    console.log(naming); // wes
+  console.log('cool name(s)'); // cool name(s)
+  console.log(naming); // wes
 }
 
 if (naming === 'wes' && lastNaming === 'bos') {
-    console.log(naming, lastNaming); // wes bos
+  console.log(naming, lastNaming); // wes bos
 }
 
 if (naming === 'scott' || (naming === 'wes' && lastNaming === 'bos')) {
-    console.log(naming, lastNaming); // wes bos
+  console.log(naming, lastNaming); // wes bos
 }
 ```
 
@@ -203,22 +194,25 @@ true || true || false || true // true
 - with `&&` if only one evaluates to `false`, everything is evaluated to `false`
 - with `||` if one of them evaluates to `true`, everything is evaluated to `true`
 
-### `true` and `false` with functions
+### FUNCTION RETURNS
 
 ```
+const naming = 'wes';
 const isAwesomeName = 'awesome'.includes(naming)
 if (isAwesomeName) {
-    console.log('super awesome'); // super awesome
+  console.log('super awesome'); // super awesome
 }
 
 // own function, that returns true or false
 function nameIsAwesome(naming) {
-    return 'awesome'.includes(naming);
+  return 'awesome'.includes(naming);
 }
 if (nameIsAwesome('wes')) {
-    console.log('own function wes'); // own function wes
+  console.log('own function wes'); // own function wes
 }
 ```
+
+- `includes()` is a method that will return `true` or `false`
 
 ### `truthy` and `falsy`
 
@@ -227,88 +221,180 @@ if (nameIsAwesome('wes')) {
 ```
 const dog = 'snickers';
 if (dog) {
-    console.log('you have a dog'); // you have a dog
+  console.log('you have a dog'); // you have a dog
 } else {
-    console.log('you don\'t have a dog'); //
+  console.log('you don\'t have a dog'); // ignored because first statement ist true
 }
 
-const dog = '';
-if (dog) {
-    console.log('you have a dog'); // you have a dog
+const dog2 = '';
+if (dog2) {
+  console.log('you have a dog'); // ignored because second statement is true
 } else {
-    console.log('you don\'t have a dog'); // you don't have a dog
+  console.log('you don\'t have a dog'); // you don't have a dog
 }
 ```
 
-- an empty string is not `true` and it's not `false`, it's a string
-- so how come that this still works
-- if statements take in a number of different values and will try to **coerce them** and will try to turn them into a Boolean of `true` or `false`
+- an empty string is not `true` and it's not `false`, it's an empty string, so how come that this still works
+- because if statements take in a number of different values and will try to **coerce them** and will try to turn them into a Boolean of `true` or `false`
+- so values of `truthy` and `falsy` will also work
 
 ### check for `truthy` / `falsy` values
 
 ```
-// GRAB ALL, LOOP OVER, TRUTHY OR FALSY
+// GRAB ALL OF THE POSSIBLE VALUES, LOOP OVER, return TRUTHY OR FALSY
 const values = [[], {}, -10, 1, 0, '', 'full string', ' ', undefined, NaN, null];
 
 values.forEach(value => {
-    if (value) {
-        console.log(value, 'is truthy')
-    } else {
-        console.log(value, 'is falsy')
-    }
+  if (value) {
+    console.log(value, 'is truthy')
+  } else {
+    console.log(value, 'is falsy')
+  }
 });
+
+// [] 'is truthy'
+// {} 'is truthy'
+// -10 'is truthy'
+// 1 'is truthy'
+// 0 'is falsy'
+// '' is falsy
+// full string is truthy
+// ' ' is truthy
+// undefined 'is falsy'
+// NaN 'is falsy'
+// null 'is falsy'
 ```
 
 ![mod 0702](./img/screen-mod0702-01.png)
 
 ### Truthy Values
 
-**array**
+**1**
 
+```
+let score = 1;
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // 1
+} else {
+  console.log('no score yet');
+}
+```
+
+**-10**
+
+```
+let score = -10;
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // -10
+} else {
+  console.log('no score yet');
+}
+```
+
+**string**
+
+```
+let score = "0";
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // 0
+} else {
+  console.log('no score yet');
+}
+```
+- `'some words'` a full string is `truthy`
+- any string with content will be `truthy`
+- so also `'0'` or `' '` will be `truthy`
+
+**empty array**
+
+```
+let score = [];
+if (score) {
+  console.log('there is a score already'); // there is a score already
+  console.log(score); // []
+} else {
+  console.log('no score yet');
+}
+```
 - an array that has nothing in it is `truthy`
 - if you have to check for anything IN an array, check for `.length()`
 - `[1, 2, 3].length // 3` will be true
 - `[].length // 0` will be false
 
-**object**
+**empty object**
 
+```
+let score = {};
+if (score) {
+  console.log('there is a score already');
+  console.log(score); // {}
+} else {
+  console.log('no score yet');
+}
+```
 - an object that has nothing in it is `truthy`
 - if you have to check if anything is IN there, check `Object.keys({})`, will return to you an empty array where you then can use `.length` on: `Object.keys({}).length` and that's 0 (elements in it)
-
-**-10**
-
-- `truthy`
-
-**1**
-
-- `truthy`
-- `1 == true // true`
-
-**full string**
-
-- `'some words'` a full string is `truthy`
-- any string with content will be `truthy`
-- so also `'0'` or `' '` will be `truthy`
 
 ### Falsy Values
 
 **0**
 
+```
+let score = 0;
+if (score) {
+  console.log('there is a score of 0 already');
+  console.log(score);
+} else {
+  console.log('no score yet'); // no score yet
+}
+```
 - `0`, a zero will equate to `false`
 - `0 == false // true`
 - only `0` will be `falsy`, all other numbers will be `truthy`
 
 **undefined**
 
+```
+let score;
+if (score) {
+  console.log('there is a score already');
+} else {
+  console.log(score); // undefined
+  console.log('no score yet'); // no score yet
+}
+```
+- how do you make an undefined variable? Do not assign a value to it.
+
+**null**
+
 - `falsy`
 
 **NaN**
 
-- `falsy`
-- `score // NaN`
+```
+let score = 'wes' * 100;
+if (score) {
+  console.log('there is a score already');
+} else {
+  console.log(score); // NaN
+  console.log('no score yet'); // no score yet
+}
+```
 
 **`''`**
 
+```
+let score = '';
+if (score) {
+  console.log('there is a score already');
+} else {
+  console.log(score); //
+  console.log('no score yet'); // no score yet
+}
+```
 - `''` an empty string (without whitespace!) is `falsy`
 
 ## Coercion Ternaries Conditional Abuse
