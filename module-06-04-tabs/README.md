@@ -28,7 +28,7 @@
 // select the outer div container
 const tabs = document.querySelector('.tabs');
 
-// select the tab buttons
+// select the buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 
 function handleTabClick(eve) {
@@ -48,10 +48,10 @@ tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
 // select the outer div container
 const tabs = document.querySelector('.tabs');
 
-// select the tab buttons
+// select the buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 
-// select the tab panels divs
+// select the panel divs
 const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
 function handleTabClick(eve) {
@@ -83,10 +83,10 @@ tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
 // select the outer div container
 const tabs = document.querySelector('.tabs');
 
-// select the tab buttons
+// select the buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 
-// select the tab panels divs
+// select the panel divs
 const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
 function handleTabClick(eve) {
@@ -141,7 +141,7 @@ const tabPanel = tabs.querySelector(`[aria-labelledby="${id}"]`);
 tabPanel.hidden = false;
 ```
 
-**With `find()` in the array() of `tabPanels`, method 2**
+**With `find()` in the array of `tabPanels`, method 2**
 
 For this you need the original selection of `tabPanels` changed from<br>
 `const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');`<br>
