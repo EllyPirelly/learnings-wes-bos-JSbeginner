@@ -230,9 +230,9 @@ console.clear();
 
 // COERCION -------------------------------------
 
-const isCool = true;
+const isCool = false;
 if (!isCool) {
-  console.log('nope');
+  console.log('nope'); // nope
 }
 
 /* const holla = "ella";
@@ -252,21 +252,20 @@ if (count === 1) {
 const sentence = `You have ${count} ${word} in your cart`;
 console.log(sentence); // You have 2 items in your cart */
 
-// shorthand
+// Ternary
 /* const count = 1;
 const word = count === 1 ? 'item' : 'items';
-
 const sentence = `You have ${count} ${word} in your cart`;
 console.log(sentence); // You have 1 item in your cart */
 
-// even shorter
+// Ternary more dynamic
 const count = 3;
 const sentence = `You have ${count} items${count === 1 ? '' : 's'} in your cart`;
 console.log(sentence); // You have 3 itemss in your cart
 
-// use with functions
+// Ternary use with functions
 /* function showAdminBar() {
-  console.log('Showing admin bar');
+  console.log('Showing admin bar'); // Showing admin bar
 };
 const isAdmin = true;
 isAdmin ? showAdminBar() : null; */
@@ -295,14 +294,15 @@ if (check1() && check2() && check3()) {
 
 // CONDITIONAL ABUSE
 function showAdminBar() {
-  console.log('Showing admin bar');
+  console.log('Showing admin bar'); // Showing admin bar
 };
 const isAdmin = true;
 isAdmin && showAdminBar();
 
 // Statements block
+// this:
 if (isAdmin) {
   showAdminBar();
 }
-
+// can be turned into this:
 if (isAdmin) showAdminBar();

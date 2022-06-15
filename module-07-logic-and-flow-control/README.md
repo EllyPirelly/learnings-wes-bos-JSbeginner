@@ -402,14 +402,13 @@ if (score) {
 ### Coercion
 
 ```
-const isCool = true;
-
+const isCool = false;
 if (!isCool) {
-    console.log('nope');
+  console.log('nope'); // nope
 }
 ```
 
-- `!` means "is not"
+- `!` means "is the opposite"
 - `!` does coercion
 - something of a different type (string, number...) will be taken and coerced into a real Boolean (`true` or `false`)
 
@@ -418,7 +417,6 @@ const holla = "ella";
 !"ella" // false
 !!"ella" // true
 ```
-
 - `!` will coerce to `false`, `!!` will coerce to `true`
 
 **`!` and `!!` take the fact that something has a `truthy` or `falsy` value and coerce that into a real Boolean.**
@@ -429,16 +427,15 @@ const holla = "ella";
 - helpful to quickly run functionality based on something being `true` or `false`
 - it needs a condition, it needs what to do if `true`, it needs what to do if `false`
 
-**If it's a simple if statement like below, that's too verbose and can be done better**
+**verbose if statementr**
 
 ```
 const count = 2;
 let word;
-
 if (count === 1) {
-    word = 'item';
+  word = 'item';
 } else {
-    word = 'items';
+  word = 'items';
 }
 const sentence = `You have ${count} ${word} in your cart`;
 console.log(sentence); // You have 2 items in your cart
@@ -449,12 +446,11 @@ console.log(sentence); // You have 2 items in your cart
 ```
 const count = 1;
 const word = count === 1 ? 'item' : 'items';
-
 const sentence = `You have ${count} ${word} in your cart`;
 console.log(sentence); // You have 1 item in your cart
 ```
 
-**Even shorter**
+**Ternary more dynamic**
 
 ```
 const count = 3;
@@ -462,18 +458,17 @@ const sentence = `You have ${count} items${count === 1 ? '' : 's'} in your cart`
 console.log(sentence); // You have 3 itemss in your cart
 ```
 
-**Use with functions**
-
-- how to do "nothing" in this statement? just type `null` (or an empty string `''`)
-- using the `false` case is a must and cannot be left off
+**Ternary use with functions**
 
 ```
 function showAdminBar() {
-    console.log('Showing admin bar');
+  console.log('Showing admin bar'); // Showing admin bar
 };
 const isAdmin = true;
 isAdmin ? showAdminBar() : null;
 ```
+- how to do "nothing" in this statement? just type `null` (or an empty string `''`)
+- using the `false` case is a must and cannot be left off
 
 **`&&` trick**
 
@@ -481,29 +476,27 @@ isAdmin ? showAdminBar() : null;
 - makes sure that all of these three are `true` before continuing
 
 ```
-// && trick
 function check1() {
-    console.log('Running check1'); // Running check1
-    return true;
+  console.log('Running check1'); // Running check1
+  return true;
 }
 
 function check2() {
-    console.log('Running check2'); // Running check2
-    return false;
+  console.log('Running check2'); // Running check2
+  return false;
 }
 
 function check3() {
-    console.log('Running check3');
-    return true;
+  console.log('Running check3');
+  return true;
 }
 
 if (check1() && check2() && check3()) {
-    console.log('all checks passed');
+  console.log('all checks passed');
 } else {
-    console.log('some checks failed'); // some checks failed
+  console.log('some checks failed'); // some checks failed
 }
 ```
-
 - the third check never runs
 - if in a condition at any point of that condition one part is `false`, the condition is returned as `false`
 - short circuiting, meaning that the whole condition knowingly was never finished
@@ -512,7 +505,7 @@ if (check1() && check2() && check3()) {
 
 ```
 function showAdminBar() {
-    console.log('Showing admin bar');
+  console.log('Showing admin bar'); // Showing admin bar
 };
 const isAdmin = true;
 isAdmin && showAdminBar();
@@ -521,25 +514,23 @@ isAdmin && showAdminBar();
 - previously `isAdmin ? showAdminBar() : null;` is changed to `isAdmin && showAdminBar();`
 - if `isAdmin` is ever `false`, `showAdminBar()` will never run
 - this a bit of abuse but totally works
-- used in React a lot as if statements are hard to do there
 
 **Statement block `{}`**
-
-- if something is on the same line, the statement block is not needed and `{}` can be deleted
 
 ```
 // this:
 if (isAdmin) {
-    showAdminBar();
+  showAdminBar();
 }
-
 // can be turned into this:
 if (isAdmin) showAdminBar();
 ```
-
+- if something is on the same line, the statement block is not needed and `{}` can be deleted
 - question is if you _should_ do that
 
 ## Case Switch
+
+- **following examples are referring to `switch.html` and `switch.js`**
 
 ### Switch
 
