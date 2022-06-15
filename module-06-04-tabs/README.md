@@ -4,10 +4,10 @@
 
 ![mod 0603](./img/screen-mod0604-00.gif)
 
-- Tabs
-  - JavaScript, HTML, CSS
-  - click on `tab` shows current `tab` and `tabPanel` (content), hides other `tab`s and `tabPanel`s (content)
-  - default state: show the first `tab` and `tabPanel` (content)
+- JavaScript, HTML, CSS
+- click on one menu tab and show the current menu tab and the content that is associated with it
+- hide other menu tabs and the content associated with them
+- default state: show the first menu tab and the associated content
 
 ## Topics to cover
 
@@ -15,145 +15,147 @@
 - event listeners
 - looping
 - accessibility (use keyboard to tab over)
-  - `<button>` already is accessible, no need to "fix" the click event to work without mouse
-  - `role` and `aria-selected` make the `tab`s accessible (also to have your content easily read by search engines)
-- `role="tablist" aria-label="Programming Languages"` for screen readers / what is this list about
-- `aria-selected=" "` on `<button>`s will maintain whether that `tab` is currently active
+  - `<button>` is already accessible via keyboard, no need to "fix" the click event to work without mouse
+  - `role` and `aria-selected` are used to make elements accessible and readable by search engines
+  - `role="tablist" aria-label="Programming Languages"` for screen readers, "what is this list about"
+- `aria-selected=" "` on `<button>` will maintain whether that element is currently active
 
 ## Exercise
 
-#### Listen for click on `tabButtons`s, log `currentTarget`
+#### How to log `currentTarget` in listening for a click on `tabButtons`
 
 ```
+// select the outer div container
+const tabs = document.querySelector('.tabs');
+
+// select the tab buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
 
 function handleTabClick(eve) {
-    console.log(eve.currentTarget);
+  console.log(eve.currentTarget);
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
 ```
 
-- gives back each `<button>` HTML element
+- click on `tabButtons` returns `<button>` HTML element as `currentTarget`
 
 ![mod 0604](./img/screen-mod0604-01.png)
 
-#### Log all `tabPanel`s
+#### Hide all `tabPanels` (the content)
 
 ```
+// select the outer div container
+const tabs = document.querySelector('.tabs');
+
+// select the tab buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
-const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));
+
+// select the tab panels divs
+const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
 function handleTabClick(eve) {
-    console.log(tabPanels); // node list with 3 (dom) elements
-    tabPanels.forEach(function (panel) {
-        console.log(panel); // single html elements
-    })
+  // hide all tab panels
+  // console.log(tabPanels); // NodeList with 3 DOM elements
+  tabPanels.forEach(panel => {
+    // console.log(panel); // single HTML element
+    panel.hidden = true;
+  });
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
 ```
 
-- `forEach()` takes the node list of 3 (DOM) elements (`tabPanels`), loops over every single one of them (`panel`)
-- variable `panel` is the reference for each one of them
-- `console.log()` gives back all three HTML elements (`tabPanels`)
-- click on one `tab` gives back all three seperate HTML elements (`tabPanels`)
-
-![mod 0604](./img/screen-mod0604-02.png)
-
-#### Now hide all `tabPanel`s
-
-```
-const tabButtons = tabs.querySelectorAll('[role="tab"]');
-const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));
-
-function handleTabClick(eve) {
-    tabPanels.forEach(function (panel) {
-        panel.hidden = true;
-    })
-}
-
-tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
-```
-
-- it's easier to first hide them all (`panel.hidden = true;`) and then show the one that we want
-- we _could_ filter for the ones that are not associated with the current one and only hide accordingly but it's not as easy as the other way
-- as soon as _any_ `tab` is clicked, all `tabPanel`s will be closed
+- `function handeTabClick`
+  - `forEach()` takes the NodeList of 3 DOM elements off of `tabPanels`, loops over every single one of them
+  - for each one we get a variable of `panel` which is how we reference each of them
+  - click on one `tabButtons` returns ALL three seperate HTML elements `tabPanels`!
+  - using `panel.hidden = true` results in as soon as ANY `tabButtons` is clicked, ALL `tabPanels` are hidden
 
 ![mod 0604](./img/screen-mod0604-03.png)
 
-#### Mark all `tab`s as unselected
+- it's easier to first hide them all (`panel.hidden = true;`) and then show the one that we want
+- we _could_ filter for the ones that are not associated with the current one and only hide accordingly but it's not as easy as the other way
+
+#### Mark all `tabButtons` as unselected
 
 ```
+// select the outer div container
+const tabs = document.querySelector('.tabs');
+
+// select the tab buttons
 const tabButtons = tabs.querySelectorAll('[role="tab"]');
-const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));
+
+// select the tab panels divs
+const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');
 
 function handleTabClick(eve) {
+  // hide all tab panels
+  // console.log(tabPanels); // NodeList with 3 DOM elements
+  tabPanels.forEach(panel => {
+    // console.log(panel); // single HTML element
+    panel.hidden = true;
+  });
 
-    tabPanels.forEach(panel => {
-        panel.hidden = true;
-    });
-
-    tabButtons.forEach(tabButton => {
-        // tabButton.ariaSelected = false; // won't work
-        tabButton.setAttribute('aria-selected', false); // works
-    });
+  // mark all tabs as unselected
+  tabButtons.forEach(tabButton => {
+    tabButton.setAttribute('aria-selected', false);
+  })
 }
 
 tabButtons.forEach(button => button.addEventListener('click', handleTabClick));
 ```
 
-`aria-selected` = how do you access a property when the property itself has a dash on it?
-Any time you see an attribute with a dash on an HTML element, you can almost always access that with the camelcased version of it.
-
-For most properties in JavaScript (for example `tabButton.alt` or `tabButton.src` or `tabButton.title`) you can access the property on the element directly BUT for some properties - including custom properties you made up as well as aria attributes - you can't access directly via `tabButton.ariaSelected = false;` and need `getAttribute()` and `setAttribute()` methods.
-
 ![mod 0604](./img/screen-mod0604-04.gif)
 
-#### Mark the clicked `tab` as selected
+`aria-selected` = how do you access a property when the property itself has a dash on it?<br>
+**Any time you see an attribute with a dash on an HTML element, you can almost always access that with the camelcased version of it.**
+
+For most properties in JavaScript (for example `tabButton.alt` or `tabButton.src` or `tabButton.title`) you can access the property on the element directly.<br>
+For some properties though - including custom properties you made up as well as aria attributes - you CAN'T access directly via `tabButton.ariaSelected = false;`.<br>
+You need `getAttribute()` and `setAttribute()` methods, like follows `tabButton.setAttribute('aria-selected', false);`
+
+#### Mark the clicked `tabButtons` as selected
 
 ```
 eve.currentTarget.setAttribute('aria-selected', true);
 ```
 
-- this is now easy
-- click on `tab`s will now set and remove (toggle) the `aria-selected` attribute
-
 ![mod 0604](./img/screen-mod0604-05.gif)
 
-- prefer accessing via accessibility attribute over a class, as you don't have to maintain classes on two places
-- select and style your elements with `aria`
+- a click on a `tabButtons` will toggle the `aria-selected` attribute
+- prefer accessing via accessibility attribute over a class, as you don't have to maintain classes in two places
+- styling comes in via css `button[aria-selected="true"] { ... }`
 
-#### Find the associated `tabPanel` and show it
+#### Find the associated `tabPanels` to `tabButtons` and show it
 
-- if somebody clicks on a `<button>` with an `<id="js">` on it, we need to find the associated `tabPanel` that has the `aria-labelledby="js"`
-- there's two ways
+- example JavaScript menu tab: if somebody clicks on a `tabButtons` with an `<id="js">` on it, we need to find the associated `tabPanels` that has the `aria-labelledby="js"`
 
 **With `querySelector`-ing, method 1**
 
 ```
-...
-// find the associated tabPanel and show it - method 1
+// find the associated tabPanels to tabButtons and show it
+// method 1
 const id = eve.currentTarget.id;
 const tabPanel = tabs.querySelector(`[aria-labelledby="${id}"]`);
 tabPanel.hidden = false;
-...
 ```
 
-**With `find()` in the array(!) of `tabPanel`'s, method 2**
+**With `find()` in the array() of `tabPanels`, method 2**
 
-- you need to have <br>
-  `const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));`<br>
-  as an array with `Array.from()`
-- find the `tabPanel` where the `tabPanel`'s `labelledby` is equal to the `id`
-- store the result of that in a variable
-- this method is to be preferred as we already have the `tabPanel`'s, no need to `querySelector` for them again, like in method 1
+For this you need the original selection of `tabPanels` changed from<br>
+`const tabPanels = tabs.querySelectorAll('[role="tabpanel"]');`<br>
+to<br>
+`const tabPanels = Array.from(tabs.querySelectorAll('[role="tabpanel"]'));`
 
 ```
-...
-// find the associated tabPanel and show it - method 2
+// find the associated tabPanels (in the array of tabPanels) to tabButtons and show it
+// method 2
 const id = eve.currentTarget.id;
 const tabPanel = tabPanels.find(panel => panel.getAttribute('aria-labelledby') === id);
 tabPanel.hidden = false;
-...
 ```
+
+- we need to have `tabPanels` as an array, because before, it was a NodeList, we need it as an array to use `find()` on it
+- within the `tabPanels` `<div>`s, find the `tabPanels` where the `labelledby` is equal to the `id`
+- store the result of that in a variable `const tabPanel`

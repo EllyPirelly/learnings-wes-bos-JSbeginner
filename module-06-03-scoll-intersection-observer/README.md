@@ -4,9 +4,10 @@
 
 ![mod 0603](./img/screen-mod0603-000.gif)
 
+- JavaScript, HTML, CSS
 - have an outer `<div>` terms and conditions with `overflow: scroll` set on it
 - select that element and listen for scroll on it
-- the accept button at the bottom doesn't work until it's been scolled all the way down ("scroll to accept")
+- the accept button at the bottom doesn't work until it's been scrolled all the way down ("scroll to accept")
 
 ## scoll events and why this might not be what we want
 
