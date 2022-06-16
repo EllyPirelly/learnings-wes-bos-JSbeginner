@@ -15,7 +15,7 @@ As most of the content (except for the animated turtle, see down below) is infor
 
 ## BEDMAS
 
-- **following examples are referring to `index.html` and `index.js`**
+**Following examples are referring to `index.html` and `index.js`**
 
 - **order of operations** in which JavaScript runs (exactly how math works)
   - Brackets (Parenthesis)
@@ -530,7 +530,8 @@ if (isAdmin) showAdminBar();
 
 ## Switch Case
 
-- **following examples are referring to `switch.html` and `switch.js`**
+**Following examples are referring to `switch.html` and `switch.js`**
+
 - pass it the thing that you are testing
 - has cases, those cases HAVE to be clearly defined
 - `break;` is needed after each single statement
@@ -597,89 +598,94 @@ turtle.setAttribute('style', `
 
 ## Intervals and Timers
 
-- See [intervals.html](./intervals.html), [intervals.js](./intervals.js) and [styles.css](./styles.css) here.
+**Following examples are referring to `intervals.html` and `intervals.js`**
+
+These examples are purely happening in the Browser Developer Console.
 
 - `setTimeout()` and `setInterval()` work the same way
 - both are globally scoped methods
+- run something AFTER 5 seconds: `setTimeout()`
+- run something EVERY 5 seconds: `setInterval()`
 - both take two arguments, a callback and milliseconds
-- don't use them like
-  - `window.setTimeout()` for cases where node.js runs the same functions, as node does not have a concept of `window`
-- `window` when accessing globally available APIs is not needed
 
 ### `setTimeout()`
-
-- run something after 5 seconds: timeout
-
-**Example**
 
 - will run 500 milliseconds after the JavaScript has started
 
 ```
 // anonymous function
-setTimeout(function () {
-    console.log('done');
+setTimeout(function() {
+  console.log('done');
 }, 500);
 ```
 
 ```
 // reference to a function
 function buzzer() {
-    console.log('buzzed');
+  console.log('buzzed');
 }
 setTimeout(buzzer, 500);
 ```
 
-**Interesting thing about timers**
+**Gotcha**
 
 ```
 function buzzer() {
-    console.log('buzzed');
+  console.log('buzzed');
 }
-
 console.log('starting');
 setTimeout(buzzer, 500);
 console.log('finishing');
 ```
 
 - "starting" and "finishing" will be logged first, then "buzzed"
-- **callback** - come back and do it at a later point in time
+- this is because of the **callback**: "come back and do it at a later point in time"
 - the rest of JavaScript will keep on running while the callback is still waiting for the 500 milliseconds to be over (and to then run)
+- asynchronous nature of JavaScript
 
 ### `setInterval()`
 
-- run something every 5 seconds: intervall
-
-**Example**
-
-- will run this every 200 ms
+These examples will run every 2000 milliseconds unless you abort them!
 
 ```
-setInterval(function () {
-    console.log('intervalled');
-}, 200);
+// anonymous function
+setInterval(function() {
+  console.log('intervalled');
+}, 2000);
 ```
 
-- **Gotcha**
-  - it won't run immediately
-  - in only runs after the first 2 seconds have elapsed
-  - there is no option to tell the interval to run right away and ALSO run after 2 seconds
-  - if we DO want that sort of functionlity, we need to code our own interval
+```
+// reference to a function
+function intervalled() {
+  console.log('intervalled');
+}
+console.log('starting');
+setInterval(intervalled, 2000);
+console.log('finishing');
+```
 
-**Example - create own function**
+**Gotcha**
+- it won't run immediately
+- "starting" and "finishing" will be logged first, then "intervalled" will keep on running every 2000 ms until it is aborted - or until eternity
+- in only runs after the first 2 seconds have elapsed
+- there is no option to tell the interval to run right away and ALSO run after 2 seconds
+- if we DO want that sort of functionality, we need to code our own interval
+
+**Example - create own interval function**
 
 ```
 function intervalling() {
-    console.log('intervalled');
+  console.log('intervalling my own');
 }
 
 function setImmediateInterval(funcToRun, ms) {
-    // right away call that function
-    funcToRun();
-    // run a regular interval
-    return setInterval(funcToRun, ms);
+  // right away call that function
+  funcToRun();
+  // run a regular interval
+  return setInterval(funcToRun, ms);
 }
 
-setImmediateInterval(intervalling, 500);
+// setImmediateInterval(intervalling, 500);
 ```
 
 - a function `setImmediateInterval()` that as a parameter takes in another function `funcToRun()`
@@ -692,7 +698,7 @@ setImmediateInterval(intervalling, 500);
 
 ```
 function destroy() {
-    document.body.innerHTML = `<p>destroyed</p>`;
+  document.body.innerHTML = `<p>destroyed</p>`;
 }
 setTimeout(destroy, 2000);
 ```
@@ -704,14 +710,16 @@ setTimeout(destroy, 2000);
 
 ```
 function destroy() {
-    document.body.innerHTML = `<p>destroyed</p>`;
+  document.body.innerHTML = `<p>destroyed</p>`;
 }
 const bombTimer = setTimeout(destroy, 2000);
-console.log(typeof bombTimer); // number
+console.log(typeof bombTimer); // number; it's a reference to all timers currently on the page
 
 window.addEventListener('click', function () {
-    console.log('clicked, not destroyed');
-    this.clearTimeout(bombTimer);
+  console.log('clicked, not destroyed');
+  // how do I stop the timer from running?
+  // save reference to bombTimer
+  clearTimeout(bombTimer);
 });
 ```
 
@@ -719,27 +727,26 @@ window.addEventListener('click', function () {
 
 ```
 const poopInterval = setInterval(function () {
-    console.log('💩');
-    console.log('har har');
+  console.log('💩');
+  console.log('har har');
 }, 10);
+
 window.addEventListener('click', function () {
-    this.clearInterval(poopInterval);
-    console.log('stop silly pooping');
-})
+  clearInterval(poopInterval);
+  console.log('stop silly pooping');
+});
 ```
 
 **`setInterval()` and `setTimeout()` example - run this every 100 milliseconds but after 3 seconds stop it entirely**
 
-- pretty common
-
 ```
 const poopInterval = setInterval(function () {
-    console.log('💩');
-    console.log('har har');
+  console.log('💩');
+  console.log('har har');
 }, 100);
 
 setTimeout(function () {
-    clearInterval(poopInterval);
-    console.log('pooping stopped');
+  clearInterval(poopInterval);
+  console.log('pooping stopped');
 }, 3000);
 ```
