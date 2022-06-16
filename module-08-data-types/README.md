@@ -1,7 +1,7 @@
 # Module 8 - Data Types
 
-As most of the content is information and coding bits, this README here is used as an extensive notepad. <br>
-Content of this module is information and coding bits, no project.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+This module contains no project. <br>
 
 [Objects](#Objects)
 
@@ -19,30 +19,32 @@ Content of this module is information and coding bits, no project.
 
 ## Objects
 
-See [object.html](./object.html) and [object.js](./object.js) in this module's folder to follow up with the coding bits.
+**Following examples are referring to `object.html` and `object.js`**
 
 - objects are one fundamental building block of JavaScript, just like strings, numbers, boolean
 - actually everything in JavaScript is an object
 - objects allow us to group together properties and values (keys and values)
-- used for example for storing related data, storing functionality, creating custom types
+- used for example for storing related data, storing functionality, creating your own custom types
 - values of an object can be of _any_ type
 
-**Important: objects can be used for where the order of the properties does not matter**
+**Important: objects can be used for where the order of the properties does not matter. You cannot trust the order in an object.**
 
 ### Object Literal Syntax
 
 ```
 const person = {
-    name: 'Maria',
-    age: 100,
-}
+  name: 'Helga',
+  age: 100,
+};
+console.log(person); // {name: 'Helga', age: 100}
 ```
 
+### Also possible but used rarely as the object literal syntax is much cleaner
+
 ```
-// also possible but used rarely as the object literal syntax is much cleaner
 const person = new Object({
-    name: 'Maria',
-    age: 100,
+  name: 'Helga',
+  age: 100,
 });
 ```
 
@@ -50,34 +52,35 @@ const person = new Object({
 
 ```
 const age = 100;
+const name = 'Helga';
 const person = {
-    name: 'Maria',
-    age,
-}
+  name: name,
+  age: age,
+};
+// can be shortened to
+const person = { name, age };
+console.log(person);
 ```
-
 - if property and value are the same, it's possible to shorten to the property
 
 ### Create own properties
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    'cool-dude': true,
-    'really cool': true,
-    '777': true,
-}
+  name: 'Helga',
+  age: 100,
+  'cool-dude': true,
+  'really cool': true,
+  '777': true,
+};
+console.log(person); // {777: true, name: 'Helga', age: 100, cool-dude: true, really cool: true}
 ```
-
-- `'cool-dude'` will show up as a property with a dash in it
-- `'really cool'`, spaces are possible in a property
+- you can have properties with a dash in them
+- you can have properties with spaces in them
 
 **Reasoning to always put a comma at the end of the last property value pair**
 
-- putting a new property value pair below the last one _way_ later in a coding process won't lead to a Syntax Error because of the missing comma
-- when a Syntax Error is shown because of that missing comma, it will complain about the _newly_ added line - even though the comma is missing in the line _before_
+- when a Syntax Error is shown because of a missing comma it will complain about the _newly_ added line - even though the comma is missing in the line _before_
 - more important: Git
   - the person that has to add the next property value pair does not only have to add the new line but also needs to touch the line before to only add a comma
   - with Git Blame, that line will then fall on that person even though another person wrote the original code
@@ -86,14 +89,13 @@ const person = {
 ### Nested objects: access, add and overwrite through dot notation
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    }
+  name: 'Helga',
+  age: 100,
+  clothing: {
+    shirts: 10,
+    pants: 2,
+  }
 };
 console.log(person.age); // 100
 person.job = 'Chef cook';
@@ -105,116 +107,99 @@ console.log(person.age); // 50
 **Why is it possible to change a variable value that has been created with `const`?!**
 
 - `const` does NOT mean that the VALUE of an object cannot be changed
-- `const` means that the BINDING to `person` cannot be changed - properties CAN change but the actual object itself (`person`) can never be overwritten entirely
-
+- `const` means that the BINDING to `person` cannot be changed
+- "a person can evole and get older, have another profession - so that can change but not the person itself"
+- properties CAN change but the actual object itself (`person`) can never be overwritten entirely
 ### Immutable object
 
 - freeze an entire object with `Object.freeze();`
 
 ```
-const age = 100;
-const maria = {
-    name: 'Maria',
-    age,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    }
+const helga = {
+  name: 'Helga',
+  age: 100,
 };
-console.log(maria.age); // age: 100
+console.log(helga.age); // age: 100
 
-maria.job = 'Chef cook';
-maria.age = 50;
-console.log(maria.age); // age: 50
+helga.job = 'Chef cook';
+helga.age = 50;
+console.log(helga.age); // age: 50
 
-const mariaFroze = Object.freeze(maria);
-maria.age = 75;
-console.log(maria.age); // age: 50
+const helgaFroze = Object.freeze(helga);
+helga.age = 75;
+console.log(helga.age); // age: 50
 ```
 
-- that's not going to freeze the original object `maria` though
-- it will return a new object `mariaFroze`, which can never be changed
+- that's not going to freeze the original object `helga` though
+- it will return a new object `helgaFroze`, which can never be changed
 
-### Reason 1 for `[]`
+### Bracket Notation - reason 1 for `[]`
 
 ```
 const age = 100;
 const person = {
-    name: 'Maria',
-    propertyToCheck: 'If I\'m logged - are you really looking for the property??',
-    age,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    }
+  name: 'Helga',
+  propertyToCheck: 'If I\'m logged - are you really looking for the property??',
+  age: 100,
+  clothing: {
+    shirts: 10,
+    pants: 2,
+  }
 };
 person.job = 'Chef cook';
 person.age = 50;
 
 console.log('regular log:', person.age); // regular log: 50
+
 const propertyToCheck = prompt('What do you want to check?');
 
-console.log('regular square brackets:', person['age']);
-// regular square brackets: 50
+console.log('regular square brackets:', person['age']); // regular square brackets: 50
 
+// whatever you type in the prompt (and is a property in the object) will be logged
 console.log('propertyToCheck square brackets:', person[propertyToCheck]);
-// whatever you type in the prompt (and is a value in the object) will be logged, e.g. propertyToCheck square brackets: 50
-
-// will literally look for the property
+// will literally look for the property 'propertyToCheck' and will log its value
 console.log('propertyToCheck:', person.propertyToCheck);
-// propertyToCheck: If I'm logged - are you really looking for the property??
 ```
 
 **Why is there both `.` and `[]` - as `[]` seem to be much uglier?**
 
 - `person[propertyToCheck])` is not going to look for a property called `propertyToCheck`
 - what `person[propertyToCheck])` will do is use the string in that variable as a property look-up
-- `console.log(person.propertyToCheck);` will literally look for the PROPERTY on that object
+- `console.log(person.propertyToCheck);` will literally look for the PROPERTY `propertyToCheck` on that object
 - that's the reason why `[]` are used: `console.log('person[propertyToCheck]);` to reference the NAME of the property
 
-![mod 0801](./img/screen-mod0801-01.png)
-![mod 0801](./img/screen-mod0801-02.png)
-![mod 0801](./img/screen-mod0801-03.png)
-![mod 0801](./img/screen-mod0801-04.png)
-![mod 0801](./img/screen-mod0801-05.png)
-![mod 0801](./img/screen-mod0801-06.png)
-
-### Reason 2 for `[]`
+### Bracket Notation - reason 2 for `[]`
 
 - if properties on an object are not referencable via JavaScript, you have to use a string
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    'cool-dude': true,
-    'really cool': true,
-    '777': true,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    },
+  name: 'Helga',
+  age: 100,
+  'cool-dude': true,
+  'really cool': true,
+  '777': true,
 };
 
-console.log(person.cool-dude);
+// console.log(person.cool-dude);
 // Uncaught ReferenceError: dude is not defined
 
-console.log(person.really cool);
+// console.log(person.cool - dude);
+// Uncaught ReferenceError: dude is not defined
+
+// console.log(person.really cool);
 // Uncaught SyntaxError: missing ) after argument list
 
-console.log(person.777);
+// console.log(person.777);
 // Uncaught SyntaxError: missing ) after argument list
-```
 
-- `person.cool-dude`, `person.really cool`, `person.777` are invalid property look-ups
-- if that's the case, use square bracket notation, to access those
-
-```
 console.log(person['cool-dude']); // true
 console.log(person['really cool']); // true
 console.log(person[777]); // true
 ```
+
+- `person.cool-dude`, `person.cool - dude`, `person.really cool`, `person.777` are invalid property look-ups
+- if that's the case, use square bracket notation, to access those
 
 **Why is that necessary in the first place?**
 
@@ -223,95 +208,71 @@ If you receive data from another language or data from a server side you don't h
 ### Referencing multiple levels deep
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    },
-    'hey man': {
-        shoes: 4,
-    },
+  name: 'Helga',
+  age: 100,
+  clothing: {
+    shirts: 10,
+    pants: 2,
+  },
+  'hey man': {
+    shoes: 4,
+  },
 };
 
-console.log('multiple level reference:', person.clothing.shirts);
-// multiple level reference: 10
-
-console.log('multiple level reference:', person['hey man'].shoes);
-// multiple level reference: 4
+console.log(person.clothing.shirts); // 10
+console.log(person['hey man'].shoes); // 4
 ```
 
 ### Check for existance
 
-Exists in HTML:
+HTML:
 
 ```
 <input type="text" name="first" value="valuehere">
+```
 
+JavaScript:
+```
 const nameInput = document.querySelector('[name="first"]');
 const naming = nameInput.value;
-console.log(nameInput);
-// <input type="text" name="first" value="valuehere">
-
+console.log(nameInput); // input object
 console.log(naming); // valuehere
-```
 
-Does not exist in HTML:
-
-```
 const notPresentInput = document.querySelector('[name="not-present"]');
-const nomen = notPresentInput.value;
-// Uncaught TypeError: Cannot read property 'value' of null
 console.log(notPresentInput); // null
+// const nomen = notPresentInput.value; // Uncaught TypeError: Cannot read property 'value' of null
+
+const noma = notPresentInput ? notPresentInput.value : 'not present';
+console.log(noma); // not present
 ```
 
-Check for existance in HTML:
-
-```
-const noma = notPresentInput ? notPresentInput.value : '';
-console.log(noma); // will return an empty string
-```
-
-- it's pretty common to check like this<br>
+- it's pretty common to check like this and return an empty string<br>
   `const noma = notPresentInput ? notPresentInput.value : '';`
 
 ### Move a property from an object
 
-With `delete`, delete a property from an object
+- with `delete`, delete a property from an object
+- `delete` will return `true` or `false`
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    clothing: {
-        shirts: 10,
-        pants: 2,
-    },
-    'hey man': {
-        shoes: 4,
-    },
+  name: 'Helga',
+  age: 100,
+  clothing: {
+    shirts: 10,
+    pants: 2,
+  },
+  'hey man': {
+    shoes: 4,
+  },
 };
 const deleted = delete person['hey man'];
 console.log(deleted); // true
 console.log(delete person['hey man']); // true
-console.log(person); // will log the object without deleted property
-console.log(person['hey man']); // undefined
+console.log(person); // will log the object without deleted property 'hey man'
+console.log(person['hey man']); // undefined, because deleted
 ```
-
-- `delete` will return `true` or `false`
-
-With `null` and `undefined`? Nope, not really.
-
-```
-person.age = null;
-person.age = undefined;
-```
-
-- won't delete, but will in some cases/in some frameworks just allow to be skipped over
-
 ### Methods
 
 **What's the difference between a method and a function?**
@@ -319,58 +280,51 @@ person.age = undefined;
 A method is a function that lives inside of an object.
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    sayHello: function (greeting = 'Hola') {
-        return `${greeting} ${this.name}!`;
-    },
+  name: 'Helga',
+  age: 100,
+  sayHello: function (greeting = 'Hola') {
+    return `${greeting} ${this.name}!`;
+  },
 };
-console.log(person.sayHello()); // Hola Maria!
-console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Maria!
+console.log(person.sayHello()); // Hola Helga!
+console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Helga!
 ```
-
-- set `function (greeting = 'hola')` as the default value
 
 **What is `this`?**
 
-- look at a method and the left side of the dot: `this` will always be equal to the left of the dot
+- `this` will always be equal to the left of the dot
+- in this case `this` is equal to (the object) `person`
 - for prototyping, to use a method on multiple instances, not only on `person`,
-- when you have a function that lives on a property in an object (like here), that function is referred to as a method of that object
 - more on that in future courses
 
 ### Method shorthand
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    sayHello(greeting = 'Hola') {
-        return `${greeting} ${this.name}!`;
-    },
+  name: 'Helga',
+  age: 100,
+  sayHello(greeting = 'Hola') {
+    return `${greeting} ${this.name}!`;
+  },
 };
-console.log(person.sayHello()); // Hola Maria!
-console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Maria!
+console.log(person.sayHello()); // Hola Helga!
+console.log(person.sayHello('HIIIIIII,')); // HIIIIIII, Helga!
 ```
-
-- this is not an arrow function!
 
 ### Method arrow function
 
 ```
-const age = 100;
 const person = {
-    name: 'Maria',
-    age,
-    sneeze: () => {
-        console.log('regular log:', 'ahhhchoooo');
-        // regular log: ahhhchoooo
+  name: 'Helga',
+  age: 100,
+  sneeze: () => {
+    console.log('regular log:', 'ahhhchoooo');
+    // regular log: ahhhchoooo
 
-        console.log('with this:', 'ahhhchoooo', this);
-        // with this: ahhhchoooo Window {window: Window, self: Window, document: document, name: "", location: Location, …}
-    },
+    console.log('with this:', 'ahhhchoooo', this);
+    // with this: ahhhchoooo Window {window: Window, self: Window, document: document, name: "", location: Location, …}
+  },
 };
 person.sneeze();
 ```
@@ -381,21 +335,19 @@ person.sneeze();
 ### Method regular function
 
 ```
-const age = 100;
-const person = {
-    name: 'Maria',
-    age,
-    sneeze1: function () {
-        console.log('regular function:', 'brrrr', this);
-        // regular function: brrrr {name: "Maria", age: 100, sneeze: ƒ, sneeze1: ƒ}
-    }
+  name: 'Helga',
+  age: 100,
+  sneeze1: function () {
+    console.log('regular function:', 'brrrr', this);
+    // regular function: brrrr {name: "Helga", age: 100, sneeze: ƒ, sneeze1: ƒ}
+  }
 };
 person.sneeze1();
 ```
 
-- `this` is equal to `person`
+- `this` is equal to (the object) `person`
 
-**Arrow functions do not scope `this` to the thing that they are called against.**
+**Arrow functions do not scope `this` to the thing that they are called against, the parent scope will inherit `this`.**
 
 ## Object Reference vs Values
 
