@@ -40,6 +40,8 @@ img {
   transform:
     translate(var(--x))
     translateY(var(--y))
+    /* rotateY(180deg) */
+    /* rotateY(0.5turn) */
     rotateY(var(--rotateX))
     rotate(var(--rotate));
   transition: transform .2s;

@@ -8,7 +8,7 @@ As most of the content (except for the animated turtle, see down below) is infor
 
 [Coercion, Ternaries and Conditional Abuse](#Coercion-Ternaries-Conditional-Abuse)
 
-[Case Switch and Animating a Turtle with CSS Variables](#Case-Switch)
+[Case Switch and Animating a Turtle with CSS Variables](#Switch-Case)
 ![mod 0603](./img/screen-mod0704-01.gif)
 
 [Intervals and Timers](#Intervals-and-Timers)
@@ -528,12 +528,9 @@ if (isAdmin) showAdminBar();
 - if something is on the same line, the statement block is not needed and `{}` can be deleted
 - question is if you _should_ do that
 
-## Case Switch
+## Switch Case
 
 - **following examples are referring to `switch.html` and `switch.js`**
-
-### Switch
-
 - pass it the thing that you are testing
 - has cases, those cases HAVE to be clearly defined
 - `break;` is needed after each single statement
@@ -541,64 +538,62 @@ if (isAdmin) showAdminBar();
 
 ```
 switch (eve.key) {
-    case 'ArrowUp':
-        ...
-        break;
-    case 'ArrowDown':
-        ...
-        break;
-    case 'ArrowLeft':
-        ...
-        break;
-    case 'ArrowRight':
-        ...
-        break;
-    default:
-        console.log('that is not a valid move');
-        break;
+  case 'ArrowUp':
+    ...
+    break;
+  case 'ArrowDown':
+    ...
+    break;
+  case 'ArrowLeft':
+    ...
+    break;
+  case 'ArrowRight':
+    ...
+    break;
+  default:
+    console.log('that is not a valid move');
+    break;
 }
 ```
 
-### Switch Turtle
+### Make the turtle walk
 
 ![mod 0603](./img/screen-mod0704-01.gif)
 
-See [switch.html](./switch.html), [switch.js](./switch.js) and [styles.css](./styles.css) here.
-
-- `turtle.png`
-- make that turtle walk through pressing arrow keys 'up', 'down', 'left', 'right'
+- make the turtle `turtle.png` walk
+- press arrow keys 'up', 'down', 'left', 'right'
 - add speed, flip over turtle (change direction), rotate
-- update CSS variables with JavaScript
-
-**How to add custom CSS properties to `style` in JavaScript**
 
 ```
-turtle.style.background = 'red'; // works
-turtle.style['background'] = 'yellow'; // works
-turtle.style['border'] = `5px solid black`; // works
-turtle.style['madeup'] = `5px solid green`; // does not work
-```
-
-- only CSS attributes that are "real" are going to be added to the turtle
-- so how - when it's not a "real" CSS attribute - to apply custom CSS properties?
-- this way:
-
-```
+// CSS
 .turt {
-    --x: 0;
-    --y: 0;
-    transform: translate(var(--x)) translateY(var(--y));
+  position: relative;
+  --x: 0;
+  --y: 0;
+  --rotateX: 0;
+  --rotate: 0;
+  /* important! first move it bevore rotating it! */
+  transform:
+    translate(var(--x))
+    translateY(var(--y))
+    rotateY(var(--rotateX))
+    rotate(var(--rotate));
+  transition: transform .2s;
 }
 ```
-
-- with `setAttribute();`
-
 ```
+// JS
 turtle.setAttribute('style', `
-    --x: ${x}px;
-    --y: ${y}px;
+  --rotateX: ${flipped ? '180deg' : '0'};
+  --x: ${x * speed}px;
+  --y: ${y * speed}px;
+  --rotate: ${rotate}deg;
 `);
 ```
+- update CSS variables with JavaScript
+- only CSS attributes that are "real" are going to be added to the turtle
+- so how - when it's not a "real" CSS attribute - to apply custom CSS properties?
+- use `setAttribute();`
 
 ## Intervals and Timers
 
