@@ -351,7 +351,7 @@ person.sneeze1();
 
 ## Object Reference vs Values
 
-See [ref-vs-value.html](./ref-vs-value.html) and [ref-vs-value.js](./ref-vs-value.js) in this module's folder to follow up with the coding bits.
+**Following examples are referring to `ref-vs-value.html` and `ref-vs-value.js`**
 
 ### Strings
 
@@ -361,12 +361,10 @@ let name2 = 'betty';
 console.log(name1 === name2); // true
 
 name1 = 'paul';
-console.log(name1); // paul
-console.log(name2); // betty
 console.log(name1 === name2); // false
 
+// update name1 what is to be name2
 name1 = name2;
-console.log(name1); // betty (!)
 console.log(name1 === name2); // true
 
 name2 = 'bettina';
@@ -376,111 +374,82 @@ console.log(name2); // bettina
 
 - `===` checks
   - the type: is string
-  - the value: is exactly the same?
+  - the value: is exactly the same thing
 - when taking `name1` and setting it to `name2` like this `name1 = name2;`, the value of `name2` is taken, copied and pasted into `name1`
 - when one of the variables is updated, the other one that has been pointing to does not update itself
 
 ### Objects
 
-**Why is that `false`?**
+**Example - comparing objects / object values**
 
 ```
 const person1 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
-
 const person2 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
-
 console.log(person1 === person2); // false
 ```
 
+**Why is that `false`?**
 - when you are comparing objects, it is done by reference to the object itself, NOT the values inside of it
 - even if the content is exactly the same, it is NOT the same object
 
-**What's going on here?**
+**Example - object reference**
 
 ```
 const person1 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
-
 const person2 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
-
 console.log(person1 === person2); // false
 
 const person3 = person1;
+console.log(person3); // {first: 'todd', last: 'smith'}
 person1.first = 'teddy';
 console.log(person3.first); // teddy
 console.log(person1.first); // teddy (!)
-```
-
-- `person3` has been updated and `person1` was ALSO updated
-
-**Why is `person1` being updated?**
-
-```
-const person1 = {
-    first: 'todd',
-    last: 'smith',
-};
-
-const person2 = {
-    first: 'todd',
-    last: 'smith',
-};
-
-console.log(person1 === person2); // false
-
-const person3 = person1;
-person1.first = 'teddy';
-
-console.log(person3.first); // teddy
-console.log(person1.first); // teddy (!)
-
 console.log(person1); // {first: "teddy", last: "smith"}
 console.log(person2); // {first: "todd", last: "smith"}
 console.log(person3); // {first: "teddy", last: "smith"}
 
 person3.last = 'cool';
-
 console.log(person3); // {first: "teddy", last: "cool"}
 console.log(person1); // {first: "teddy", last: "cool"}
 ```
 
-- this is a fundamental concept of JavaScript that will come and bite you in the butt
-- with this `const person3 = person1;`, we are not taking a copy, we are simply creating a variable `person3` that references/points to the original variable
-- `person3` never was its own object, it was just pointing to the orginal object `person1`
+- `person3` was updated and `person1` was ALSO updated
+- `const person3 = person1;` we are creating a variable that **references** (or points) to the original object, instead of making a copy of it
+- this happens when Objects (and Arrays) are **referenced** to
+- in this example `person3` was never its own object, it was only pointing to `person1`
 
-### How to take a copy then?
+### Copy via spread operator
 
-- spread `...` operator or `Object.assign()` operator
-- copying will only work one level deep!
-- "shallow copy"
-
-**Copy via spread operator**
-
+- spread `...` operator
 - takes in every single item in an object
 - takes a copy of single item
 - spreads them into a new object
+- copying will only work one level deep!
+- "shallow copy"
 
 ```
 const person1 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
-
 const person2 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
+console.log(person1); // {first: 'todd', last: 'smith'}
+console.log(person2); // {first: 'todd', last: 'smith'}
 
 const person3 = { ...person1 };
 console.log(person3); // {first: "todd", last: "smith"}
@@ -489,34 +458,30 @@ person3.first = 'Larry';
 console.log(person3.first); // Larry
 console.log(person1.first); // todd
 console.log(person3); // {first: "Larry", last: "smith"}
-```
 
-**Copy via Oject.assign()**
-
-- not that popular anymore since spread has been introduced
-- first argument is an empty object
-- second argument is the object that is supposed to be fold into the first argument's empty object
-
-```
+// copy va Object.assign()
 const person4 = Object.assign({}, person1);
 console.log(person3); // {first: "Larry", last: "smith"}
 ```
 
-**Copying this way only goes one level deep!**
+- copy via `Object.assign()` operator
+- not that popular anymore since `spread` has been introduced
+- first argument is an empty object, second argument is the object that is supposed to be fold into the first argument's empty object
+
+### Copy only goes one level deep!
 
 ```
 const person1 = {
-    first: 'todd',
-    last: 'smith',
-    clothing: {
-        shirts: 2,
-        shoes: 4,
-    },
+  first: 'todd',
+  last: 'smith',
+  clothing: {
+    shirts: 2,
+    shoes: 4,
+  },
 };
-
 const person2 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
 
 const person3 = { ...person1 };
@@ -528,46 +493,46 @@ console.log(person3);
 // {first: "todd", last: "smith", clothing: {{shirts: 100, shoes: 4}}}
 
 console.log(person1);
-// {first: "todd", last: "smith", clothing: {{shirts: 100, shoes: 4}}}
+// {first: "todd", last: "smith", clothing: {{shirts: 100, shoes: 4}}} // person1 was also updated
 ```
+- `person1` was also updated
+- spread operator `{ ...object }` and `Object.assign()` operator both only go one level deep
+- both only do shallow copies
 
-- changes you do on the newly created `person3` object will also be done on the spreaded object `person1`
-
-### Deep Copy / Deep Clone
+### Deep Copy / Deep Clone, e.g. lodash
 
 - via utility library, for example lodash https://lodash.com/
-- has lots of methods to work with objects and arrays
+- has lots of methods to work with objects and arrays, one of the is working with copies
 - can be included in your script
-- all of lodash method live in the `_`
+- all of lodash methods live in the `_`
 - `_.cloneDeep(value)` https://lodash.com/docs/4.17.15#cloneDeep
 
-**How to work with lodash?**
-
-- use https://unpkg.com/#/
-- change URL to https://unpkg.com/lodash@4.17.21/lodash.js will return the most recent lodash version
-- then take that URL and have it as a script tag in your HTML, right before your own scripts start
+**How to include lodash in your project?**
 
 ```
 <body>
-    ...
-    <script src="https://unpkg.com/lodash@4.17.21/lodash.js"></script>
-    <script src="./ref-vs-value.js"></script>
+  ...
+  <script src="https://unpkg.com/lodash@4.17.21/lodash.js"></script>
+  <script src="./ref-vs-value.js"></script>
 </body>
 ```
+- use https://unpkg.com/#/
+- change URL to https://unpkg.com/lodash@4.17.21/lodash.js will return the most recent lodash version
+- then take that URL and have it as a script tag in your HTML, right before your own scripts start
+- when your own JavaScript is depending on having lodash first, put lodash first
 
 ```
 const person1 = {
-    first: 'todd',
-    last: 'smith',
-    clothing: {
-        shirts: 2,
-        shoes: 4,
-    },
+  first: 'todd',
+  last: 'smith',
+  clothing: {
+    shirts: 2,
+    shoes: 4,
+  },
 };
-
 const person2 = {
-    first: 'todd',
-    last: 'smith',
+  first: 'todd',
+  last: 'smith',
 };
 
 const person3 = _.cloneDeep(person1);
@@ -580,33 +545,30 @@ console.log(person3);
 // {first: "todd", last: "smith", clothing: {{shirts: 100, shoes: 4}}}
 ```
 
-### Merging objects with spread
+### Merging objects via spread operator
 
 ```
 const meatInventory = {
-    bacon: 2,
-    sausage: 3,
-    oyster: 2,
+  bacon: 2,
+  sausage: 3,
+  oyster: 2,
 };
-
 const veggieInventory = {
-    lettuce: 5,
-    tomatoes: 3,
-    oyster: 10,
+  lettuce: 5,
+  tomatoes: 3,
+  oyster: 10,
 };
-
 const inventory = {
-    ...meatInventory,
-    ...veggieInventory,
-    lobsters: 5
+  ...meatInventory,
+  ...veggieInventory,
+  lobsters: 5
 };
 console.log(inventory);
 // bacon: 2 lettuce: 5 lobsters: 5 oyster: 10 sausage: 3 tomatoes: 3
 ```
-
 - you can spead in as many objects as you want
 - you can add your own property value pair
-- **in case of duplicates, the last one in the code wins and overwrites the one before**
+- **in case of duplicate properties, the last one in the code wins and overwrites the one before**
 
 ### Reference vs copy in functions
 
@@ -614,51 +576,51 @@ console.log(inventory);
 let name1 = 'betty';
 
 function doStuff(data) {
-    data = 'something else';
-    console.log(data); // something else
+  data = 'something else';
+  console.log(data); // something else
 }
 
 doStuff(name1);
 console.log(name1); // betty
 ```
-
-- when we pass in `name1` to `doStuff()`, it only passes in the value
+- when we pass in `name1` to `doStuff()`, it only passes in the **value**
 - it does NOT reference to the external variable
 
 ### Reference vs copy with objects in functions
 
 ```
 const meatInventory = {
-    bacon: 2,
-    sausage: 3,
+  bacon: 2,
+  sausage: 3,
 };
 
 const veggieInventory = {
-    lettuce: 5,
-    tomatoes: 3,
+  lettuce: 5,
+  tomatoes: 3,
 };
 
 const inventory = {
-    ...meatInventory,
-    ...veggieInventory,
+  ...meatInventory,
+  ...veggieInventory,
 };
 
 function doStuff2(data) {
-    data.tomatoes = 5000;
-    console.log(data);
-    // bacon: 2 lettuce: 5 sausage: 3 tomatoes: 5000
+  data.tomatoes = 5000;
+  console.log(data);
+  // bacon: 2 lettuce: 5 sausage: 3 tomatoes: 5000
 }
 
 doStuff2(inventory);
 console.log(inventory);
 // bacon: 2 lettuce: 5 sausage: 3 tomatoes: 5000
 ```
-
-- when you pass in an object into a function, and you modify that object, the external object will also be updated
+- when you pass in an object into a function, and you modify that object inside of that function, the external object will also be updated
+- this is not the case for booleans, numbers and strings - it IS the case for objects and arrays
+- be careful to not accidentally also modify data that lives outside of that function
 
 ## Maps
 
-See [maps.html](./maps.html) and [maps.js](./maps.js) in this module's folder to follow up with the coding bits.
+**Following examples are referring to `maps.html` and `maps.js`**
 
 - a `map` is very similar to an object
 - a `map` is simply for storing data
