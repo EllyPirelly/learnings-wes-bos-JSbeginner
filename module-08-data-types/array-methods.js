@@ -15,20 +15,20 @@ console.log(from); */
 
 // Array.from() with function that creates a range from x to y
 /* const range = Array.from({ length: 10 }, function () {
-    return 'wes';
+  return 'wes';
 });
 console.log(range); // (10) ["wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes"] */
 
 /* const range = Array.from({ length: 10 }, function (item, index) {
-    return index;
+  return index;
 });
 console.log(range); // (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] */
 
 /* function createRange(start, end) {
-    const range = Array.from({ length: end - start + 1 }, function (item, index) {
-        return index + start;
-    });
-    return range;
+  const range = Array.from({ length: end - start + 1 }, function (item, index) {
+    return index + start;
+  });
+  return range;
 }
 console.log(createRange(3, 7)); // (5) [3, 4, 5, 6, 7] */
 
@@ -36,10 +36,10 @@ console.log(createRange(3, 7)); // (5) [3, 4, 5, 6, 7] */
 // Array.isArray(), , check if array really is an array
 /* function createRange(start, end) {
 
-    const range = Array.from({ length: end - start + 1 }, function (item, index) {
-        return index + start;
-    });
-    return range;
+  const range = Array.from({ length: end - start + 1 }, function (item, index) {
+    return index + start;
+  });
+  return range;
 
 }
 const myRange = createRange(3, 7);
@@ -48,9 +48,9 @@ console.log(Array.isArray(myRange)); // true */
 
 // Object.entries(), Object.keys(), Object.values() - make three arrays
 /* const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 console.log(Object.entries(meats));
 console.log(Object.keys(meats));
@@ -58,50 +58,50 @@ console.log(Object.values(meats)); */
 
 // forEach()
 /* const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 Object.values(meats).forEach(qty => {
-    console.log(qty); // 10 // 5 // 7 - single line logs
+  console.log(qty); // 10 // 5 // 7 - single line logs
 });
 Object.keys(meats).forEach(qty => {
-    console.log(qty); // beyond // beef // pork - single line logs
+  console.log(qty); // beyond // beef // pork - single line logs
 });
 Object.entries(meats).forEach(entry => {
-    console.log(entry); // (2) ["beyond", 10] // (2) ["beef", 5] // (2) ["pork", 7] - single line logs
+  console.log(entry); // (2) ["beyond", 10] // (2) ["beef", 5] // (2) ["pork", 7] - single line logs
 }); */
 
 // forEach(), split up into their own variables
 /* const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 Object.entries(meats).forEach(entry => {
-    const key = entry[0];
-    const value = entry[1];
-    console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  const key = entry[0];
+  const value = entry[1];
+  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
 }); */
 
 // forEach(), split up into their own variables, destructuring
 /* const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7
 };
 Object.entries(meats).forEach(entry => {
-    const [key, value] = entry;
-    console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  const [key, value] = entry;
+  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
 }); */
 // or
 /* const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 Object.entries(meats).forEach(([key, value]) => {
-    console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
 }); */
 
 
@@ -209,7 +209,7 @@ console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
 // add if it's not
 if (!isInToppings) {
-    toppings.push('Hot Sauce');
+  toppings.push('Hot Sauce');
 }
 
 console.log(toppings); // (5) ["Mushrooms ", "Tomatoes", "Onions", "Cheese", "Hot Sauce"] */
