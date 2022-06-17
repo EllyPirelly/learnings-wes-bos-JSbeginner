@@ -7,7 +7,7 @@ This module contains no project. <br>
 
 [Object Reference vs Values](#Object-Reference-vs-Values)
 
-[Maps](#Maps)
+[Map](#Map)
 
 [Arrays](#Arrays)
 
@@ -618,86 +618,71 @@ console.log(inventory);
 - this is not the case for booleans, numbers and strings - it IS the case for objects and arrays
 - be careful to not accidentally also modify data that lives outside of that function
 
-## Maps
+## Map
 
 **Following examples are referring to `maps.html` and `maps.js`**
 
-- a `map` is very similar to an object
-- a `map` is simply for storing data
-- in order to add/delete items we have
+- `Map()` is very similar to an object
+- `Map()` is simply for storing data
+- in order to add/delete items on `Map()`, on it we have
   - the `.set()` API
   - the `.get()` API
   - the `.has()` API
   - the `.delete()` API
-- PROS of `map`
-  - the above mentioned methods
-  - the keys and the values can be of ANY type
-    - previously in the course, there only was the ability to put different types in the VALUE portion of an object
-    - a `map` allows to put ANY type into the key AND value
-  - order IS guaranteed (with an object, order is NOT guaranteed)
-- CONS of `map`
-  - there is no object literal syntax (as is with objects), we have to create a `new Map()` and then set the items (you _can_ pass items into a `map` though, with array of arrays)
-  - you cannot put functions inside of `map` (as you can with objects), that's not what `map` is for
-  - JSON
-    - currently JSON does not handle `map`
-    - if you use `map` and want to send your code for example via email, you have to convert it to an object first to then make it a JSON
-    - `Object.fromEntries()` tries its best to convert to an object
 
-**In a lot of the exercises that will follow - whenever there's the need to create an object - first is should be evaluated if `map` can be used.**
-
-Why would you want to use a `map` over an object?<br>
-Use `map` if you do need to maintain the order of your items.
+**In a lot of the exercises that will follow - whenever there's the need to create an object - first it should be evaluated if `Map()` can be used.** <br>
+Why would you want to use a `Map()` over an object?<br>
+Use `Map()` if you do need to maintain the order of your items.
 
 ```
 const myMap = new Map();
-
 myMap.set('name', 'wes');
+console.log(myMap); // Map(1) {'name' => 'wes'}
 myMap.age = 100;
-
-console.log(myMap);
+console.log(myMap); // Map(1) {'name' => 'wes'} // 100 is in there but not added at the same spot
 ```
 
 ![mod 0803](./img/screen-mod0803-01.png)
 
 - `.set(key, value)` takes two arguments, first one is the key, second one is the value you want to set
-- "Entries" are the actual values in the `map`
-- `age` is not in the same spot, it's a property ON `map` but NOT an actual entry IN `map`
+- `[[Entries]]` are the actual values in `Map()`
+- `age` is not in the same spot, it's a property ON `Map()` but NOT an actual entry IN `Map()`
 
-### Example dictionary
+### Example dictionary with `Map()`
 
 Dictionaries are a way to store additional metadata about something.
 
 ```
 const person1 = {
-    name: 'wes',
-    age: 200,
+  name: 'wes',
+  age: 200,
 };
-
 const myMap = new Map();
-
 myMap.set('name', 'wes');
 myMap.set(100, 'this is a number');
+// key is the reference to an object
+// value can be anything
 myMap.set(person1, 'really cool');
-
 console.log(myMap);
-console.log(myMap.get(person1));
 ```
 
 ![mod 0803](./img/screen-mod0803-02.png)
 
-- to store additional information inside of `map` use the reference to `person1` object as a key in `map`: `myMap.set(person1, 'really cool');`
+- to store additional information inside of `Map()` use the reference to the `person1` object as a key in `myMap.set(person1, 'really cool');`
 - the key is actually an object and the value is `'really cool'`
+- why would that be useful? when at a later point in time you want to reference that / to look it up, use `get()`, see below:
 
 ```
 const person1 = {
-    name: 'wes',
-    age: 200,
-}
-
+  name: 'wes',
+  age: 200,
+};
+const myMap = new Map();
 myMap.set('name', 'wes');
 myMap.set(100, 'this is a number');
+// key is the reference to an object
+// value can be anything
 myMap.set(person1, 'really cool');
-
 console.log(myMap);
 console.log(myMap.get(person1));
 ```
@@ -705,27 +690,10 @@ console.log(myMap.get(person1));
 ![mod 0803](./img/screen-mod0803-03.png)
 
 - use the nice `get()` method, instead of using a unique string or an ID to look the value up later
-- use the reference of the object as the key in the map `console.log(myMap.get(person1));`
+- use the reference of the object as the key in `Map()` see in this example `console.log(myMap.get(person1));`
+- values again can be of ANY type
 
-### Example score
-
-Somebody has some scores that they want to store some additional information about.
-
-```
-const score = 100;
-const prizes = new Map();
-prizes.set(100, 'bear');
-prizes.set(200, 'duck');
-prizes.set(300, 'cat');
-
-console.log(`you win a ${prizes.get(score)}`);
-// you win a bear
-```
-
-- previously, if this was an object, we would have to use a string of the number to look it up
-- in this case we can simply use a number `const score = 200` to look up what the corresponding prize is
-
-### Example looping - return of value
+### Example score with `Map()`
 
 ```
 const score = 100;
@@ -734,36 +702,56 @@ prizes.set(100, 'bear');
 prizes.set(200, 'duck');
 prizes.set(300, 'cat');
 
+console.log(`you win a ${prizes.get(score)}`); // you win a bear
+console.log(prizes.size); // 3
+```
+- on `Map()` store some additional information about `score`
+- previously, if this was an object, we would have had to use a string of the number in order to look it up
+- with `Map()` we can simply use a number `const score = 100` to look up what the corresponding prize is (`you win a bear`)
+
+### Example looping with `Map()` - return value `forEach()`
+
+```
 const ul = document.querySelector('.prizes');
+const score = 100;
+const prizes = new Map();
+prizes.set(100, 'bear');
+prizes.set(200, 'duck');
+prizes.set(300, 'cat');
+
 // returns the value
 prizes.forEach(entry => {
-    console.log(entry);
+  console.log(entry);
 });
 ```
 
 ![mod 0803](./img/screen-mod0803-04.png)
 
-### Example looping - returns array with key AND value
+### Example looping with `Map()` - return value AND key `for (... of ...)`
 
 ```
+const ul = document.querySelector('.prizes');
 const score = 100;
 const prizes = new Map();
 prizes.set(100, 'bear');
 prizes.set(200, 'duck');
 prizes.set(300, 'cat');
 
-// returns array with key and value
+// returns value AND key
 for (const prize of prizes) {
-    console.log(prize);
-    console.log(prize[0]);
-    console.log(prize[1]);
-    console.log(prize[2]);
+  console.log(prize);
+  // (2) [100, 'bear'] // (2) [200, 'duck'] // (2) [300, 'cat']
+  // console.log(prize[0], prize[1], prize[2]);
 }
 ```
 
 ![mod 0803](./img/screen-mod0803-05.png)
 
-### Destructuring and creating `<ul>`, `<li>` in the HTML
+- looping over all of the entries in prizes `Map()`
+- for each create a temporary variable `prize`
+- log it
+
+### Example destructuring with `Map()` and creating `<ul>`, `<li>` in the HTML
 
 ```
 const score = 100;
@@ -774,47 +762,69 @@ prizes.set(300, 'cat');
 
 const ul = document.querySelector('.prizes');
 for (const [points, prize] of prizes) {
-    console.log(points, prize);
+  console.log(points, prize);
 
-    const li = `<li>${points} - ${prize}</li>`;
-    ul.insertAdjacentHTML('beforeend', li);
+  const li = `
+    <li>${points} - ${prize}</li>
+  `;
+  ul.insertAdjacentHTML('beforeend', li);
 };
 ```
 
 ![mod 0803](./img/screen-mod0803-06.png)
 ![mod 0803](./img/screen-mod0803-07.png)
 
-### Example Array of Arrays
+### Example Array of Arrays with `Map()`
 
 ```
 const arrayOfArrays = new Map([
-    ['name', 'bella'],
-    ['age', '75']
+  ['name', 'bella'],
+  ['age', '75']
 ]);
 console.log(arrayOfArrays);
 ```
 
 ![mod 0803](./img/screen-mod0803-08.png)
 
+- you can pass an array of multiple arrays into `new Map()`
 - object literal syntax is a bit nicer than that though
 
-### `.delete()` a property
+### Example `.delete()` a property on `Map()`
 
 ```
 const person1 = {
-    name: 'wes',
-    age: 200,
+  name: 'wes',
+  age: 200,
 };
 const myMap = new Map();
-myMap.set('name', 'wes');
+console.log(person1); // {name: 'wes', age: 200}
+
+myMap.set('name', 'helga');
 myMap.set(100, 'this is a number');
 myMap.set(person1, 'really cool');
-myMap.delete('name');
+console.log(person1); // // {name: 'wes', age: 200}
+console.log(myMap); // Map(3) {'name' => 'helga', 100 => 'this is a number', {…} => 'really cool'}
 
-console.log(myMap);
+myMap.delete('name');
+console.log(myMap); // Map(2) {100 => 'this is a number', {…} => 'really cool'}
 ```
 
 ![mod 0803](./img/screen-mod0803-09.png)
+
+**PROS of `Map()`**
+- `.set()`, `.get()`, `.has()`, `.delete()`
+- the keys and the values in `Map()` can be of ANY type
+  - previously in the course, there only was the ability to put different types in the VALUE portion of an object
+  - `Map()` allows to put ANY type into the key and the value
+- order IS guaranteed (with an object, order is NOT guaranteed)
+
+**CONS of `Map()`**
+- there is no object literal syntax (as is with objects), we have to create a `new Map()` and then set the items (you _can_ pass items into a `Map()` though, with array of arrays)
+- you cannot put functions inside of `Map()` (as you can with objects), that's not what `Map()` is for
+- JSON
+  - currently JSON does not handle `Map()`
+  - if you use `Map()` and want to send your code for example via email, you have to convert it to an object first to then make it a JSON
+  - `Object.fromEntries()` tries its best to convert to an object
 
 ## Arrays
 
