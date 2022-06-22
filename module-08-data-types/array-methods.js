@@ -1,4 +1,4 @@
-// STATIC METHODS
+// STATIC METHODS -------------------------
 // Array.of();
 /* const names = Array.of('wes', 'kait', 'snickers');
 console.log(names); // (3) ["wes", "kait", "snickers"]
@@ -14,12 +14,12 @@ console.log(from); */
 
 
 // Array.from() with function that creates a range from x to y
-/* const range = Array.from({ length: 10 }, function () {
+/* const range = Array.from({ length: 10 }, function() {
   return 'wes';
 });
 console.log(range); // (10) ["wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes"] */
 
-/* const range = Array.from({ length: 10 }, function (item, index) {
+/* const range = Array.from({ length: 10 }, function(item, index) {
   return index;
 });
 console.log(range); // (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] */
@@ -33,14 +33,12 @@ console.log(range); // (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] */
 console.log(createRange(3, 7)); // (5) [3, 4, 5, 6, 7] */
 
 
-// Array.isArray(), , check if array really is an array
+// Array.isArray(), check if array really is an array
 /* function createRange(start, end) {
-
   const range = Array.from({ length: end - start + 1 }, function (item, index) {
     return index + start;
   });
   return range;
-
 }
 const myRange = createRange(3, 7);
 console.log(Array.isArray(myRange)); // true */
@@ -63,13 +61,13 @@ console.log(Object.values(meats)); */
   pork: 7,
 };
 Object.values(meats).forEach(qty => {
-  console.log(qty); // 10 // 5 // 7 - single line logs
+  console.log(qty); // 10 // 5 // 7
 });
 Object.keys(meats).forEach(qty => {
-  console.log(qty); // beyond // beef // pork - single line logs
+  console.log(qty); // beyond // beef // pork
 });
 Object.entries(meats).forEach(entry => {
-  console.log(entry); // (2) ["beyond", 10] // (2) ["beef", 5] // (2) ["pork", 7] - single line logs
+  console.log(entry); // (2) ["beyond", 10] // (2) ["beef", 5] // (2) ["pork", 7]
 }); */
 
 // forEach(), split up into their own variables
@@ -81,7 +79,7 @@ Object.entries(meats).forEach(entry => {
 Object.entries(meats).forEach(entry => {
   const key = entry[0];
   const value = entry[1];
-  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 }); */
 
 // forEach(), split up into their own variables, destructuring
@@ -92,7 +90,7 @@ Object.entries(meats).forEach(entry => {
 };
 Object.entries(meats).forEach(entry => {
   const [key, value] = entry;
-  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 }); */
 // or
 /* const meats = {
@@ -101,29 +99,30 @@ Object.entries(meats).forEach(entry => {
   pork: 7,
 };
 Object.entries(meats).forEach(([key, value]) => {
-  console.log(key, value); // beyond 10 // beef 5 // pork 7 - single line logs
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 }); */
 
 
-// INSTANCE METHODS
+// INSTANCE METHODS -------------------------
 // BUNS
-/* // use join() to display all bun items with " or "
-const buns = ['egg', 'wonder', 'brioche'];
+// use join() to display all bun items with " or "
+/* const buns = ['egg', 'wonder', 'brioche'];
 
 console.log(buns); // ["egg", "wonder", "brioche"]
 console.log(buns.join()); // egg,wonder,brioche
-console.log(buns.join(' or ')); // egg or wonder or brioche
+console.log(buns.join(' or ')); // egg or wonder or brioche */
 
 // use split() to turn a string "hot dogs,hamburgers,sausages,corn" into an array
-const foodString = 'hot dogs,hamburgers,sausages,corn';
+/* const foodString = 'hot dogs,hamburgers,sausages,corn';
 console.log(foodString.split()); // ["hot dogs,hamburgers,sausages,corn"]
 console.log(foodString.split(',')); // ["hot dogs", "hamburgers", "sausages", "corn"]
 console.log(foodString.split(''));
 // ["h", "o", "t", " ", "d", "o", "g", "s", ",", "h", "a", "m", "b", "u", "r", "g", "e", "r", "s", ",", "s", "a", "u", "s", "a", "g", "e", "s", ",", "c", "o", "r", "n"] */
 
 // TOPPINGS
-/* // use pop() to take the last item off toppings
-const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+// use pop() to take the last item off toppings
+/* const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 const lastItem = toppings.pop();
 console.log(lastItem); // Cheese
 console.log(toppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
@@ -157,22 +156,24 @@ console.log(newToppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 // TOPPINGS - slice and spread
 // use slice() to make a copy of the toppings array
 /* const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log('original', toppings); // original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
 const toppingsCopy = toppings.slice(0);
+console.log('copy because of slice', toppingsCopy); // copy because of slice (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
+
 toppings[0] = 'Mushy Boi';
-console.log('original toppings', toppings); // original toppings (4) ["Mushy Boi", "Tomatoes", "Onions", "Cheese"]
-console.log('toppings copy', toppingsCopy); // toppings copy (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"] */
+console.log('because of slice this is a copy already; changed', toppings); // because of slice this is a copy already; changed (4) ['Mushy Boi', 'Tomatoes', 'Onions', 'Cheese']
+console.log('is the unchanged copy of the original', toppingsCopy); // is the unchanged copy of the original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'] */
 
 // use spread `...` to make a copy of the toppings array
 /* const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-const toppingsCopy = [...toppings];
+console.log('original', toppings); // original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
-console.log(toppingsCopy); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+const toppingsCopy = [...toppings];
+console.log('copy because of spread', toppingsCopy); // copy because of spread (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
 toppingsCopy[0] = 'PARMESAN';
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
-console.log(toppingsCopy); // (4) ["PARMESAN", "Tomatoes", "Onions", "Cheese"] */
+console.log('because of spread this is a copy already; changed', toppingsCopy); // because of spread this is a copy already; changed  (4) ['PARMESAN', 'Tomatoes', 'Onions', 'Cheese'] */
 
 // TOPPINGS - other methods
 // use splice() to take out items 3 to 5 off the new toppings array
@@ -194,7 +195,10 @@ console.log(avoZwo); // 5 */
 // indexOf() works with any type but be aware of reference vs value!:
 /* const wesObject = { name: 'wes' };
 const people = [{ name: 'scott' }, wesObject];
+console.log(people); // (2) [{…}, {…}]
+// giving reference to that object
 console.log(people.indexOf(wesObject)); // 1
+// it did not find anything
 console.log(people.indexOf({ name: 'scott' })); // -1 */
 
 // includes() to check if hot sauce is in the array
@@ -207,11 +211,12 @@ const isInToppings = toppings.includes('Hot Sauce');
 console.log(isInToppings); // false
 console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
-// add if it's not
+// add it if it's not there
 if (!isInToppings) {
   toppings.push('Hot Sauce');
 }
 
+console.log(!isInToppings); // true
 console.log(toppings); // (5) ["Mushrooms ", "Tomatoes", "Onions", "Cheese", "Hot Sauce"] */
 
 // use reverse() - mutable - to flip toppings

@@ -1063,10 +1063,10 @@ console.log(names); // (5) ["poppy", "wes", "kait", "snickers", "lux"]
 const names = ['poppy', 'wes', 'kait', 'snickers', 'lux'];
 const kaitIndex = names.findIndex(name => name === 'kait');
 const newNamesWithoutKait = [
-    // get everything up to kaitIndex
-    names.slice(0, kaitIndex),
-    // everything after kaitIndex
-    names.slice(kaitIndex + 1)
+  // get everything up to kaitIndex
+  names.slice(0, kaitIndex),
+  // everything after kaitIndex
+  names.slice(kaitIndex + 1)
 ].flat();
 console.log(newNamesWithoutKait); // (4) ["poppy", "wes", "snickers", "lux"]
 console.log(names); // (5) ["poppy", "wes", "kait", "snickers", "lux"]
@@ -1102,6 +1102,8 @@ console.log(comments); // (5) [{…}, {…}, {…}, {…}, {…}]
 
 ## Array Cardio Static Methods
 
+**Following examples are referring to `array-methods.html` and `array-methods.js`**
+
 There are static methods and there are instance or prototype methods.<br>
 
 **What does Static Method mean?**
@@ -1118,23 +1120,19 @@ There are static methods and there are instance or prototype methods.<br>
 
 ```
 const names = Array.of('wes', 'kait', 'snickers');
-
-console.log(names);
-// (3) ["wes", "kait", "snickers"]
-
-console.log(Array.of(...'wes'));
-// (3) ["w", "e", "s"]
+console.log(names); // (3) ["wes", "kait", "snickers"]
+console.log(Array.of(...'wes')); // (3) ["w", "e", "s"]
 ```
 
-- is used for creating an array from its arguments
-- spread `...` into a function is possible with it
+- will create an array from the argument you pass it
+- spread `...` into a function call is possible
+  - will take an iterable (something with a length; strings have a length) and return an array from that iterable
+- `Array.of()` is most likely rarely used
+- most of the time you'll create an array this way:
 
 ```
-// most of the time you'll create an array this way though
 const names2 = ['wes2', 'kait2', 'snickers2'];
-
-console.log(names2);
-// (3) ["wes2", "kait2", "snickers2"]
+console.log(names2); // (3) ["wes2", "kait2", "snickers2"]
 ```
 
 ### `Array.from()`
@@ -1143,66 +1141,60 @@ console.log(names2);
 const from = Array.from({ length: 10 });
 console.log(from);
 ```
-
 ![mod 0804](./img/screen-mod0804-04.png)
 
-- will take an iterable (something with a length) and return an array from that iterable
+- will take an iterable (something with a length; in this case an object with a length property) and return an array from that iterable
 - example will return an array with 10 empty spots
 
 ### `Array.from()` with function that creates a range from x to y
 
 ```
-const range = Array.from({ length: 10 }, function () {
-    return 'wes';
+const range = Array.from({ length: 10 }, function() {
+  return 'wes';
 });
-
-console.log(range);
-// (10) ["wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes"]
+console.log(range); // (10) ["wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes", "wes"]
 ```
 
+- `Array.from()` takes two arguments
+  - the first one is an iterable (most likely will be an an object with a length property)
+  - the second argument is referred to as a map argument (callback function)
+
 ```
-const range = Array.from({ length: 10 }, function (item, index) {
-    return index;
+const range = Array.from({ length: 10 }, function(item, index) {
+  return index;
 });
-
-console.log(range);
-// (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(range); // (10) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
+
+- the callback function can take two arguments `function(item, index)`
+- in our example `item` is undefined, so we can refer to it with `function(_, index)` or `function(_item, index)` or `function(item, index)` - just to denote that item doesn't do anything
 
 ```
 function createRange(start, end) {
-
-    const range = Array.from({ length: end - start + 1 }, function (item, index) {
-        return index + start;
-    });
-    return range;
-
+  const range = Array.from({ length: end - start + 1 }, function (item, index) {
+    return index + start;
+  });
+  return range;
 }
 
-console.log(createRange(3, 7));
-// (5) [3, 4, 5, 6, 7]
+console.log(createRange(3, 7)); // (5) [3, 4, 5, 6, 7]
 ```
-
-- `Array.from()` creates an array
-- `Array.from()` takes two arguments
-  - the first one is an iterable (most likely will be an object with a length on it)
-  - the second argument is referred to as a map argument (callback function)
-- the callback function can take two arguments `function(item, index)`
-- in our example `item` is undefined, so we can refer to it with `function(_, index)` or `function(_item, index)` or `function(item, index)` - just to denote that item doesn't do anything
+- we can use this to make a function
+- the function is inclusive of the end number
+- "start at 3 (inclusive 3), end at 7 (inclusive 7)"
+- **be careful: there is a limit how large your arrays can be**
+- you most likely run into large arrays when you deal with 3d graphics
 
 ### `Array.isArray()`, check if array really is an array, aka `true`
 
 ```
 function createRange(start, end) {
-
-    const range = Array.from({ length: end - start + 1 }, function (item, index) {
-        return index + start;
-    });
-    return range;
-
+  const range = Array.from({ length: end - start + 1 }, function (item, index) {
+    return index + start;
+  });
+  return range;
 }
 const myRange = createRange(3, 7);
-
 console.log(Array.isArray(myRange)); // true
 ```
 
@@ -1212,11 +1204,10 @@ console.log(Array.isArray(myRange)); // true
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
-
 console.log(Object.entries(meats));
 console.log(Object.keys(meats));
 console.log(Object.values(meats));
@@ -1225,8 +1216,8 @@ console.log(Object.values(meats));
 ![mod 0804](./img/screen-mod0805-01.png)
 
 - `Object.entries()`
-  - returns an array of the keys, or values, or both of them
-  - gives us arrays that are nested
+  - returns an array of the keys, or values, or - as in our case - both of them
+  - gives us an array where each item of it is a nested array inside of it
 - `Object.keys()`
   - returns an array of all the object keys
 - `Object.values()`
@@ -1236,50 +1227,49 @@ console.log(Object.values(meats));
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 
 Object.values(meats).forEach(qty => {
-    console.log(qty);
-    // 10
-    // 5
-    // 7
+  console.log(qty); // 10 // 5 // 7
 });
 
 Object.keys(meats).forEach(qty => {
-    console.log(qty);
-    // beyond
-    // beef
-    // pork
-});
-
-Object.entries(meats).forEach(entry => {
-    console.log(entry);
-    // (2) ["beyond", 10]
-    // (2) ["beef", 5]
-    // (2) ["pork", 7]
+  console.log(qty); // beyond // beef // pork
 });
 ```
+
+- would be a pretty common way to use
+
+```
+const meats = {
+  beyond: 10,
+  beef: 5,
+  pork: 7,
+};
+
+Object.entries(meats).forEach(entry => {
+  console.log(entry); // (2) ["beyond", 10] // (2) ["beef", 5] // (2) ["pork", 7]
+});
+```
+- for each one you get an array with two items
+- first item is always going to be the key
+- second item is always going to be the value
 
 **`forEach()`, split up into their own variables**
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
-
 Object.entries(meats).forEach(entry => {
-    const key = entry[0];
-    const value = entry[1];
-
-    console.log(key, value);
-    // beyond 10
-    // beef 5
-    // pork 7
+  const key = entry[0];
+  const value = entry[1];
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 });
 ```
 
@@ -1287,38 +1277,30 @@ Object.entries(meats).forEach(entry => {
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7
 };
 Object.entries(meats).forEach(entry => {
-    const [key, value] = entry;
-
-    console.log(key, value);
-    // beyond 10
-    // beef 5
-    // pork 7
+  const [key, value] = entry;
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 });
 ```
-
 - or
-
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 Object.entries(meats).forEach(([key, value]) => {
-
-    console.log(key, value);
-    // beyond 10
-    // beef 5
-    // pork 7
+  console.log(key, value); // beyond 10 // beef 5 // pork 7
 });
 ```
 
 ## Array Cardio Instance Methods
+
+**Following examples are referring to `array-methods.html` and `array-methods.js`**
 
 **What does Instance Method (or Prototype Method) mean?**
 
@@ -1344,51 +1326,50 @@ console.log(buns.join(' or ')); // egg or wonder or brioche
 
 ```
 const foodString = 'hot dogs,hamburgers,sausages,corn';
-
-console.log(foodString.split());
-// ["hot dogs,hamburgers,sausages,corn"]
-
-console.log(foodString.split(','));
-// ["hot dogs", "hamburgers", "sausages", "corn"]
+console.log(foodString.split()); // ["hot dogs,hamburgers,sausages,corn"]
+console.log(foodString.split(',')); // ["hot dogs", "hamburgers", "sausages", "corn"]
+console.log(foodString.split(''));
+// ["h", "o", "t", " ", "d", "o", "g", "s", ",", "h", "a", "m", "b", "u", "r", "g", "e", "r", "s", ",", "s", "a", "u", "s", "a", "g", "e", "s", ",", "c", "o", "r", "n"]
 ```
 
 - `split()` turns a string into an (one) array
 - is a method on a string
 
-**`split()` on `''` is pretty much similar to spread `...`**
-
 ```
 const foodString = 'hot dogs,hamburgers,sausages,corn';
-
 console.log(foodString.split(''));
 // ["h", "o", "t", " ", "d", "o", "g", "s", ",", "h", "a", "m", "b", "u", "r", "g", "e", "r", "s", ",", "s", "a", "u", "s", "a", "g", "e", "s", ",", "c", "o", "r", "n"]
 ```
 
+- `split()` on `''` is pretty much similar to spread `...`
 - `split()` on `''` returns a string, split into single characters including spaces and commas
 
 **`pop()`**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-const lastItem = toppings.pop();
+console.log(toppings); // (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
+const lastItem = toppings.pop();
 console.log(lastItem); // Cheese
 console.log(toppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
 ```
 
 - `pop()` returns the last item of an array
-- it's a **mutable method** because it **mutates the original array** / it takes the last item off of the original array
+- it takes the last item off of the original array
+- it's a **mutable method** because it **mutates the original array**
 
 **`push()`**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
+
 const lastItem = toppings.pop();
 console.log(lastItem); // Cheese
 console.log(toppings); // (3) ["Mushrooms ", "Tomatoes", "Onions"]
 
 const t2 = toppings.push(lastItem);
-
 console.log(t2); // 4
 console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 ```
@@ -1399,26 +1380,27 @@ console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-const firstItem = toppings.shift();
+console.log(toppings); // (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
+const firstItem = toppings.shift();
 console.log(firstItem); // Mushrooms
 console.log(toppings); // (3) ["Tomatoes", "Onions", "Cheese"]
-
 ```
 
-- `shift()` takes off the first item of an array, mutates the original array
+- `shift()` takes off the first item of an array, **mutates** the original array
 
 **`unshift()`**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log(toppings); // (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
+
 const firstItem = toppings.shift();
 console.log(firstItem); // Mushrooms
 console.log(toppings); // (3) ["Tomatoes", "Onions", "Cheese"]
 
 toppings.unshift(firstItem);
-
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"] */
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 ```
 
 - `unshift()` puts the item taken off via `shift()` back
@@ -1437,51 +1419,50 @@ newToppings = [...newToppings, toppings[toppings.length - 1]];
 console.log(newToppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 ```
 
-**`slice()`**
+- spreads everything from the `newToppings` array into the array
+- adds on that last item
+- use of `let` because of overwriting
+
+**`slice()` - make a copy of the toppings array**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
+console.log('original', toppings); // original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
+
 const toppingsCopy = toppings.slice(0);
+console.log('copy because of slice', toppingsCopy); // copy because of slice (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
+
 toppings[0] = 'Mushy Boi';
-
-console.log('original toppings', toppings);
-// original toppings (4) ["Mushy Boi", "Tomatoes", "Onions", "Cheese"]
-
-console.log('toppings copy', toppingsCopy);
-// toppings copy (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+console.log('because of slice this is a copy already; changed', toppings); // because of slice this is a copy already; changed (4) ['Mushy Boi', 'Tomatoes', 'Onions', 'Cheese']
+console.log('is the unchanged copy of the original', toppingsCopy); // is the unchanged copy of the original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 ```
 
 - use `slice()` to make a copy of an array
 
-**spread `...`**
+**spread `...` - make a copy of the toppings array**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-const toppingsCopy = [...toppings];
+console.log('original', toppings); // original (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
-console.log(toppingsCopy); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
+const toppingsCopy = [...toppings];
+console.log('copy because of spread', toppingsCopy); // copy because of spread (4) ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese']
 
 toppingsCopy[0] = 'PARMESAN';
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
-console.log(toppingsCopy); // (4) ["PARMESAN", "Tomatoes", "Onions", "Cheese"]
+console.log('because of spread this is a copy already; changed', toppingsCopy); // because of spread this is a copy already; changed  (4) ['PARMESAN', 'Tomatoes', 'Onions', 'Cheese']
 ```
 
 - use spread `...` to make a copy of an array
 
-**`splice()`**
+**`splice()` - take items off of the toppings array**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
-
-console.log(toppings);
-// (11) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Chiles", "Bacon", "Pickles", "Onions", "Cheese"]
-
+console.log(toppings); // (11) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Chiles", "Bacon", "Pickles", "Onions", "Cheese"]
 const toppingsCopy = [...toppings];
-toppingsCopy.splice(3, 5);
 
-console.log(toppingsCopy);
-// (6) ["Mushrooms ", "Tomatoes", "Eggs", "Pickles", "Onions", "Cheese"]
+toppingsCopy.splice(3, 5);
+console.log(toppingsCopy); // (6) ["Mushrooms ", "Tomatoes", "Eggs", "Pickles", "Onions", "Cheese"]
 ```
 
 - use `splice()` to take out items off an array
@@ -1490,10 +1471,7 @@ console.log(toppingsCopy);
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Cheese'];
-
-console.log(toppings);
-// (7) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Cheese"]
-
+console.log(toppings); // (7) ["Mushrooms ", "Tomatoes", "Eggs", "Chili", "Lettuce", "Avocado", "Cheese"]
 const avoIndex = toppings.indexOf('Avocado');
 console.log(avoIndex); // 5
 
@@ -1505,7 +1483,6 @@ console.log(avoZwo); // 5
 - `indexOf()` will return the first instance
 - `indexOf()` works with any types
 - `indexOf()` is giving reference to objects
-- `-1` is returned when `indexOf()` doesn't find anything
 
 **Gotcha `indexOf()`**
 
@@ -1513,7 +1490,12 @@ console.log(avoZwo); // 5
 const wesObject = { name: 'wes' };
 const people = [{ name: 'scott' }, wesObject];
 
+console.log(people); // (2) [{…}, {…}]
+
+// giving reference to that object
 console.log(people.indexOf(wesObject)); // 1
+
+// it did not find anything
 console.log(people.indexOf({ name: 'scott' })); // -1
 ```
 
@@ -1526,7 +1508,7 @@ console.log(people.indexOf({ name: 'scott' })); // -1
 - **reference vs value** again
 - if you're looking for someone with the name of `'scott'` then you need to use `find()` with a callback
 
-**`includes()`**
+**`includes()` - check if an item is in an array**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
@@ -1535,11 +1517,12 @@ const isInToppings = toppings.includes('Hot Sauce');
 console.log(isInToppings); // false
 console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
-// add if it's not
+// add it if it's not there
 if (!isInToppings) {
-    toppings.push('Hot Sauce');
+  toppings.push('Hot Sauce');
 }
 
+console.log(!isInToppings); // true
 console.log(toppings); // (5) ["Mushrooms ", "Tomatoes", "Onions", "Cheese", "Hot Sauce"]
 ```
 
@@ -1547,30 +1530,31 @@ console.log(toppings); // (5) ["Mushrooms ", "Tomatoes", "Onions", "Cheese", "H
 - if you'd want to check for all different versions (`hot sauce`, `Hot sauce`, `hot Sauce`, etc), you'd first lowercase the entire array (more on that later in the course, `map()`)
 - `includes()` checks if the array includes a number, a string, or reference to an object
 
-**`reverse()` - mutable method**
+**`reverse()` - flip topping - mutable method**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 toppings.reverse();
 console.log(toppings); // (4) ["Cheese", "Onions", "Tomatoes", "Mushrooms "]
 ```
 
 - mutatable method, meaning it will reverse the original `toppings` array
 
-**`reverse()` - how to use this in an immutable way**
+**`reverse()` - flip topping - immutable method**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Onions', 'Cheese'];
-console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 
+console.log(toppings); // (4) ["Mushrooms ", "Tomatoes", "Onions", "Cheese"]
 const toppingsReversed = [...toppings].reverse();
 console.log(toppingsReversed); // (4) ["Cheese", "Onions", "Tomatoes", "Mushrooms "]
 ```
 
 - make a new array
-- spread `...` the previous array into it
+- take a copy of the original array with spread `...`
+- spread the previous array into it
 - `reverse()` the new array
 
 ## Array Cardio Callback Methods and Function Generation
