@@ -1559,13 +1559,15 @@ console.log(toppingsReversed); // (4) ["Cheese", "Onions", "Tomatoes", "Mushroo
 
 ## Array Cardio Callback Methods and Function Generation
 
+**Following examples are referring to `callback.html` and `callback.js`**
+
 ```
 function doSomething(element, index, array) {
-    //  function body
+  //  function body
 }
 ```
 
-- function as we want to use it can take in 3 arguments
+- callback functions as we want to use them can take in 3 arguments
   - element = each individual item (in the example below, this would be `singleFeedback`)
   - `index`, often shortened to `i` (if you ever need to know what index something is, when you are in the loop, you have access to it)
   - `array`, if you need to reference the entire array
@@ -1575,22 +1577,22 @@ function doSomething(element, index, array) {
 
 ```
 const feedback = [
-    { comment: 'Love the burgs', rating: 4 },
-    { comment: 'Horrible Service', rating: 2 },
-    { comment: 'Smoothies are great, liked the burger too', rating: 5 },
-    { comment: 'Ambiance needs work', rating: 3 },
-    { comment: 'I DONT LIKE BURGERS', rating: 1 },
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
 ];
 
 function findBurgRating(singleFeedback) {
-    // long version:
-    if (singleFeedback.comment.includes('burg')) {
-        return true;
-    } else {
-        return false;
-    }
-    // short version:
-    // return singleFeedback.comment.includes('burg');
+  // long version:
+  if (singleFeedback.comment.includes('burg')) {
+    return true;
+  } else {
+    return false;
+  }
+  // short version:
+  // return singleFeedback.comment.includes('burg');
 }
 
 const burgRating = feedback.find(findBurgRating);
@@ -1603,125 +1605,230 @@ console.log(burgRating); // {comment: "Love the burgs", rating: 4}
 
 **ASSIGNING the function to a const, `const findBurgRating`**
 
+- another way of doing this
+`findBurgRating` as a `const`, no `if / else`, explicit `return`
+
 ```
-const findBurgRating = function (singleFeedback) {
-    return singleFeedback.comment.includes('burg');
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
+const findBurgRating = function(singleFeedback) {
+  return singleFeedback.comment.includes('burg');
 }
+
+const burgRating = feedback.find(findBurgRating);
+console.log(burgRating); // {comment: "Love the burgs", rating: 4}
 ```
 
 **ARROW FUNCTION**
 
+- another way of doing this
+- `const findBurgRating` as arrow Function
+
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
 const findBurgRating = singleFeedback => {
-    return singleFeedback.comment.includes('burg');
+  return singleFeedback.comment.includes('burg');
 }
+
+const burgRating = feedback.find(findBurgRating);
+console.log(burgRating); // {comment: "Love the burgs", rating: 4}
 ```
 
 **IMPLICIT RETURN**
 
+- another way of doing this
+- `const findBurgRating` as a one liner
+
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
 const findBurgRating = singleFeedback => singleFeedback.comment.includes('burg');
 
+const burgRating = feedback.find(findBurgRating);
+console.log(burgRating); // {comment: "Love the burgs", rating: 4}
+
 ```
 
-**UTIL**
+**PUTTING A FUNCTION INSIDE OF AN OBJECT**
+
+- another way of doing this
+- put the original function `findBurgRating` inside of an object
+- that makes it a method
+- can be called via dot notation
 
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+// putting the function inside of an object, that makes it a method
 const util = {
-    findBurgRating: function (singleFeedback) {
-        return singleFeedback.comment.includes('burg');
-    }
+  findBurgRating: function(singleFeedback) {
+    return singleFeedback.comment.includes('burg');
+  }
 }
+console.log(util.findBurgRating); // ƒ (singleFeedback) { return singleFeedback.comment.includes('burg'); }
 ```
 
-**Function that returns other function (high-order function)**
+**High-order function - function that returns other function**
 
 - if you ever get the feeling that your code is too verbose and can be shortended
 
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
+// the lines below are really unefficient and tied to 'burg' / 'smoothie', how to make this more general?
 const findBurgRating = singleFeedback => singleFeedback.comment.includes('burg');
-const findSmoothieRating = singleFeedback => singleFeedback.comment.includes('smoothie');
+const findSmoothieRating = singleFeedback => singleFeedback.comment.includes('Smoothie');
+const burgRating = feedback.find(findBurgRating);
+const smoothieRating = feedback.find(findSmoothieRating);
+console.log(burgRating, smoothieRating); // {comment: 'Love the burgs', rating: 4} // {comment: 'Smoothies are great, liked the burger too', rating: 5}
 ```
 
-- the lines above are really unefficient and tied to `'burg'` / `'smoothie'`, how to make this more general?
-- make a function that makes another function
+- how to make this more general?
+- make a function `findByWord()` that returns another function:
 
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
 function findByWord(word) {
-    return function (singleFeedback) {
-        return singleFeedback.comment.includes(word);
-    }
+  return function(singleFeedback) {
+    return singleFeedback.comment.includes(word);
+  }
 }
 
 const burgRating = feedback.find(findByWord('burg'));
 const smoothieRating = feedback.find(findByWord('Smoothies'));
-
-console.log(burgRating, smoothieRating);
+console.log(burgRating, smoothieRating); // {comment: 'Love the burgs', rating: 4} // {comment: 'Smoothies are great, liked the burger too', rating: 5}
 ```
 
 - `findByWord()` does not find the burger or smoothie themselves
 - it just returns a function which then in turn will find them for you
 
-**SIMPLE FUNCTION - `filter()`**
+**SIMPLE FUNCTION - `filter()` - find all ratings that are above 2**
 
 ```
 const feedback = [
-    { comment: 'Love the burgs', rating: 4 },
-    { comment: 'Horrible Service', rating: 2 },
-    { comment: 'Smoothies are great, liked the burger too', rating: 5 },
-    { comment: 'Ambiance needs work', rating: 3 },
-    { comment: 'I DONT LIKE BURGERS', rating: 1 },
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
 ];
 
+// regular function - long version
+/* const goodReviews = feedback.filter(singleFeedback => {
+  if (singleFeedback.rating > 2) {
+    return true;
+  } else {
+    return false;
+  }
+}); */
+
+// regular function - short version
 const goodReviews = feedback.filter(singleFeedback => {
-    if (singleFeedback.rating > 2) {
-        return true;
-    } else {
-        return false;
-    }
-    // short version
-    // return singleFeedback.rating > 2;
+  return singleFeedback.rating > 2;
 });
+
+console.table(goodReviews);
 ```
+
+- `filter()` works pretty much the same as `find()` but will return a new array instead of one item
+- `filter()` method will loop over every single item
+- will either return `true` or `false`
+
+![mod 0806](./img/screen-mod0806-01.png)
 
 **IMPLICIT return**
 
+- another way of doing this
+- `const goodReviews` as a one liner
+
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
 const goodReviews = feedback.filter(singleFeedback => singleFeedback.rating > 2);
+console.table(goodReviews);
 ```
 
-**Function that returns other function (high-order function)**
+**High-order function - function that returns other function**
+
+- make a function `filterByMinRating()` that returns another function:
 
 ```
+const feedback = [
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
+];
+
 function filterByMinRating(minRating) {
-    return function (singleFeedback) {
-        return singleFeedback.rating > minRating;
-    }
+  return function(singleFeedback) {
+    return singleFeedback.rating > minRating;
+  }
 }
 
 const goodReviews = feedback.filter(filterByMinRating(2));
 console.table(goodReviews);
 ```
 
-![mod 0806](./img/screen-mod0806-01.png)
-
-- `filter()` works pretty much the same as `find()` but will return a new array instead of one item
-- `filter()` method will loop over every single item
-- will either return `true` or `false`
+**`filter()` - find all ratings that talk about burger**
 
 ```
 const feedback = [
-    { comment: 'Love the burgs', rating: 4 },
-    { comment: 'Horrible Service', rating: 2 },
-    { comment: 'Smoothies are great, liked the burger too', rating: 5 },
-    { comment: 'Ambiance needs work', rating: 3 },
-    { comment: 'I DONT LIKE BURGERS', rating: 1 },
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
 ];
 
 function findByWord(word) {
-    return function (singleFeedback) {
-        return singleFeedback.comment.includes(word);
-    }
+  return function(singleFeedback) {
+    return singleFeedback.comment.includes(word);
+  }
 }
 
 const burgRatings = feedback.filter(findByWord('burg'));
@@ -1730,13 +1837,15 @@ console.table(burgRatings);
 
 ![mod 0806](./img/screen-mod0806-02.png)
 
+**`filter()` - remove the one star rating**
+
 ```
 const feedback = [
-    { comment: 'Love the burgs', rating: 4 },
-    { comment: 'Horrible Service', rating: 2 },
-    { comment: 'Smoothies are great, liked the burger too', rating: 5 },
-    { comment: 'Ambiance needs work', rating: 3 },
-    { comment: 'I DONT LIKE BURGERS', rating: 1 },
+  { comment: 'Love the burgs', rating: 4 },
+  { comment: 'Horrible Service', rating: 2 },
+  { comment: 'Smoothies are great, liked the burger too', rating: 5 },
+  { comment: 'Ambiance needs work', rating: 3 },
+  { comment: 'I DONT LIKE BURGERS', rating: 1 },
 ];
 
 const legitRatings = feedback.filter(single => single.rating !== 1);
@@ -1745,13 +1854,13 @@ console.table(legitRatings);
 
 ![mod 0806](./img/screen-mod0806-03.png)
 
-**`some()`**
+**`some()` - check if there is at least one type of meat has value 5**
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7,
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 
 console.log(Object.values(meats)); // (3) [10, 5, 7]
@@ -1760,15 +1869,16 @@ const isThereEnoughOfAtLeastOneMeat = Object.values(meats).some(meatValue => mea
 console.log(isThereEnoughOfAtLeastOneMeat); // true
 ```
 
-- convert object into array to use the method `some()` on it, in our case with `Object.values()`
+- with `Object.values()`, convert object into array to use the method `some()` on it
+- we loop over every single item `Object.values(meats)`, check if it's `>= 5`, return result as array
 
-**`every()`**
+**`every()` - make sure we have at least 3 of every meat**
 
 ```
 const meats = {
-    beyond: 10,
-    beef: 5,
-    pork: 7,
+  beyond: 10,
+  beef: 5,
+  pork: 7,
 };
 
 console.log(Object.values(meats)); // (3) [10, 5, 7]
@@ -1777,71 +1887,73 @@ const isThereEnoughOfEveryMeat = Object.values(meats).every(meatValue => meatVal
 console.log(isThereEnoughOfEveryMeat); // true
 ```
 
-**`sort()` strings**
+**`sort()` strings - sort toppings alphabetically**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
-
-console.log(toppings.sort());
-// (11) ["Avocado", "Bacon", "Cheese", "Chiles", "Chili", "Eggs", "Lettuce", "Mushrooms ", "Onions", "Pickles", "Tomatoes"]
+console.log(toppings.sort()); // (11) ["Avocado", "Bacon", "Cheese", "Chiles", "Chili", "Eggs", "Lettuce", "Mushrooms ", "Onions", "Pickles", "Tomatoes"]
 ```
 
 - by default, it sorts alphabetically as strings
 
-**`sort()` numbers (OR nested elements), needs a callback function**
+**`sort()` numbers**
 
 ```
 const numbers = [1, 2, 100, 3, 200, 400, 155];
 
 const numbersSorted = numbers.sort(function (firstItem, secondItem) {
-    if (firstItem > secondItem) {
-        return 1;
-    } else if (secondItem > firstItem) {
-        return -1;
-    } else {
-        return 0;
-    }
-    // short version:
-    // return firstItem - secondItem;
+  if (firstItem > secondItem) {
+    return 1;
+  } else if (secondItem > firstItem) {
+    return -1;
+  } else {
+    return 0;
+  }
+  // short version:
+  // return firstItem - secondItem;
 });
 
 console.log(numbersSorted); // (7) [1, 2, 3, 100, 155, 200, 400]
 ```
 
+- when you are dealing with numbers or nested elements, `sort()` needs a callback function
 - the way that `sort()` works, it takes a compare callback function, loops over items, gives the first and the second item
-- up to user to decide what goes in front, behind or stays in place
+- up to user to decide what goes in front, behind, or stays in place
 - less than `0` - go before it
 - `0` - unchanged
 - greater than `0` - go behind of it
 - every function gets two things: one in the left hand, one in the right hand
 - up to developer to decide if places need to be switched
-- JavaScript will switch places until there's nothing left to be switched
+- JavaScript will sort and switch places until there's nothing left to be switched
 
-**`sort()` and `reverse()`**
+**`sort()` and `reverse()` - order totals**
 
 ```
 const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
 
 function totalSort(a, b) {
-    return a - b;
+  return a - b;
 }
+
+console.log(orderTotals.sort(totalSort)); // (8) [34, 342, 523, 634, 854, 1002, 1644, 2222]
 console.log(orderTotals.reverse()); // (8) [2222, 1644, 854, 634, 34, 523, 1002, 342]
 ```
 
-**`sort()` on object with `Object.entries()`**
+**`sort()` - sort the prices on object with `Object.entries()`**
 
 ```
 const prices = {
-    hotDog: 453,
-    burger: 765,
-    sausage: 634,
-    corn: 234,
+  hotDog: 453,
+  burger: 765,
+  sausage: 634,
+  corn: 234,
 };
+console.log(prices); // {hotDog: 453, burger: 765, sausage: 634, corn: 234}
 
-const productsSortedByPrice = Object.entries(prices).sort(function (a, b) {
-    const aPrice = a[1];
-    const bPrice = b[1];
-    return aPrice - bPrice;
+const productsSortedByPrice = Object.entries(prices).sort(function(a, b) {
+  const aPrice = a[1];
+  const bPrice = b[1];
+  return aPrice - bPrice;
 });
 console.table(productsSortedByPrice);
 
