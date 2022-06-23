@@ -1,19 +1,20 @@
-// forEach()
+// forEach() -------------------------------
 
-// example 1 - simple forEach()
+// example 1 - forEach() with function outside
 /* const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
 
-function logTopping(topping) {
-    console.log(topping);
+function logTopping(topping, index, array) {
+  console.log(topping);
+  console.log(topping, index, array);
 }
 
 toppings.forEach(logTopping); */
 
-// example 2 - instead of external function:
+// example 2 - forEach() no function outside
 /* const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
 
 toppings.forEach(topping => {
-    console.log(topping);
+  console.log(topping);
 }); */
 
 // example 3 - perform more operations
@@ -21,85 +22,86 @@ toppings.forEach(topping => {
 
 function logTopping(topping, index, originalArray) {
 
-    console.log(toppings);
+  const prevTopping = originalArray[index - 1];
+  const nextTopping = originalArray[index + 1];
 
-    const nextTopping = originalArray[index + 1];
-    const prevTopping = originalArray[index - 1];
+  // log the topping
+  console.log('originalTopping: ', topping);
 
-    // log the topping
-    console.log('originalTopping: ', topping);
+  // log the prev topping if there is one
+  if (prevTopping) {
+    console.log('prevTopping: ', prevTopping);
+  }
 
-    // log the prev topping if there is one
-    if (prevTopping) {
-        console.log('prevTopping: ', prevTopping);
-    }
+  // log the next topping if there is one
+  if (nextTopping) {
+    console.log('nextTopping: ', nextTopping);
+  }
+  // or:
+  // nextTopping ? console.log(nextTopping) : null;
 
-    // log the next topping if there is one
-    if (nextTopping) {
-        console.log('nextTopping: ', nextTopping);
-    }
-    // or:
-    // nextTopping ? console.log(nextTopping) : null;
+  // if its the last item in the array, say Goodbye
+  index === originalArray.length - 1
+    ? console.log('Goodbye')
+    : console.log('next please');
+  // or:
+  // index === originalArray.length && console.log('Goodbye');
 
-    // if its the last item in the array, say Goodbye
-    index === originalArray.length - 1
-        ? console.log('Goodbye')
-        : console.log('next please');
-    // or:
-    // index === originalArray.length && console.log('Goodbye');
-
-    console.log('----');
-
+  console.log('----');
 }
 toppings.forEach(logTopping); */
 
 
-// map()
+// map() -------------------------------
 
-// example 1 - simple use of map()
+// map() - simple use
 /* const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
-console.log(faces);
+console.log(faces); // (8) ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺']
 
 function addArms(face) {
-    return `👋🏻${face}👋🏻`;
+  return `👋🏻${face}👋🏻`;
 };
 
 const toys = faces.map(addArms);
-console.log(toys); */
+console.log(toys); // (8) ['👋🏻😃👋🏻', '👋🏻🤠👋🏻', '👋🏻🤡👋🏻', '👋🏻🤑👋🏻', '👋🏻😵👋🏻', '👋🏻🌞👋🏻', '👋🏻🐶👋🏻', '👋🏻😺👋🏻'] */
 
-// example 2 - simple use of map()
+
+// map() - simple use
 /* const fullNames = ['wes', 'kait', 'poppy'].map(name => `${name} bos`);
-console.log(fullNames); */
+console.log(fullNames); // (3) ['wes bos', 'kait bos', 'poppy bos'] */
 
 
-// example 3 - chaining map()
+// map() - chaining
 /* function bosify(name) {
-    return `${name} Bos`;
+  return `${name} Bos`;
 }
 
 function capitalize(word) {
-    // return word[0].toUpperCase() + word.slice();
-    // better way: concatenate string via back ticks instead of +
-    return `${word[0].toUpperCase()}${word.slice(1)}`;
+  // one way:
+  // return word[0].toUpperCase() + word.slice();
+  // better way: concatenate string via back ticks instead of using +
+  return `${word[0].toUpperCase()}${word.slice(1)}`;
 }
 
 const fullNames = ['wes', 'kait', 'poppy'].map(capitalize).map(bosify);
 console.log(fullNames); // (3) ["Wes Bos", "Kait Bos", "Poppy Bos"] */
 
 
-// example 4 - map() with numbers
-/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
-const orderTotalsWithTax = orderTotals.map(total => 1);
-console.log(orderTotalsWithTax); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
-console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222] */
+// map() - with numbers
+const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 
-/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+// turn all values to 1
+const orderTotalsOne = orderTotals.map(total => 1);
+console.log(orderTotalsOne); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
+
+// add tax to each value
 const orderTotalsWithTax = orderTotals.map(total => total * 1.13);
-console.log(orderTotalsWithTax);
-// (8) [386.46, 1132.26, 590.9899999999999, 38.419999999999995, 716.42, 965.0199999999999, 1857.7199999999998, 2510.8599999999997]
-console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222] */
+console.log(orderTotalsWithTax); // (8) [386.46, 1132.26, 590.9899999999999, 38.419999999999995, 716.42, 965.0199999999999, 1857.7199999999998, 2510.8599999999997]
+console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 
-// example 5 - cowboys - repeat(), fill(), map(), forEach()
+
+// repeat(), fill(), map(), forEach() - cowboys
 /* const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
 console.log(faces); // (8) ["😃", "🤠", "🤡", "🤑", "😵", "🌞", "🐶", "😺"]
 
@@ -116,50 +118,51 @@ function attachBody(face, body) {
 }
 faces.map(face => attachBody(face, '🍟')).forEach(body => console.log(body)); */
 
-// map() with objects
-/* const people = [
-    {
-        birthday: 'April 22, 1993',
-        names: {
-            first: 'Keith',
-            last: 'Buckley'
-        }
-    },
-    {
-        birthday: 'January 3, 1975',
-        names: {
-            first: 'Larry',
-            last: 'Heep'
-        }
-    },
-    {
-        birthday: 'February 12, 1944',
-        names: {
-            first: 'Linda',
-            last: 'Bermeer'
-        }
+
+// map() - with objects
+const people = [
+  {
+    birthday: 'April 22, 1993',
+    names: {
+      first: 'Keith',
+      last: 'Buckley'
     }
+  },
+  {
+    birthday: 'January 3, 1975',
+    names: {
+      first: 'Larry',
+      last: 'Heep'
+    }
+  },
+  {
+    birthday: 'February 12, 1944',
+    names: {
+      first: 'Linda',
+      last: 'Bermeer'
+    }
+  }
 ];
 
 const cleanPeople = people.map(function (person) {
-    // get their birthday
-    // figure out how old they are
+  // get their birthday
+  // figure out how old they are
 
-    // then timestamp
-    const birthday = new Date(person.birthday).getTime();
-    // now timestamp
-    const now = Date.now();
+  // then timestamp
+  const birthday = new Date(person.birthday).getTime();
+  // now timestamp
+  const now = Date.now();
 
-    const age = Math.floor((now - birthday) / 31536000000);
-    console.log(age);
+  const age = Math.floor((now - birthday) / 31536000000);
+  console.log(age);
 
-    // return their full name and birthday in an object
-    return {
-        age: age,
-        name: `${person.names.first} ${person.names.last}`,
-    }
+  // return their full name and birthday in an object
+  return {
+    age: age,
+    name: `${person.names.first} ${person.names.last}`,
+  }
 });
-console.table(cleanPeople); */
+console.table(cleanPeople);
 
 
 
@@ -305,7 +308,7 @@ console.log(student3); // {id: "3a16", first_name: "Micki", last_name: "Mattes"}
 
 // reduce() - example 1
 // how would I add all of these up?
-const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222]; */
 
 // messy, works, but not good because the callback method relies on an external variable that has been made outside
 // side effect, where you update a variable that exists outsideof the function
@@ -442,7 +445,7 @@ for (const prop in wes3) {
 
 
 // while loop
-let cool = true;
+/* let cool = true;
 let i = 0;
 
 while (cool === true) {
@@ -458,4 +461,4 @@ let a = 1;
 let b = 2;
 do {
     console.log('b actually is bigger than a'); // b actually is bigger than a
-} while (b <= a);
+} while (b <= a); */

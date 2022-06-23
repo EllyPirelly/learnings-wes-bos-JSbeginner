@@ -1,7 +1,7 @@
 # Module 9 - Looping and Iterating
 
-As most of the "Module 9 - Loops" content is information and small coding bits, this README here is used as a notepad. <br>
-Content of this module is information and coding bits, no project.
+As most of the content is information and small coding bits, this README here is used as a notepad. <br>
+This module contains no project. <br>
 
 [Array for Each](#Array-for-Each)
  `.forEach()`
@@ -20,96 +20,94 @@ Content of this module is information and coding bits, no project.
 
 [for, for in, for of, while loops](#for-for-in-for-of-while-loops)
 
-- there's a few different ways to loop in JavaScript
+## Array for Each
+
+**Following examples are referring to `loops.html` and `loops.js`**
+
+There's a few different ways to loop in JavaScript
 - the most common thing to happen is to loop over an array
 - most loopings work the same way:
   - a method that loops over an array
   - it's been passed a callback function
   - the callback function will run once for every item in the array, giving access to each idividual item
 
-## Array for Each
-
-- the very basic looping on some data
-- for example, add event listeners to multiple elements, logging of data, displaying data on a page
-- `forEach()` is a bit different from the other methods, it doesn't return any value, it just goes off and does some work on each piece of data in an array
+**`forEach()` with function outside**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
 
-function logTopping(topping) {
-    console.log(topping);
+function logTopping(topping, index, array) {
+  console.log(topping);
+  console.log(topping, index, array);
 }
 
 toppings.forEach(logTopping);
+```
 
-// instead of external function:
+**`forEach()` no function outside**
+
+```
+const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
+
 toppings.forEach(topping => {
-    console.log(topping);
+  console.log(topping);
 });
 ```
 
-**So where is `topping` coming from?**
-
-- the phrase is not important, important is, that it is a PLACEHOLDER, not an argument that has a value
-- the first parameter in `forEach()` stands for the (current) element being processed in the array
-
-```
-function logTopping(element, index, array) {
-    console.log(element, index, array);
-}
-toppings.forEach(logTopping);
-```
+**`forEach()` example operations**
 
 ```
 const toppings = ['Mushrooms ', 'Tomatoes', 'Eggs', 'Chili', 'Lettuce', 'Avocado', 'Chiles', 'Bacon', 'Pickles', 'Onions', 'Cheese'];
 
 function logTopping(topping, index, originalArray) {
 
-    const nextTopping = originalArray[index + 1];
-    const prevTopping = originalArray[index - 1];
+  const prevTopping = originalArray[index - 1];
+  const nextTopping = originalArray[index + 1];
 
-    // log the topping
-    console.log('originalTopping: ', topping);
+  // log the topping
+  console.log('originalTopping: ', topping);
 
-    // log the prev topping if there is one
-    if (prevTopping) {
-        console.log('prevTopping: ', prevTopping);
-    }
+  // log the prev topping if there is one
+  if (prevTopping) {
+    console.log('prevTopping: ', prevTopping);
+  }
 
-    // log the next topping if there is one
-    if (nextTopping) {
-        console.log('nextTopping: ', nextTopping);
-    }
-    // or:
-    // nextTopping ? console.log(nextTopping) : null;
+  // log the next topping if there is one
+  if (nextTopping) {
+    console.log('nextTopping: ', nextTopping);
+  }
+  // or:
+  // nextTopping ? console.log(nextTopping) : null;
 
-    // if its the last item in the array, say Goodbye
-    index === originalArray.length - 1
-        ? console.log('Goodbye')
-        : console.log('next please');
-    // or:
-    // index === originalArray.length && console.log('Goodbye');
+  // if its the last item in the array, say Goodbye
+  index === originalArray.length - 1
+    ? console.log('Goodbye')
+    : console.log('next please');
+  // or:
+  // index === originalArray.length && console.log('Goodbye');
 
-    console.log('----');
-
+  console.log('----');
 }
 toppings.forEach(logTopping);
 ```
 
-![mod 0901](./img/screen-mod0901-01.png)
-![mod 0901](./img/screen-mod0901-02.png)
+- `forEach()` is the very basic looping on some data
+- `forEach()` is a bit different from the other looping methods, it doesn't return any value, it just goes off and does some work on each piece of data in an array
+- the phrase `topping` is not important, important is, that it is a PLACEHOLDER, not an argument that has a value
+- `forEach()` takes in 3 arguments: current value, index, array
+- the first parameter in `forEach()` stands for the (current) element being processed in the array
 
 ### Side Effects
 
-- being inside of a function reaching outside of that function to do something else, for example attaching event listeners, console.logging
+- a side effect is when you are inside of a function and you reach outside of that function to do something else, for example attaching event listeners, putting some data on a page
 - whereas side effects are totally fine, there's quite some methods that are simply taking in data, doing something with that data, and then returning that data that has been modified, massaged or transformed in some way
 - that is where we get into `map()`, `filter()` and `reduce()`
 - pure functions: they take in data, they return data, they always work exactly the same way given the data input, they always return the exact same thing, they don't reach outside of themselves
 
 ## Mapping
 
-- `map()` will always produce the same length of the array as it starts with (returns an array of the exact same length put in)
 - `map()` is like a machine in a factory, it takes in data, performs an operation and spits it out on the other side
+- `map()` will always produce the same length of the array as it starts with (returns an array of the exact same length put in)
 - `map()` can be used for any kind of data (strings, numbers, objects)
 - **don't update the DOM inside of a `map()` function**
 
@@ -117,14 +115,14 @@ toppings.forEach(logTopping);
 
 ```
 const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
-console.log(faces);
+console.log(faces); // (8) ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺']
 
 function addArms(face) {
-    return `👋🏻${face}👋🏻`;
+  return `👋🏻${face}👋🏻`;
 };
 
 const toys = faces.map(addArms);
-console.log(toys);
+console.log(toys); // (8) ['👋🏻😃👋🏻', '👋🏻🤠👋🏻', '👋🏻🤡👋🏻', '👋🏻🤑👋🏻', '👋🏻😵👋🏻', '👋🏻🌞👋🏻', '👋🏻🐶👋🏻', '👋🏻😺👋🏻']
 ```
 
 ![mod 0902](./img/screen-mod0902-01.png)
@@ -133,20 +131,21 @@ console.log(toys);
 
 ```
 const fullNames = ['wes', 'kait', 'poppy'].map(name => `${name} bos`);
-console.log(fullNames);
+console.log(fullNames); // (3) ['wes bos', 'kait bos', 'poppy bos']
 ```
 
 **`map()` chaining**
 
 ```
 function bosify(name) {
-    return `${name} Bos`;
+  return `${name} Bos`;
 }
 
 function capitalize(word) {
-    /* return word[0].toUpperCase() + word.slice(); */
-    // better way: concatenate string via back ticks instead of +
-    return `${word[0].toUpperCase()}${word.slice(1)}`;
+  // one way:
+  // return word[0].toUpperCase() + word.slice();
+  // better way: concatenate string via back ticks instead of using +
+  return `${word[0].toUpperCase()}${word.slice(1)}`;
 }
 
 const fullNames = ['wes', 'kait', 'poppy'].map(capitalize).map(bosify);
@@ -160,26 +159,24 @@ console.log(fullNames); // (3) ["Wes Bos", "Kait Bos", "Poppy Bos"]
 
 ```
 const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
-const orderTotalsWithTax = orderTotals.map(total => 1);
-console.log(orderTotalsWithTax); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
+console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
+
+// turn all values to 1
+const orderTotalsOne = orderTotals.map(total => 1);
+console.log(orderTotalsOne); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
+
+// add tax to each value
+const orderTotalsWithTax = orderTotals.map(total => total * 1.13);
+console.log(orderTotalsWithTax); // (8) [386.46, 1132.26, 590.9899999999999, 38.419999999999995, 716.42, 965.0199999999999, 1857.7199999999998, 2510.8599999999997]
 console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 ```
 
-**Every item is turned into `1` - why?**
-
+- why are items turned into value `1`?
 - whatever you return from your `map()` function will replace whatever initially was in your `map()` function
 - it's NOT mutable, `orderTotals` are still there
-- the NEW array `orderTotalsWithTax` will have the updated values
+- the NEW array `orderTotalsOne` will have the updated values
 
-```
-const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
-const orderTotalsWithTax = orderTotals.map(total => total * 1.13);
-console.log(orderTotalsWithTax);
-// (8) [386.46, 1132.26, 590.9899999999999, 38.419999999999995, 716.42, 965.0199999999999, 1857.7199999999998, 2510.8599999999997]
-console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
-```
-
-**`repeat()`, `fill()`, `map()`, `forEach()`**
+**`repeat()`, `fill()`, `map()`, `forEach()` - cowboys**
 
 ```
 const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
@@ -212,46 +209,46 @@ Use case:
 
 ```
 const people = [
-    {
-        birthday: 'April 22, 1993',
-        names: {
-            first: 'Keith',
-            last: 'Buckley'
-        }
-    },
-    {
-        birthday: 'January 3, 1975',
-        names: {
-            first: 'Larry',
-            last: 'Heep'
-        }
-    },
-    {
-        birthday: 'February 12, 1944',
-        names: {
-            first: 'Linda',
-            last: 'Bermeer'
-        }
+  {
+    birthday: 'April 22, 1993',
+    names: {
+      first: 'Keith',
+      last: 'Buckley'
     }
+  },
+  {
+    birthday: 'January 3, 1975',
+    names: {
+      first: 'Larry',
+      last: 'Heep'
+    }
+  },
+  {
+    birthday: 'February 12, 1944',
+    names: {
+      first: 'Linda',
+      last: 'Bermeer'
+    }
+  }
 ];
 
 const cleanPeople = people.map(function (person) {
-    // get their birthday
-    // figure out how old they are
+  // get their birthday
+  // figure out how old they are
 
-    // then timestamp
-    const birthday = new Date(person.birthday).getTime();
-    // now timestamp
-    const now = Date.now();
+  // then timestamp
+  const birthday = new Date(person.birthday).getTime();
+  // now timestamp
+  const now = Date.now();
 
-    const age = Math.floor((now - birthday) / 31536000000);
-    console.log(age);
+  const age = Math.floor((now - birthday) / 31536000000);
+  console.log(age);
 
-    // return their full name and birthday in an object
-    return {
-        age: age,
-        name: `${person.names.first} ${person.names.last}`,
-    }
+  // return their full name and birthday in an object
+  return {
+    age: age,
+    name: `${person.names.first} ${person.names.last}`,
+  }
 });
 console.table(cleanPeople);
 ```
