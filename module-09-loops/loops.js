@@ -88,7 +88,7 @@ console.log(fullNames); // (3) ["Wes Bos", "Kait Bos", "Poppy Bos"] */
 
 
 // map() - with numbers
-const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
 console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
 
 // turn all values to 1
@@ -98,7 +98,7 @@ console.log(orderTotalsOne); // (8) [1, 1, 1, 1, 1, 1, 1, 1]
 // add tax to each value
 const orderTotalsWithTax = orderTotals.map(total => total * 1.13);
 console.log(orderTotalsWithTax); // (8) [386.46, 1132.26, 590.9899999999999, 38.419999999999995, 716.42, 965.0199999999999, 1857.7199999999998, 2510.8599999999997]
-console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222]
+console.log(orderTotals); // (8) [342, 1002, 523, 34, 634, 854, 1644, 2222] */
 
 
 // repeat(), fill(), map(), forEach() - cowboys
@@ -144,17 +144,17 @@ const people = [
   }
 ];
 
-const cleanPeople = people.map(function (person) {
+const cleanPeople = people.map(function(person) {
   // get their birthday
-  // figure out how old they are
-
-  // then timestamp
+  // timestamp
   const birthday = new Date(person.birthday).getTime();
   // now timestamp
   const now = Date.now();
+  console.log(birthday, now);
 
+  // figure out how old they are
   const age = Math.floor((now - birthday) / 31536000000);
-  console.log(age);
+  console.log(age); // 28 46 77 -> depending on the year you check!
 
   // return their full name and birthday in an object
   return {

@@ -109,7 +109,7 @@ toppings.forEach(logTopping);
 - `map()` is like a machine in a factory, it takes in data, performs an operation and spits it out on the other side
 - `map()` will always produce the same length of the array as it starts with (returns an array of the exact same length put in)
 - `map()` can be used for any kind of data (strings, numbers, objects)
-- **don't update the DOM inside of a `map()` function**
+- **don't update the DOM inside of a `map()` function, for that use `forEach()`**
 
 **`map()` simple use**
 
@@ -205,6 +205,7 @@ Use case:
 - data that's not in the format that you need
 - take in that data, optimize it and return the new formatted data
 - timestamp checker https://epoch.vercel.app/
+- `31536000000` is January 1st 1971
 - https://date-fns.org/
 
 ```
@@ -232,17 +233,17 @@ const people = [
   }
 ];
 
-const cleanPeople = people.map(function (person) {
+const cleanPeople = people.map(function(person) {
   // get their birthday
-  // figure out how old they are
-
-  // then timestamp
+  // timestamp
   const birthday = new Date(person.birthday).getTime();
   // now timestamp
   const now = Date.now();
+  console.log(birthday, now);
 
+  // figure out how old they are
   const age = Math.floor((now - birthday) / 31536000000);
-  console.log(age);
+  console.log(age); // 28 46 77 -> depending on the year you check!
 
   // return their full name and birthday in an object
   return {
