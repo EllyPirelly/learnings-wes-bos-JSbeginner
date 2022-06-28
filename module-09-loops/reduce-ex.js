@@ -546,50 +546,60 @@ const text = `
     Privacy
     Cookies
 `;
+/* console.log(text); // 18.5kB */
 
+// turn the text into an array of items with split() -----------------
+// text.split() will be used chained later in the code, see down below
 
-// get rid off junk chars first
+/* const everything = text.split('');
+console.log(everything); // (18471) ['\n', ' ', ' ', ' ', ' ', 'S', 'k', 'i', 'p', ' ', 't', 'o', ' ', 'm', 'a', 'i', 'n', ' ', 'c', 'o', 'n', 't', 'e', 'n', 't', '\n', ' ', ' ', ' ', ' ', 'S', 'k', 'i', 'p', ' ', 't', 'o', ' ', 's', 'e', 'a', 'r', 'c', 'h', '\n', ' ', ' ', ' ', ' ', 'T', 'e', 'c', 'h', 'n', 'o', 'l', 'o', 'g', 'i', 'e', 's', '\n', ' ', ' ', ' ', ' ', 'R', 'e', 'f', 'e', 'r', 'e', 'n', 'c', 'e', 's', ' ', '&', ' ', 'G', 'u', 'i', 'd', 'e', 's', '\n', ' ', ' ', ' ', ' ', 'F', 'e', 'e', 'd', 'b', 'a', 'c', 'k', '\n', ' ', …] */
+
+// get rid off junk chars first with match() -----------------
+// text.filter() will be used chained later in the code, see down below
+
 function isValidChar(char) {
-    // if that char is a-z or A-Z or 0-9 keep it
-    // match takes a regex
-    return char.match(/[a-z0-9]/i);
+  // if that char is a-z or A-Z or 0-9 keep it
+  // match takes a regex
+  return char.match(/[a-z0-9]/i); // will be truthy or falsy
 }
 
+// lowercase result with toLowerCase() -----------------
+// text.map() will be used chained later in the code, see down below
 
-// lowercase result
 /* function lowercase(char) {
-    return char.toLowerCase();
+  return char.toLowerCase();
 } */
 // or
 const lowercase = char => char.toLowerCase();
 
+// count how many times each letter and number occur -----------------
+// text.reduce()  will be used chained later in the code, see down below
 
-// count how many times each letter and numbers occur
 function instanceCounter(counts, char) {
-    counts[char]
-        // if exists
-        ? counts[char] = counts[char] + 1
-        // if doesn't exist
-        : counts[char] = 1;
-    return counts;
+  counts[char]
+    // if exists, increment + 1
+    ? counts[char] = counts[char] + 1
+    // if doesn't exist, set it to 1
+    : counts[char] = 1;
+  return counts;
 }
 
 const result = text
-    .split('') // split each char into an item of array
-    .filter(isValidChar) // filter for valid chars
-    .map(lowercase) // lowercasing
-    .reduce(instanceCounter, {}); // total each instance
+  .split('') // split each char into an array of items
+  .filter(isValidChar) // filter for valid chars
+  .map(lowercase) // lowercasing
+  .reduce(instanceCounter, {}); // count the instances of
 
-console.log(result);
+console.log('split, filter, map, reduce', result);
 
 
-// sort result by value
+// sort result by value / most used with entries() and sort() -----------------
 function sortByValue(a, b) {
-    return a[1] - b[1];
+  return a[1] - b[1];
 }
 
 const sortedResult = Object
-    .entries(result)
-    .sort(sortByValue);
+  .entries(result)
+  .sort(sortByValue);
 
-console.log(sortedResult);
+console.log('sorted by value', sortedResult);

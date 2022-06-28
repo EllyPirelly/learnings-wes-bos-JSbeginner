@@ -507,16 +507,21 @@ console.log(totalInventoryPrice); // 14117
 
 ## Reduce Exercise
 
-Please see [reduce-ex.html](./reduce-ex.html) and [reduce-ex.js](./reduce-ex.js) in this module's folder, open the html file and the JavaScript console to follow up with the coding bits of this part of the course.
+**Following examples are referring to `reduce-ex.html` and `reduce-ex.js`**
 
-- use `map()`, `filter()`, `reduce()`
-- grab all the text from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce (simply select all, copy & paste into js file)
-- get rid off the junk characters first
+**use `map()`, `filter()`, `reduce()`**
+
+- go to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+- grab all the text you see there (simply select all `cmd a`, copy `cmd c` & paste into js file `cmd v`)
+- convert this into an array of letters
+- get rid off the junk characters first (characters that are not letters)
 - lowercase the result
 - count, how many times each (remaining) letter and number occurs
 - sort result by value
 
 ![mod 0905](./img/screen-mod0905-01.png)
+![mod 0905](./img/screen-mod0905-02.png)
+![mod 0905](./img/screen-mod0905-03.png)
 
 - https://regex101.com/
 
