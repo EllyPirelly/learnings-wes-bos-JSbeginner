@@ -198,15 +198,22 @@ faces.map(face => attachBody(face, '🍟')).forEach(body => console.log(body));
 
 ![mod 0902](./img/screen-mod0902-02.png)
 
-**`map()` with objects**
+**`map()` and `filter()`**
 
-Use case:
+`map()` use case:
 
 - data that's not in the format that you need
 - take in that data, optimize it and return the new formatted data
 - timestamp checker https://epoch.vercel.app/
 - `31536000000` is January 1st 1971
 - https://date-fns.org/
+
+`filter()` use case:
+
+- find ONE person in a set of data or filter that list of data down to be a subset of it
+- `filter()` loops over every single item in the array, and you either say 'yes' or 'no' (aka, `true` or `false`)
+- `filter()` will return ALL of the items that match what you want
+- `filter()` will always return an ARRAY
 
 ```
 const people = [
@@ -233,6 +240,7 @@ const people = [
   }
 ];
 
+// map()
 const cleanPeople = people.map(function(person) {
   // get their birthday
   // timestamp
@@ -252,52 +260,97 @@ const cleanPeople = people.map(function(person) {
   }
 });
 console.table(cleanPeople);
+
+// older than 40 years old
+// filter() - verbose version
+/* const over40 = cleanPeople.filter(function(person) {
+  if (person.age > 40) {
+    return true;
+  } else {
+    return false;
+  }
+});
+console.table(over40); */
+
+// filter() - smaller version - explicit return
+/* const over40 = cleanPeople.filter(person => {
+  return person.age > 40;
+});
+console.table(over40); */
+
+// check if any people are in this subset of an array
+if (over40.length) {
+  console.log('there is someone over 40');
+}
 ```
 
 ![mod 0902](./img/screen-mod0902-03.png)
 
 ## Filter, Find and Higher Order Functions
 
-**`filter()`**
-
-Use case:
-
-- find ONE person in a set of data or filter that list of data down to be a subset of it
-- `filter()` loops over every single item in the array, and you either say 'yes' or 'no' (aka, `true` or `false`)
-- `filter()` will return all of the items that match what you want
-- `filter()` will always return an array
-
-```
-const over40 = cleanPeople.filter(function (person) {
-    console.log(person);
-    if (person.age > 40) {
-        return true;
-    } else {
-        return false;
-    }
-});
-
-// shortened
-const over40 = cleanPeople.filter(person => {
-    return person.age > 40;
-});
-console.table(over40);
-
-// implicit return
-const over40 = cleanPeople.filter(person => person.age > 40);
-console.table(over40);
-```
+- `filter()` see `map()`
 
 **`find()`**
 
-- works the same way except it will only find ONE item in the array
-- `find()` will always return the actual item
+- works the same way as `filter()` except
+  - `find()` will only find ONE item in the array; `filter()` will return ALL of the items that match what you want
+  - `find()` will always return the actual ITEM; `filter()` will always return an ARRAY
 
 ```
-// find the student with 565a
+const students = [
+  {
+    id: '11ce',
+    first_name: 'Dall',
+    last_name: 'Puckring',
+  },
+  {
+    id: '2958',
+    first_name: 'Margarete',
+    last_name: 'Brandi',
+  },
+  {
+    id: '565a',
+    first_name: 'Bendicty',
+    last_name: 'Woodage',
+  },
+  {
+    id: '3a16',
+    first_name: 'Micki',
+    last_name: 'Mattes',
+  },
+  {
+    id: 'f396',
+    first_name: 'Flory',
+    last_name: 'Gladeche',
+  },
+  {
+    id: 'de5f',
+    first_name: 'Jamill',
+    last_name: 'Emilien',
+  },
+  {
+    id: '54cb',
+    first_name: 'Brett',
+    last_name: 'Aizikowitz',
+  },
+  {
+    id: '9135',
+    first_name: 'Lorry',
+    last_name: 'Smallman',
+  },
+  {
+    id: '978f',
+    first_name: 'Gilly',
+    last_name: 'Flott',
+  },
+];
+
+// find() student with 565a
+// returns an object which is the student itself
 const student = students.find(studi => studi.id === '565a');
 console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodage"}
 
+// returns an array of one item
 const student2 = students.filter(studi => studi.id === '565a');
 console.log(student2); // [0: {id: "565a", first_name: "Bendicty", last_name: "Woodage"}]
 ```
@@ -305,13 +358,13 @@ console.log(student2); // [0: {id: "565a", first_name: "Bendicty", last_name: "W
 **`find()`, higher order function**
 
 ```
+// find() student with 565a with external higher order function
 function findById(id) {
-    return function isStudent(studi) {
-        return studi.id === id;
-    }
+  return function isStudent(studi) {
+    return studi.id === id;
+  }
 }
 const student = students.find(findById('565a'));
-
 console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodage"}
 ```
 
@@ -322,43 +375,40 @@ console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodag
 
 ```
 function findByProp(prop, propWeAreLookingFor) {
-    return function fullStudent(studentele) {
-        return studentele[prop] === propWeAreLookingFor;
-    }
+  return function fullStudent(studentele) {
+    return studentele[prop] === propWeAreLookingFor;
+  }
 }
 
 const student2 = students.find(findByProp('id', '565a'));
 const student3 = students.find(findByProp('first_name', 'Micki'));
-
 console.log(student2); // {id: "565a", first_name: "Bendicty", last_name: "Woodage"}
 console.log(student3); // {id: "3a16", first_name: "Micki", last_name: "Mattes"}
 ```
 
 - more flexible, because what happpens if a `student` you want to run `find()` on has 15 properties on them?
 - `function findByProp()`
-  - takes in a property (or key) we are looking for and an actual key we are looking for
+  - takes in a prop and the propWeAreLookingFor
   - looks into an object for whatever property you specified is equal to whatever value you have specified
   - `[]` and not `.` notation, because the property that we are looking for is being passed in as a variable, as an argument to that function
 - advanced topic
 
 ## Reduce
 
-- `map()` take in items and return a transformed item
-- `filter()` take in items and return a subset of those items
-- `reduce()`
-  - takes in an array of data, just like `map()`, `filter()`
-  - loops over every single item
-  - will return to you a result or a single value
-
 ![mod 0904](./img/map-filter-reduce.png)
 
-- `map()` takes in raw materials and map it through a 'cook function', returns the cooked, transformed materials
-- `filter()` takes in cooked materials and returns the veggie options, a subset of the original array
-- `reduce()` takes in the cooked materials and returns a compiled smaller version of it
-
+- `map()`
+  - takes in data, optimize it and returns the new formatted data
+  - takes in items and returns a transformed item
+  - takes in raw materials and map it through a 'cook function', returns the cooked, transformed materials
+- `filter()`
+  - takes in items and returns a subset of those items
+  - takes in cooked materials and returns a subset of the original array
 - `reduce()`
-  - accumulator: the thing that has been handed to you from the last instance of the loop
-  - currentValue: the current thing in it
+  - takes in an array of data, just like `map()`, `filter()`
+  - loops over every single item in that array
+  - returns to you a result or a single value
+  - takes in the cooked materials and returns a smaller, compiled (reduced!) version of it
 
 **adding up numbers, messy version**
 
@@ -367,68 +417,81 @@ const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
 
 let total = 0;
 orderTotals.forEach(singleTotal => {
-    total = total + singleTotal;
+  total = total + singleTotal;
 });
 console.log(total); // 7255
 ```
-
 - this works but is messy
-- the callback method relies on an external variable that has been made outside
+- the callback function `orderTotals` relies on an external variable that has been made outside `let total = 0`
+- then this variable `let total = 0` will be updated inside of that callback function
 - side effect, where you update a variable that exists outside of the function
 
-**`reduce()` adding up numbers, correct version**
+**adding up numbers with `reduce()`**
 
 ```
 const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
 
 function tallyNumbers(tally, currentTotal) {
-    console.log(`the current tally is ${tally}`);
-    console.log(`the current total is ${currentTotal}`);
-    console.log('------');
-    // return the current tally PLUS the amount of this order
-    return tally + currentTotal;
+  console.log(`the current tally is ${tally}`);
+  console.log(`the current total is ${currentTotal}`);
+  console.log('------');
+  // return the current tally PLUS the amount of this order
+  return tally + currentTotal;
 }
 
 const allOrders = orderTotals.reduce(tallyNumbers, 0);
+
+console.log(allOrders); // 7255
 ```
 
 ![mod 0904](./img/screen-mod0904-01.png)
 
+- callback function, that will run once for every single item in it
 - `reduce()` will loop over items in an array
+- `reduce()` takes in two parameters
+  - accumulator: the thing that has been handed to you from the last instance of the loop
+  - we start with `0` because the accumulator starts with `0`
+  - if you don't provide an initial accumulator value, the first loop iteration will take the first numbers
+  - it's good practice to provide a default accumulator value
+  - currentValue: the current thing in it
 - every single time you loop over an item in an array, you have the option to return a value and can use that to accumulate values or distill them down into one value
+
+**check how many of each instances, total value of all of the inventory, with `reduce()`**
 
 ```
 const inventory = [
-    { type: 'shirt', price: 4000 },
-    { type: 'pants', price: 4532 },
-    { type: 'socks', price: 234 },
-    { type: 'shirt', price: 2343 },
-    { type: 'pants', price: 2343 },
-    { type: 'socks', price: 542 },
-    { type: 'pants', price: 123 },
+  { type: 'shirt', price: 4000 },
+  { type: 'pants', price: 4532 },
+  { type: 'socks', price: 234 },
+  { type: 'shirt', price: 2343 },
+  { type: 'pants', price: 2343 },
+  { type: 'socks', price: 542 },
+  { type: 'pants', price: 123 },
 ];
 
+// how many of each instances are there
 function inventoryReducer(accuTotals, item) {
-    console.log(`looping over ${item.type}`);
+  console.log(`looping over ${item.type}`);
 
-    // increment the type by 1
-    // as if statement:
-    if (accuTotals[item.type]) {
-        accuTotals[item.type] = accuTotals[item.type] + 1;
-        // accuTotals[item.type]++;
-    } else {
-        accuTotals[item.type] = 1;
-    }
+  // increment the type by 1
+  // as if statement:
+  if (accuTotals[item.type]) {
+    accuTotals[item.type] = accuTotals[item.type] + 1;
+    // accuTotals[item.type]++;
+  } else {
+    accuTotals[item.type] = 1;
+  }
 
-    // shortened, version 1:
-    // accuTotals[item.type] = accuTotals[item.type] + 1 || 1;
+  // shortened, version 1:
+  // accuTotals[item.type] = accuTotals[item.type] + 1 || 1;
 
-    // shortened, version 2, example with shirt:
-    // accuTotals.shirt ? accuTotals.shirt + 1 : accuTotals.shirt = 1;
+  // shortened, version 2, example with shirt:
+  // accuTotals.shirt ? accuTotals.shirt + 1 : accuTotals.shirt = 1;
 
-    // return the accuTotals, so the next loop can use it
-    return accuTotals;
+  // return the accuTotals, so the next loop can use it
+  return accuTotals;
 }
+
 const inventoryCounts = inventory.reduce(inventoryReducer, {});
 console.log(inventoryCounts); // {shirt: 2, pants: 3, socks: 2}
 
@@ -437,9 +500,10 @@ const totalInventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0)
 console.log(totalInventoryPrice); // 14117
 ```
 
-- check how many of each instanced are there
-- check if the property exists before we add `1` to it
-- for total value, start at `0`, loop over single item, return previous amount which is the accumulator plus the price of the looped item
+- check how many of each instances (`shirt`, `pants`, `socks`) are there
+- what is the total value (`price`) of all of the inventory that we have
+- in function `inventoryReducer` check if the property exists before we add `1` to it
+- for total value `totalInventoryPrice`, start at `0`, loop over single item, return previous amount which is the accumulator plus the price of the looped item
 
 ## Reduce Exercise
 

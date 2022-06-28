@@ -119,8 +119,8 @@ function attachBody(face, body) {
 faces.map(face => attachBody(face, '🍟')).forEach(body => console.log(body)); */
 
 
-// map() - with objects
-const people = [
+// map() and filter()
+/* const people = [
   {
     birthday: 'April 22, 1993',
     names: {
@@ -142,9 +142,10 @@ const people = [
       last: 'Bermeer'
     }
   }
-];
+]; */
 
-const cleanPeople = people.map(function(person) {
+// map()
+/* const cleanPeople = people.map(function(person) {
   // get their birthday
   // timestamp
   const birthday = new Date(person.birthday).getTime();
@@ -162,131 +163,100 @@ const cleanPeople = people.map(function(person) {
     name: `${person.names.first} ${person.names.last}`,
   }
 });
-console.table(cleanPeople);
+console.table(cleanPeople); */
 
-
-
-// filter()
-/* const people = [
-    {
-        birthday: 'April 22, 1993',
-        names: {
-            first: 'Keith',
-            last: 'Buckley'
-        }
-    },
-    {
-        birthday: 'January 3, 1975',
-        names: {
-            first: 'Larry',
-            last: 'Heep'
-        }
-    },
-    {
-        birthday: 'February 12, 1944',
-        names: {
-            first: 'Linda',
-            last: 'Bermeer'
-        }
-    }
-];
-
-const cleanPeople = people.map(function (person) {
-    const birthday = new Date(person.birthday).getTime();
-    const now = Date.now();
-    const age = Math.floor((now - birthday) / 31536000000);
-    return {
-        age: age,
-        name: `${person.names.first} ${person.names.last}`,
-    }
-}); */
-
-/* const over40 = cleanPeople.filter(function (person) {
-    console.log(person);
-    if (person.age > 40) {
-        return true;
-    } else {
-        return false;
-    }
-}); */
-
-/* const over40 = cleanPeople.filter(person => {
-    return person.age > 40;
+// older than 40 years old
+// filter() - verbose version
+/* const over40 = cleanPeople.filter(function(person) {
+  if (person.age > 40) {
+    return true;
+  } else {
+    return false;
+  }
 });
 console.table(over40); */
 
+// filter() - smaller version - explicit return
+/* const over40 = cleanPeople.filter(person => {
+  return person.age > 40;
+});
+console.table(over40); */
+
+// filter() - smaller version - implicit return
 /* const over40 = cleanPeople.filter(person => person.age > 40);
 console.table(over40);
 
+// check if any people are in this subset of an array
 if (over40.length) {
-    console.log('there is someone over 40');
+  console.log('there is someone over 40');
 } */
 
 
 
-// find()
-/* const students = [
-    {
-        id: '11ce',
-        first_name: 'Dall',
-        last_name: 'Puckring',
-    },
-    {
-        id: '2958',
-        first_name: 'Margarete',
-        last_name: 'Brandi',
-    },
-    {
-        id: '565a',
-        first_name: 'Bendicty',
-        last_name: 'Woodage',
-    },
-    {
-        id: '3a16',
-        first_name: 'Micki',
-        last_name: 'Mattes',
-    },
-    {
-        id: 'f396',
-        first_name: 'Flory',
-        last_name: 'Gladeche',
-    },
-    {
-        id: 'de5f',
-        first_name: 'Jamill',
-        last_name: 'Emilien',
-    },
-    {
-        id: '54cb',
-        first_name: 'Brett',
-        last_name: 'Aizikowitz',
-    },
-    {
-        id: '9135',
-        first_name: 'Lorry',
-        last_name: 'Smallman',
-    },
-    {
-        id: '978f',
-        first_name: 'Gilly',
-        last_name: 'Flott',
-    },
+/* // find()
+const students = [
+  {
+    id: '11ce',
+    first_name: 'Dall',
+    last_name: 'Puckring',
+  },
+  {
+    id: '2958',
+    first_name: 'Margarete',
+    last_name: 'Brandi',
+  },
+  {
+    id: '565a',
+    first_name: 'Bendicty',
+    last_name: 'Woodage',
+  },
+  {
+    id: '3a16',
+    first_name: 'Micki',
+    last_name: 'Mattes',
+  },
+  {
+    id: 'f396',
+    first_name: 'Flory',
+    last_name: 'Gladeche',
+  },
+  {
+    id: 'de5f',
+    first_name: 'Jamill',
+    last_name: 'Emilien',
+  },
+  {
+    id: '54cb',
+    first_name: 'Brett',
+    last_name: 'Aizikowitz',
+  },
+  {
+    id: '9135',
+    first_name: 'Lorry',
+    last_name: 'Smallman',
+  },
+  {
+    id: '978f',
+    first_name: 'Gilly',
+    last_name: 'Flott',
+  },
 ]; */
 
-
-// find() student with 565a
-/* const student = students.find(studi => studi.id === '565a');
+/* // find() student with 565a
+// returns an object which is the student itself
+const student = students.find(studi => studi.id === '565a');
 console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodage"}
 
+// returns an array of one item
 const student2 = students.filter(studi => studi.id === '565a');
 console.log(student2); // [0: {id: "565a", first_name: "Bendicty", last_name: "Woodage"}] */
 
 
 // find() student with 565a with external higher order function
 /* function findById(id) {
-    return function isStudent(studi) {
-        return studi.id === id;
-    }
+  return function isStudent(studi) {
+    return studi.id === id;
+  }
 }
 const student = students.find(findById('565a'));
 console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodage"} */
@@ -294,9 +264,9 @@ console.log(student); // {id: "565a", first_name: "Bendicty", last_name: "Woodag
 
 // find(), more flexible, because what happpens if the student has 15 properties on them?
 /* function findByProp(prop, propWeAreLookingFor) {
-    return function fullStudent(studentele) {
-        return studentele[prop] === propWeAreLookingFor;
-    }
+  return function fullStudent(studentele) {
+    return studentele[prop] === propWeAreLookingFor;
+  }
 }
 
 const student2 = students.find(findByProp('id', '565a'));
@@ -306,74 +276,78 @@ console.log(student3); // {id: "3a16", first_name: "Micki", last_name: "Mattes"}
 
 
 
-// reduce() - example 1
-// how would I add all of these up?
-/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222]; */
+// reduce() -------------------------------
+// example 1 - how would I add all of these up?
+/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
 
-// messy, works, but not good because the callback method relies on an external variable that has been made outside
-// side effect, where you update a variable that exists outsideof the function
-/* let total = 0;
+// messy version with side effect
+let total = 0;
 orderTotals.forEach(singleTotal => {
-    total = total + singleTotal;
+  total = total + singleTotal;
 });
 console.log(total); // 7255 */
 
 // proper, with reduce()
-/* function tallyNumbers(tally, currentTotal) {
-    console.log(`the current tally is ${tally}`);
-    console.log(`the current total is ${currentTotal}`);
-    console.log('------');
-    // return the current tally PLUS the amount of this order
-    return tally + currentTotal;
+// how would I add all of these up?
+/* const orderTotals = [342, 1002, 523, 34, 634, 854, 1644, 2222];
+
+function tallyNumbers(tally, currentTotal) {
+  console.log(`the current tally is ${tally}`);
+  console.log(`the current total is ${currentTotal}`);
+  console.log('------');
+  // return the current tally PLUS the amount of this order
+  return tally + currentTotal;
 }
 
 const allOrders = orderTotals.reduce(tallyNumbers, 0);
-console.log(allOrders); */
+
+console.log(allOrders); // 7255 */
 
 
-// reduce() - example 2
-/* const inventory = [
-    { type: 'shirt', price: 4000 },
-    { type: 'pants', price: 4532 },
-    { type: 'socks', price: 234 },
-    { type: 'shirt', price: 2343 },
-    { type: 'pants', price: 2343 },
-    { type: 'socks', price: 542 },
-    { type: 'pants', price: 123 },
+// example 2 - check how many of each instances, total value of all of the inventory
+const inventory = [
+  { type: 'shirt', price: 4000 },
+  { type: 'pants', price: 4532 },
+  { type: 'socks', price: 234 },
+  { type: 'shirt', price: 2343 },
+  { type: 'pants', price: 2343 },
+  { type: 'socks', price: 542 },
+  { type: 'pants', price: 123 },
 ];
 
-// how many of each instanced are there
+// how many of each instances are there
 function inventoryReducer(accuTotals, item) {
-    console.log(`looping over ${item.type}`);
+  console.log(`looping over ${item.type}`);
 
-    // increment the type by 1
-    // as if statement:
-    if (accuTotals[item.type]) {
-        accuTotals[item.type] = accuTotals[item.type] + 1;
-        // accuTotals[item.type]++;
-    } else {
-        accuTotals[item.type] = 1;
-    }
+  // increment the type by 1
+  // as if statement:
+  if (accuTotals[item.type]) {
+    accuTotals[item.type] = accuTotals[item.type] + 1;
+    // accuTotals[item.type]++;
+  } else {
+    accuTotals[item.type] = 1;
+  }
 
-    // shortened, version 1:
-    // accuTotals[item.type] = accuTotals[item.type] + 1 || 1;
+  // shortened, version 1:
+  // accuTotals[item.type] = accuTotals[item.type] + 1 || 1;
 
-    // shortened, version 2, example with shirt:
-    // accuTotals.shirt ? accuTotals.shirt + 1 : accuTotals.shirt = 1;
+  // shortened, version 2, example with shirt:
+  // accuTotals.shirt ? accuTotals.shirt + 1 : accuTotals.shirt = 1;
 
-    // return the accuTotals, so the next loop can use it
-    return accuTotals;
+  // return the accuTotals, so the next loop can use it
+  return accuTotals;
 }
+
 const inventoryCounts = inventory.reduce(inventoryReducer, {});
 console.log(inventoryCounts); // {shirt: 2, pants: 3, socks: 2}
 
 // what is the total value
 const totalInventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
-console.log(totalInventoryPrice); // 14117 */
+console.log(totalInventoryPrice); // 14117
 
 
 
-// for
+// for -------------------------------
 /* for (let i = 0; i <= 10; i++) {
     console.log(i);
 }
