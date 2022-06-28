@@ -84,21 +84,9 @@ How it worked with installing parcel from scratch:
 - run `npm run start`, this will fire up your localhost at `http://localhost:1234`
 - stop the server with `control c`
 
-## Error - trouble shoot `regeneratorRuntime is not defined`
-
-**Note:** Checking this a year later, not sure if this is still an issue.
-- my and also Wes Bos' final code threw me an `regeneratorRuntime is not defined` error while following the course
-- this happened while coding the first `async / await` function `populateVideo()`
-
-![mod 1001](./img/screen-mod1001-07.png)
-
-- quick research lead to this: https://www.npmjs.com/package/regenerator-runtime
-- installed `npm i regenerator-runtime` and put `const regeneratorRuntime = require("regenerator-runtime");` at the top of `index.js`
-- stopped and restarted parcel and project worked, camera worked
-
 ## Project
 
-Important: comment in line 60 `requestAnimationFrame(detect);`
+Important: comment in line 59 `requestAnimationFrame(detect);`
 
 **Promise - `async` / `await`**
 

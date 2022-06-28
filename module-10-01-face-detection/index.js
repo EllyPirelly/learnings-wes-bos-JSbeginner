@@ -1,6 +1,5 @@
 /* console.log('it works'); */
 
-const regeneratorRuntime = require("regenerator-runtime");
 const video = document.querySelector('.webcam');
 const canvas = document.querySelector('.video');
 const ctx = canvas.getContext('2d');
