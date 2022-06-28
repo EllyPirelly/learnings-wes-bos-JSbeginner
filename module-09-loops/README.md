@@ -527,19 +527,19 @@ console.log(totalInventoryPrice); // 14117
 
 ## For, for in, for of, while loops
 
-These methods are not as nearly as popular as the array methods.
+**Following examples are referring to `loops.html` and `loops.js`**
 
 **`for()`**
 
 - `for()` loop requires 3 things: initial expression, condition, increment expression
 - a plain `for()` loop is great for running a block of code a number of times
+- traditionally this is used to loop over something, like an array of numbers
 
 ```
 for (let i = 0; i <= 10; i++) {
-    console.log(i);
+  console.log(i);
 }
 ```
-
 - initial expression: `let i = 0;`
   - sort of set up of the code, the loop starts here
 - condition: `i <= 0;`
@@ -547,64 +547,51 @@ for (let i = 0; i <= 10; i++) {
   - if this is `true` the loop will run one more time
   - if this is `false` it will no longer run and it will move on to the next line of code
 - increment expression: `i++`
-
   - this is the increment, in this case we increment `0` by `1`
   - this allows us to access the variable `i`
-
-- traditionally this is used to loop over something, like an array of numbers
 - `let` is scoped to the block, so you can use the var name (most of the time `i`) more than once
 
 ```
 const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
 
 for (let i = 0; i < numbers.length; i++) {
-    console.log(i);
-    console.log('numbers length', numbers.length);
-    console.log('retrieve numbers inside of array', numbers[i]);
+  console.log(i);
+  console.log('numbers length', numbers.length);
+  console.log('retrieve numbers inside of array', numbers[i]);
 }
 ```
 
-- it's now easier to do this with `forEach()`, `map()` or `reduce()`
+- a for loop is now easier to do with `forEach()`, `map()` or `reduce()`
 - if you see a `for()` loop maybe ask yourself if you can refactor it
-
-See etch-a-sketch example in module 6.
-
-- for HTML canvas there's a `getImageData()` method on it
-- `cancasContext.getImageData(0, 0, 100, 100)`
-- will return an array of data with a lot of items inside of it (40.000)
-- special kind of array called clamped array, used for very, very, very large arrays
-- if you want to loop over that data, you have to loop over every single pixel, meaning that you have to take 4 key/value pairs at a time
+- it is still useful for cases where you have to increment in larger numbers than 1
 
 **`for(... of ...)`**
-
-- used for looping over iterables (an iterable is something that has a length, like a number or a string)
-- in most cases you will use this for an array or a string
-- returns every single letter as a string
 
 ```
 const naming = '🦁 Wes 🦁 Bos 🦁';
 
 for (const letter of naming) {
-    console.log(letter);
+  console.log(letter);
 }
 ```
+```
+const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
+
+for (const number of numbers) {
+  console.log('number of', number);
+}
+```
+- used for looping over iterables (an iterable is something that has a length, like a number or a string)
+- in most cases you will use this for an array or a string
+- returns every single letter as a string
+- returns each of the **raw values** from the array
+- `for(... of ...)` won't give us the index (whereas `.forEach()` would do that)
+- `for(... of ...)` also doesn't allow to filter or anything like that
 
 Why would `for(... of ...)` be better than splitting it and looping over it with a `forEach()`?
 
 - `for(... of ...)` can handle emojis, `split()` won't work
 - the other use case would be working with promises: if you ever need to sequence a bunch of data, the `for(... of ...)` loop will allow to use `await` in it (more later in course)
-
-```
-const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
-
-for (const number of numbers) {
-    console.log('number of', number);
-}
-```
-
-- returns each of the **raw values** from the array
-- `for(... of ...)` won't give us the index (whereas `.forEach()` would do that)
-- `for(... of ...)` also doesn't allow to filter or anything like that
 
 **`for(... in ...)`**
 
@@ -615,19 +602,19 @@ for (const number of numbers) {
 const numbers = [2, 34, 3, 23, 42, 3, 1, 65, 364, 5, 645, 6];
 
 for (const number in numbers) {
-    console.log('number in', number);
+  console.log('number in', number);
 }
 ```
 
 ```
 const wes = {
-    name: 'wes',
-    age: 100,
-    cool: true,
+  name: 'wes',
+  age: 100,
+  cool: true,
 }
 
 for (const prop in wes) {
-    console.log(prop);
+  console.log(prop);
 }
 ```
 
@@ -636,23 +623,36 @@ for (const prop in wes) {
 
 ```
 const wes = {
-    name: 'wes',
-    age: 100,
-    cool: true,
+  name: 'wes',
+  age: 100,
+  cool: true,
 }
 
 const baseHumanStats = {
-    feet: 2,
-    arms: 2,
-    head: 1,
+  feet: 2,
+  arms: 2,
+  head: 1,
 };
 
 function Human(naming) {
-    this.naming = naming;
+  this.naming = naming;
 }
 
 const wes2 = new Human('wes');
-console.log(wes2); // Human {naming: "wes"}
+console.log('wes2', wes2); // wes2 Human {naming: "wes"}
+console.log('wes2 arms', wes2.arms) // wes2 arms undefined
+console.log('object keys', Object.keys(wes2)); // object keys ["naming"]
+console.log('object entries', Object.entries(wes2)); // object entries [Array(2)]
+
+Human.prototype = baseHumanStats;
+const wes3 = new Human('wes');
+console.log('wes3', wes3); // wes3 Human {naming: "wes"}
+console.log('wes3 arms', wes3.arms); // wes3 arms 2
+console.log('object keys', Object.keys(wes3)); // object keys ["naming"]
+
+for (const prop in wes3) {
+  console.log('wes3 prop', prop); // wes3 prop naming // wes3 prop feet // wes3 prop arms // wes3 prop head
+}
 ```
 
 - `wes2` is an object with the type of `Human`
@@ -664,30 +664,27 @@ console.log(wes2); // Human {naming: "wes"}
 
 **`while()` and `do... while()`**
 
-- not all that popular
-- be aware of infinite loops!!!
-- `while()` will take in an condition and will run infinitely until the condition is `false`
-- `while()` will check the condition before the first run and then go ahead and do it
-
 ```
 let cool = true;
 let i = 0;
 
 while (cool === true) {
-    console.log('you are cool'); // 101loops.js:449 you are cool
-    i++;
-    if (i > 100) {
-        cool = false;
-    }
+  console.log('you are cool'); // 101loops.js:449 you are cool
+  i++;
+  if (i > 100) {
+    cool = false;
+  }
 }
 ```
+- `while()` will check the condition before the first run and then go ahead and do it
+- `while()` will take in an condition and will run infinitely until the condition is `false`
+- you need an exit condition otherwise infinite loop!!!!
 
 ```
 let a = 1;
 let b = 2;
 do {
-    console.log('b actually is bigger than a'); // b actually is bigger than a
+  console.log('b actually is bigger than a'); // b actually is bigger than a
 } while (b <= a);
 ```
-
 - `do... while()` will run first and then check the condition after the first run
